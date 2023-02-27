@@ -43,6 +43,7 @@ import { SERVER_URL } from '../../../constants/http';
 import { ICartItem } from '../../../types/ICartItem';
 import { Loader } from '../../UI/Loader/Loader';
 import { NO_IMAGE } from '../../../constants/user';
+import { setAuthAdmin } from '../../../store/reducers/AuthReducer/AuthSlice';
 
 initializeIcons();
 
@@ -51,6 +52,7 @@ const editIcon: IIconProps = { iconName: 'Edit' };
 
 const ProductInfoInner: FC = () => {
   const { product, productInfo, isLoading } = useAppSelector(state => state.productReducer);
+  const { isAdminAuth } = useAppSelector(state => state.authReducer);
   const dispatch = useAppDispatch();
   const params = useParams();
   const navigate = useNavigate();
@@ -61,7 +63,7 @@ const ProductInfoInner: FC = () => {
 
   const price = colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price;
 
-  const admin = true;
+  // const admin = false;
 
   const deleteProductHandler = async () => {
     if (params.id) {
@@ -108,12 +110,13 @@ const ProductInfoInner: FC = () => {
         await dispatch(getProductByID(params.id));
       }
     })();
-    // setColorImage(SERVER_URL + product?.coverImage);
+    if (localStorage.getItem('token') === 'skrama@tut.by') {
+      dispatch(setAuthAdmin());
+    }
   }, []);
 
   useEffect(() => {
     setColorImage(prev => ({...prev, imageData: SERVER_URL + product?.coverImage}));
-    // setColorImage({image: SERVER_URL + product?.coverImage});
   }, [product])
   
   
@@ -127,7 +130,7 @@ const ProductInfoInner: FC = () => {
         />}
       <div className="productinfo">
         <div className="productinfo__wrapper">
-          {admin && (
+          {isAdminAuth && (
                   <div className="productinfo__title_btns">
                   <CommandBarButton
                     iconProps={editIcon}

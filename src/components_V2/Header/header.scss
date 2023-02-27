@@ -10,13 +10,13 @@
 
   &__toolbar {
     display: flex;
-    padding: 30px;
+    padding: 30px 15px;
     justify-content: space-between;
     align-items: center;
 
     &__tel {
       flex: 0 0 auto;
-      width: 27%;
+      width: 32%;
       display: flex;
       gap: 5px;
       align-items: center;
@@ -29,7 +29,7 @@
 
     &__title {
       flex: 0 0 auto;
-      width: 45%;
+      width: 40%;
       text-align: center;
       color: #34AD54;
       font-size: 56px;
@@ -41,7 +41,7 @@
 
     &__cart {
       flex: 0 0 auto;
-      width: 25%;
+      width: 28%;
       text-align: end;
       display: flex;
       text-align: end;
