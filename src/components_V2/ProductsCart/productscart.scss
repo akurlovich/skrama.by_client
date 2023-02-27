@@ -80,11 +80,15 @@
       display: flex;
       align-items: center;
       margin-right: 15px;
-      width: 10%;
+      width: 80px;
+      height: 80px;
+
+      // @media (min-width: 768px) and (max-width: 991px) { 
+      //   width: auto;
+      // }
 
       img {
-        width: 80px;
-        height: 80px;
+        width: 100%;
       }
     }
 

@@ -30,6 +30,10 @@
   &__info {
     display: flex;
     width: 100%;
+
+    @media (max-width: 767px) { 
+      flex-direction: column;
+    }
   }
 
   &__form {
@@ -40,6 +44,20 @@
     justify-content: space-between;
     background-color: var(--primary);
     padding: 48px;
+
+    @media (min-width: 992px) and (max-width: 1199px) { 
+      padding: 36px;
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) { 
+      padding: 20px;
+    }
+
+    @media (max-width: 767px) { 
+      width: 100%;
+      padding: 10px;
+      gap: 10px;
+    }
 
     &__input {
       padding: 10px;
@@ -72,6 +90,20 @@
     flex-direction: column;
     gap: 24px;
 
+    @media (min-width: 992px) and (max-width: 1199px) { 
+      padding: 36px;
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) { 
+      padding: 20px;
+    }
+
+    @media (max-width: 767px) { 
+      width: 100%;
+      padding: 10px;
+      padding-left: 15%;
+    }
+
     &__item {
       display: flex;
       gap: 24px;
@@ -82,7 +114,18 @@
 
       &__title {
         font-size: 32px;
-        // color: #fff;
+
+        @media (min-width: 992px) and (max-width: 1199px) { 
+          font-size: 28px;
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) { 
+          font-size: 22px;
+        }
+
+        @media (max-width: 767px) { 
+          font-size: 28px;
+        }
       }
 
       &__icon {

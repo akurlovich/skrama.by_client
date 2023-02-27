@@ -8,11 +8,31 @@
   color: #263A4F;
   font-size: 32px;
 
+  @media (min-width: 992px) and (max-width: 1199px) { 
+    font-size: 25px;
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) { 
+    font-size: 20px;
+  }
+
+  @media (min-width: 576px) and (max-width: 767px) { 
+    font-size: 18px;
+  }
+
   &__toolbar {
     display: flex;
     padding: 30px 15px;
     justify-content: space-between;
     align-items: center;
+
+    @media (min-width: 768px) and (max-width: 991px) { 
+      padding: 15px 15px;
+    }
+
+    @media (min-width: 576px) and (max-width: 767px) { 
+      padding: 10px 10px;
+    }
 
     &__tel {
       flex: 0 0 auto;
@@ -21,9 +41,21 @@
       gap: 5px;
       align-items: center;
 
+      @media (min-width: 768px) and (max-width: 991px) { 
+        width: 35%;
+      }
+
+      @media (min-width: 576px) and (max-width: 767px) { 
+        width: 36%;
+      }
+
       &__icon {
         display: flex;
         color: #34AD54;
+
+        @media (min-width: 576px) and (max-width: 767px) { 
+          width: 30px;
+        }
       }
     }
 
@@ -33,6 +65,20 @@
       text-align: center;
       color: #34AD54;
       font-size: 56px;
+
+      @media (min-width: 992px) and (max-width: 1199px) { 
+        font-size: 45px;
+      }
+
+      @media (min-width: 768px) and (max-width: 991px) { 
+        width: 35%;
+        font-size: 38px;
+      }
+
+      @media (min-width: 576px) and (max-width: 767px) { 
+        width: 35%;
+        font-size: 32px;
+      }
 
       & span {
         color: #f93

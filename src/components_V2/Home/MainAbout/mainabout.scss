@@ -9,6 +9,10 @@
     gap: 2%;
     background-color: #fff;
 
+    @media (max-width: 991px) { 
+      justify-content: center;
+    }
+
     &__image {
       flex: 0 0 auto;
       width: 47%;
@@ -23,6 +27,11 @@
     &__info {
       flex: 0 0 auto;
       width: 49%;
+
+      @media (max-width: 991px) { 
+        width: 100%;
+        padding: 20px;
+      }
       
       &__title {
         font-family: "Roboto",sans-serif;

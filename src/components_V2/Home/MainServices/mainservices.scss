@@ -24,6 +24,10 @@
       // cursor: pointer;
       transition: .5s;
 
+      @media (max-width: 991px) { 
+        padding: 10px;
+      }
+
       &:hover &__img {
         color: var(--secondary);
         transition: .5s;
