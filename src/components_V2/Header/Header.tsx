@@ -1,15 +1,35 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 // @ts-ignore
 import logoSvg from '../../assets/img/logo.png';
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { BiPhoneCall } from "react-icons/bi"
 import './header.scss';
+import { ICartItem } from "../../types/ICartItem";
+import { addItem } from "../../store/reducers/CartReducer/CartSlice";
 
 export const Header: FC = () => {
   const { totalPrice, items } = useAppSelector(state => state.cartReducer);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const dispatch = useAppDispatch();
   const location = useLocation();
+
+  // useEffect(() => {
+  //   const json = JSON.stringify(items);
+  //   localStorage.setItem('cart', json)
+    
+  // }, [items]);
+
+  useEffect(() => {
+    const json = localStorage.getItem('cart');
+    if (json) {
+      const data: ICartItem[] = JSON.parse(json);
+      for (const item of data) {
+        dispatch(addItem(item));
+      }
+    }
+  }, [])
+  
   
   return (
     <header className="header">

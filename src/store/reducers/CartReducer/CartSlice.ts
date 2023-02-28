@@ -19,11 +19,13 @@ const cartSlice = createSlice({
       const findItem = state.items.find((obj: ICartItem) => obj.id === action.payload.id);
       if (findItem) {
         findItem.count++;
+        localStorage.setItem('cart', JSON.stringify(state.items));
       } else {
         state.items.push({
           ...action.payload,
           // count: 1,
-        })
+        });
+        localStorage.setItem('cart', JSON.stringify(state.items));
       }
       // state.items.push(action.payload);
       // state.totalPrice += action.payload.price;
@@ -35,12 +37,14 @@ const cartSlice = createSlice({
       if (findItem) {
         findItem.count--;
         state.totalPrice -= action.payload.price;
+        localStorage.setItem('cart', JSON.stringify(state.items));
       }
       
     },
     removeItem(state, action: PayloadAction<{id:string, price: number}>) {
       state.items = state.items.filter((obj: ICartItem) => obj.id !== action.payload.id);
       state.totalPrice -= action.payload.price;
+      localStorage.setItem('cart', JSON.stringify(state.items));
       if (state.totalPrice === 0) {
         clearItems();
       }
@@ -48,6 +52,7 @@ const cartSlice = createSlice({
     clearItems(state) {
       state.items = [];
       state.totalPrice = 0;
+      localStorage.removeItem('cart');
     },
   },
 });
