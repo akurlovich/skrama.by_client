@@ -27,6 +27,10 @@
     @media (max-width: 991px) { 
       padding: 0px 2%;
     }
+
+    @media (max-width: 575px) { 
+      flex-direction: column-reverse;
+    }
   }
   
   &__imageblock {
@@ -35,6 +39,10 @@
 
     @media (max-width: 991px) { 
       width: 80%;
+    }
+
+    @media (max-width: 575px) { 
+      width: 100%;
     }
   }
 
@@ -90,6 +98,10 @@
     line-height: 1.2;
     font-size: 40px;
     color: var(--dark);
+
+    @media (max-width: 575px) { 
+      font-size: 30px;
+    }
 
     &_btns {
       display: flex;

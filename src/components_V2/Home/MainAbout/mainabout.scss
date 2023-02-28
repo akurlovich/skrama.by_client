@@ -41,6 +41,10 @@
         color: var(--dark);
         text-align: center;
 
+        @media (max-width: 575px) { 
+          font-size: 36px;
+        }
+
       }
 
       &__text {

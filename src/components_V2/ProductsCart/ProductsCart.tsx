@@ -105,7 +105,7 @@ const ProductsCartInner: FC = () => {
             </span>
             <span>
               {' '}
-              Сумма заказа: <b>{totalPrice} ₽</b>{' '}
+              Сумма заказа: <b>{totalPrice} руб</b>{' '}
             </span>
           </div>
           <div className="cart__bottom-buttons">

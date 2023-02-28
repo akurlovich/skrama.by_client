@@ -13,6 +13,11 @@
       justify-content: center;
       padding: 48px 0px;
       gap: 60px;
+
+      @media (max-width: 575px) { 
+        justify-content: start;
+        padding: 25px;
+      }
     }
 
     &__item {

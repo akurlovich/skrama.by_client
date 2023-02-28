@@ -15,15 +15,28 @@
     line-height: 1.2;
     font-size: 48px;
     color: var(--dark);
+
+    @media (max-width: 575px) { 
+      font-size: 28px;
+    }
   }
 
   &__main {
     display: flex;
+
+    @media (max-width: 575px) { 
+      flex-direction: column;
+    }
   }
 
   &__sort {
     flex: 0 0 auto;
     width: 200px;
+
+    @media (max-width: 575px) { 
+      width: 100%;
+      display: flex;
+    }
 
     &__title {
       font-family: "Open Sans", sans-serif;
@@ -31,9 +44,10 @@
       line-height: 1.5;
       font-size: 32px;
       color: #8D9AA8;
-      // color: #000;
-      // background-color: var(--primary);
-      // border: 2px solid var(--primary);
+      
+      @media (max-width: 575px) { 
+        display: none;
+      }
     }
 
     &__item {
@@ -46,6 +60,11 @@
       color: #fff;
       cursor: pointer;
       transition: 0.5s;
+
+      @media (max-width: 575px) { 
+        flex: 1 0 auto;
+        padding: 8px 0px;
+      }
 
       &.active {
         background-color: #f93;

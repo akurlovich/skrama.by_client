@@ -9,6 +9,10 @@
     gap: 2%;
     justify-content: center;
 
+    @media (max-width: 575px) { 
+      padding: 10px;
+    }
+
     &__item {
       flex: 0 0 auto;
       width: 32%;
@@ -26,6 +30,11 @@
 
       @media (max-width: 991px) { 
         padding: 10px;
+      }
+
+      @media (max-width: 575px) { 
+        width: 100%;
+        // min-height: 320px;
       }
 
       &:hover &__img {

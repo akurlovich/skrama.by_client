@@ -98,7 +98,7 @@ const CartItem: FC<CartItemProps> = ({
         </button>
       </div>
       <div className="cart__item-price">
-        <b>{price * count} ₽</b>
+        <b>{price * count} руб</b>
       </div>
       <div className="cart__item-remove">
         <div 
