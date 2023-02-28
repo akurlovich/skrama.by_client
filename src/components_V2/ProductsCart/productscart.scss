@@ -116,17 +116,36 @@
     width: 40%;
     font-family: "Open Sans", sans-serif;
 
+    &__description {
+      display: flex;
+      flex-direction: column;
+
+      &__item {
+        font-size: 16px;
+        color: #8d8d8d;
+
+        @media (max-width: 575px) { 
+          font-size: 10px;
+        }
+      }
+    }
+
     h3 {
       // font-family: "Open Sans", sans-serif;
       font-weight: 700;
       line-height: 1.5;
-      font-size: 16px;
+      font-size: 28px;
+
+      @media (max-width: 575px) { 
+        font-size: 16px;
+      }
     }
 
-    p {
-      font-size: 10px;
-      color: #8d8d8d;
-    }
+    // p {
+    //   font-size: 10px;
+    //   color: #8d8d8d;
+    // }
+
   }
 
   &-count {
@@ -201,6 +220,7 @@
 
     .button {
       border-color: var(--primary);
+      cursor: pointer;
     }
 
     svg {

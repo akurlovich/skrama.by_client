@@ -1,40 +1,34 @@
-import React, { FC } from 'react';
-import { useAppDispatch } from '../../../hooks/redux';
+import React, { FC, useEffect } from 'react';
+import { SERVER_URL } from '../../../constants/http';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { addItem, minusItem, removeItem } from '../../../store/reducers/CartReducer/CartSlice';
+import { getProductByID, getProductInfoByProductID } from '../../../store/reducers/ProductReducer/ProductActionCreators';
 import { ICartItem } from '../../../types/ICartItem';
-// import { useAppDispatch } from '../redux/hooks/redux';
-// import { addItem, minusItem, removeItem } from '../redux/slices/cartSlice';
-// import { ICartItem } from '../types/ICartItem';
 
-interface CartItemProps {
-  id: string;
-  title: string;
-  type: string;
-  // size: number;
-  price: number;
-  count: number;
-  imageUrl: string;
-};
-
-const CartItem: FC<CartItemProps> = ({
+const CartItem: FC<ICartItem> = ({
   id,
   title,
-  type,
-  // size,
   price,
-  count,
   imageUrl,
+  color,
+  thickness,
+  density,
+  size,
+  count,
 }) => {
+  // const { product, productInfo, isLoading } = useAppSelector(state => state.productReducer);
   const dispatch = useAppDispatch();
 
   const onClickPlus = () => {
     const item: ICartItem = {
-      id: id.toString(),
+      id,
       title,
       price,
       imageUrl,
-      type,
-      // size,
+      color,
+      thickness,
+      density,
+      size,
       count: 1,
     };
     dispatch(addItem(item))
@@ -51,13 +45,24 @@ const CartItem: FC<CartItemProps> = ({
   return (
     <div className="cart__item">
       <div className="cart__item-img">
-        <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+        <img className="pizza-block__image" src={imageUrl} alt="Поликарбонат" />
       </div>
       <div className="cart__item-info">
         <h3>{title}</h3>
-        <p>
-          {type}, 
-        </p>
+        <div className="cart__item-info__description">
+          <div className="cart__item-info__description__item">
+            Толщина: {thickness}
+          </div>
+          <div className="cart__item-info__description__item">
+            Плотность: {density}
+          </div>
+          <div className="cart__item-info__description__item">
+            Размер листа: {size}
+          </div>
+          <div className="cart__item-info__description__item">
+            Цвет: {color}
+          </div>
+        </div>
       </div>
       <div className="cart__item-count">
         <button

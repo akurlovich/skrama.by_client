@@ -3,7 +3,9 @@ export interface ICartItem {
   title: string;
   price: number;
   imageUrl: string;
-  type: string;
-  // size: number;
+  color: string;
+  thickness: string;
+  density: string;
+  size: string;
   count: number;
 }

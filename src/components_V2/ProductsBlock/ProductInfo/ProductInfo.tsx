@@ -59,7 +59,7 @@ const ProductInfoInner: FC = () => {
   // const foundProduct = products.find(item => item._id === params.id);
   const [count, setCount] = useState(1);
   const [successModal, setSuccessModal] = useState(false);
-  const [colorImage, setColorImage] = useState({imageData: NO_IMAGE, isColor: false});
+  const [colorImage, setColorImage] = useState({imageData: NO_IMAGE, isColor: false, choosenColor: 'Прозрачный'});
 
   const price = colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price;
 
@@ -88,13 +88,31 @@ const ProductInfoInner: FC = () => {
   };
 
   const addToCartHandler = () => {
+    let thickness = '';
+    let density = '';
+    let size = '';
+    for (const element of productInfo) {
+      switch (element.title) {
+        case 'Плотность':
+          density = element.description;
+          break;
+        case 'Толщина':
+          thickness = element.description;
+          break;
+        case 'Размер листа':
+          size = element.description;
+          break;
+      }
+    }
     const item: ICartItem = {
       id: product._id,
       title: product.name,
       price: product.price,
       imageUrl: SERVER_URL + product.coverImage,
-      type: product.typeID,
-      // size: +product.rating,
+      color: colorImage.choosenColor,
+      thickness,
+      density,
+      size,
       count: count,
       // productInfo: productInfo,
     };
@@ -149,43 +167,43 @@ const ProductInfoInner: FC = () => {
               <img className="productinfo__image" src={colorImage.imageData} alt="поликарбонат"/>
               <div className="productinfo__image__colors">
                 <img
-                  onClick={() => setColorImage({imageData: SERVER_URL + product?.coverImage, isColor: false})}
+                  onClick={() => setColorImage({imageData: SERVER_URL + product?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
                   className="productinfo__image__item" src={SERVER_URL + product?.coverImage} alt="поликарбонат" />
                 <img
-                  onClick={() => setColorImage({imageData: beliy, isColor: true})}
+                  onClick={() => setColorImage({imageData: beliy, isColor: true, choosenColor: 'Белый'})}
                   className="productinfo__image__item" src={beliy} alt="белый" />
                 <img
-                  onClick={() => setColorImage({imageData: biruza, isColor: true})}
+                  onClick={() => setColorImage({imageData: biruza, isColor: true, choosenColor: 'Бирюза'})}
                   className="productinfo__image__item" src={biruza} alt="бирюза" />
                 <img
-                  onClick={() => setColorImage({imageData: bronza, isColor: true})}
+                  onClick={() => setColorImage({imageData: bronza, isColor: true, choosenColor: 'Бронза'})}
                   className="productinfo__image__item" src={bronza} alt="бронза" />
                 <img
-                  onClick={() => setColorImage({imageData: granat, isColor: true})}
+                  onClick={() => setColorImage({imageData: granat, isColor: true, choosenColor: 'Гранат'})}
                   className="productinfo__image__item" src={granat} alt="гранат" />
                 <img 
-                  onClick={() => setColorImage({imageData: krasniy, isColor: true})}
+                  onClick={() => setColorImage({imageData: krasniy, isColor: true, choosenColor: 'Красный'})}
                   className="productinfo__image__item" src={krasniy} alt="красный" />
                 <img
-                  onClick={() => setColorImage({imageData: oranzhevi, isColor: true})}
+                  onClick={() => setColorImage({imageData: oranzhevi, isColor: true, choosenColor: 'Оранжевый'})}
                   className="productinfo__image__item" src={oranzhevi} alt="оранжевый" />
                 <img
-                  onClick={() => setColorImage({imageData: prozrachniy, isColor: true})}
+                  onClick={() => setColorImage({imageData: prozrachniy, isColor: true, choosenColor: 'Прозрачный'})}
                   className="productinfo__image__item" src={prozrachniy} alt="прозрачный" />
                 <img
-                  onClick={() => setColorImage({imageData: serebro, isColor: true})}
+                  onClick={() => setColorImage({imageData: serebro, isColor: true, choosenColor: 'Серебро'})}
                   className="productinfo__image__item" src={serebro} alt="серебро" />
                 <img
-                  onClick={() => setColorImage({imageData: seriy, isColor: true})}
+                  onClick={() => setColorImage({imageData: seriy, isColor: true, choosenColor: 'Серый'})}
                   className="productinfo__image__item" src={seriy} alt="серый" />
                 <img
-                  onClick={() => setColorImage({imageData: siniy, isColor: true})}
+                  onClick={() => setColorImage({imageData: siniy, isColor: true, choosenColor: 'Синий'})}
                   className="productinfo__image__item" src={siniy} alt="синий" />
                 <img 
-                  onClick={() => setColorImage({imageData: zeleniy, isColor: true})}
+                  onClick={() => setColorImage({imageData: zeleniy, isColor: true, choosenColor: 'Зеленый'})}
                   className="productinfo__image__item" src={zeleniy} alt="зеленый" />
                 <img
-                  onClick={() => setColorImage({imageData: zheltiy, isColor: true})}
+                  onClick={() => setColorImage({imageData: zheltiy, isColor: true, choosenColor: 'Желтый'})}
                   className="productinfo__image__item" src={zheltiy} alt="желтый" />
               </div>
             </div>
@@ -215,7 +233,7 @@ const ProductInfoInner: FC = () => {
 
                 <div className="productinfo__addinfo">
                   <div className="">Цвет:</div>
-                  <div className="productinfo__addinfo__secondary">Прозрачный</div>
+                  <div className="productinfo__addinfo__secondary">{colorImage.choosenColor}</div>
                 </div>
 
               <div className="productinfo__cartinfo">

@@ -18,6 +18,7 @@ const ConfirmOrderInner: FC<IProps> = ({setModal, onClickClear, items}) => {
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
   const navigate = useNavigate();
+  
   const confirmHandler = async () => {
     alert('Заказ оформлен!');
     // console.log(items)

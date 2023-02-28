@@ -22,10 +22,12 @@ export const Header: FC = () => {
             +375(29) 984-67-46
           </div>
         </div>
-        <h1 className="header__toolbar__title">
-          <span>Farm</span>
-          Fresh
-        </h1>
+        <Link to='/'>
+          <h1 className="header__toolbar__title">
+            <span>Farm</span>
+            Fresh
+          </h1>
+        </Link>
         <div className="header__toolbar__cart">
           {location.pathname !== '/cart' && (
             <Link to="/cart" className="header__toolbar__cart__button">
