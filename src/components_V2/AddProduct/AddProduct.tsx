@@ -14,6 +14,7 @@ import { uniqItemsFilter } from '../../services/ClientServices/UniqItemsFilter';
 import { setAuthAdmin } from '../../store/reducers/AuthReducer/AuthSlice';
 import { AdminLogin } from '../AdminLogin/AdminLogin';
 import { SelectOption } from '../UI/SelectOption';
+import { Loader } from '../UI/Loader/Loader';
 
 initializeIcons();
 
@@ -27,7 +28,7 @@ const addIcon: IIconProps = { iconName: 'Add' };
 
 const AddProductInner: FC = () => {
   const { isAdminAuth } = useAppSelector(state => state.authReducer);
-  const { productsAllInfo } = useAppSelector(state => state.productReducer);
+  const { productsAllInfo, error, isLoading } = useAppSelector(state => state.productReducer);
   const { types } = useAppSelector(state => state.typeReducer);
   const { brands } = useAppSelector(state => state.brandReducer);
   const [name, setName] = useState('');
@@ -103,9 +104,9 @@ const AddProductInner: FC = () => {
     setShowImg(urlImage as string);
   };
 
-  const canselHandler = () => {
-    setAddProductError(false);
-  };
+  // const canselHandler = () => {
+  //   setAddProductError(false);
+  // };
  
   const showAddBlockHandler = ({type, brand, product, infoType} : IShowProps) => {
     setShowAddBlock({type: type, brand: brand, product: product, infoType: infoType})
@@ -126,7 +127,13 @@ const AddProductInner: FC = () => {
     for (let i = 0; i < infoBlock.length; i++) {
       productInfo.push({typeID, title: infoBlock[i].title, description: infoBlock[i].description});
     }
-    await dispatch(addProduct({product: formData, productInfo: productInfo}))
+    await dispatch(addProduct({product: formData, productInfo: productInfo}));
+
+    if (!error) {
+      alert(`Товар добавлен!`)
+    } else {
+      alert(`Что-то пошло не так! ${error}`)
+    }
     
     // await dispatch(addProduct({name, price, rating, count, coverImage, typeID, brandID}));
     setName('');
@@ -159,6 +166,7 @@ const AddProductInner: FC = () => {
   return (
     <div className="addproduct__wrapper">
       {/* {addProductError && <UserErrorWarning canselHandler={canselHandler} message='Can`t add book, try late!'/>} */}
+      {isLoading && <Loader/>}
       {!isAdminAuth && <AdminLogin/>}
       <AddProductNavButtons setShowAddBlock={showAddBlockHandler}/>
       <div className="addproduct__container">

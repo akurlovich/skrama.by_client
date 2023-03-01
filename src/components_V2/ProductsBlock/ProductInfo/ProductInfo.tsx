@@ -65,7 +65,7 @@ const ProductInfoInner: FC = () => {
 
   const price = colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price;
 
-  const admin = true;
+  // const admin = true;
 
   const deleteProductHandler = async () => {
     if (params.id) {
@@ -162,7 +162,7 @@ const ProductInfoInner: FC = () => {
       }
       <div className="productinfo">
         <div className="productinfo__wrapper">
-          {admin && (
+          {isAdminAuth && (
                   <div className="productinfo__title_btns">
                   <CommandBarButton
                     iconProps={editIcon}
