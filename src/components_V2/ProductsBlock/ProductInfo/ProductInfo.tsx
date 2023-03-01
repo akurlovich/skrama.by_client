@@ -166,7 +166,7 @@ const ProductInfoInner: FC = () => {
                   <div className="productinfo__title_btns">
                   <CommandBarButton
                     iconProps={editIcon}
-                    text="Редактировать"
+                    text="Изменить цену"
                     onClick={updateProductHandler}
                   />
                   <CommandBarButton
