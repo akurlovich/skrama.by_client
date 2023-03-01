@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import serverApi from "../http";
-import { IProduct } from "../types/IProduct";
+import { IProduct, IProductPriceUpdate } from "../types/IProduct";
 import { IProductNew } from "../types/IProductNew";
 import { IProductResponse } from "../types/IProductResponse";
 // import { IProduct, IProductUpdate } from "../types/IProduct";
@@ -23,7 +23,7 @@ export default class ProductService {
     return serverApi.delete<IProductResponse>(`/product/${id}`);
   };
 
-  // static async updateProductAmountByID(newProduct: IProductUpdate): Promise<AxiosResponse<IProductResponse>> {
-  //   return serverApi.put<IProductResponse>(`/product`, newProduct);
-  // };
+  static async updateProductPriceByID(data: IProductPriceUpdate): Promise<AxiosResponse<IProductResponse>> {
+    return serverApi.put<IProductResponse>(`/product/${data.id}`, {price: data.price});
+  };
 }

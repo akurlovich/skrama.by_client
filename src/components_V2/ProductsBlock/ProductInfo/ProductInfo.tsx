@@ -44,6 +44,7 @@ import { ICartItem } from '../../../types/ICartItem';
 import { Loader } from '../../UI/Loader/Loader';
 import { NO_IMAGE } from '../../../constants/user';
 import { setAuthAdmin } from '../../../store/reducers/AuthReducer/AuthSlice';
+import { ProductUpdate } from '../ProductUpdate/ProductUpdate';
 
 initializeIcons();
 
@@ -59,11 +60,12 @@ const ProductInfoInner: FC = () => {
   // const foundProduct = products.find(item => item._id === params.id);
   const [count, setCount] = useState(1);
   const [successModal, setSuccessModal] = useState(false);
+  const [updateProductModal, setUpdateProductModal] = useState(false);
   const [colorImage, setColorImage] = useState({imageData: NO_IMAGE, isColor: false, choosenColor: 'Прозрачный'});
 
   const price = colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price;
 
-  // const admin = false;
+  const admin = true;
 
   const deleteProductHandler = async () => {
     if (params.id) {
@@ -121,6 +123,10 @@ const ProductInfoInner: FC = () => {
     // console.log(productInfo);
   };
 
+  const updateProductHandler = () => {
+    setUpdateProductModal(true);
+  };
+
   useEffect(() => {
     (async () => {
       if (params.id) {
@@ -145,14 +151,23 @@ const ProductInfoInner: FC = () => {
         <SuccessModal
           title='Товар добавлен в корзину!'
           closeModal={closeModalWindow}
-        />}
+        />
+      }
+      {updateProductModal && 
+        <ProductUpdate
+          closeModal={setUpdateProductModal}
+          productID={product._id}
+          productPrice={product.price}
+        />
+      }
       <div className="productinfo">
         <div className="productinfo__wrapper">
-          {isAdminAuth && (
+          {admin && (
                   <div className="productinfo__title_btns">
                   <CommandBarButton
                     iconProps={editIcon}
                     text="Редактировать"
+                    onClick={updateProductHandler}
                   />
                   <CommandBarButton
                     iconProps={deleteIcon}

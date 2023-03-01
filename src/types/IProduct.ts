@@ -7,3 +7,8 @@ export interface IProduct {
   typeID: string,
   brandID: string,
 }
+
+export interface IProductPriceUpdate {
+  id: string,
+  price: number,
+}

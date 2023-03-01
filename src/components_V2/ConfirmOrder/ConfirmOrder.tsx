@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
 import './confirmorder.scss';
 import { TextField } from '@fluentui/react/lib/TextField';
-import { DefaultButton, PrimaryButton } from '@fluentui/react';
 import { useNavigate } from 'react-router-dom';
 import EmailService from '../../services/EmailService';
 import { ICartItem } from '../../types/ICartItem';

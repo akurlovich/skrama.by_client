@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import ProductInfoService from "../../../services/ProductInfoService";
 import ProductService from "../../../services/ProductService";
+import { IProductPriceUpdate } from "../../../types/IProduct";
 import { IProductInfo } from "../../../types/IProductInfo";
 import { IProductInfoNew } from "../../../types/IProductInfoNew";
 import { IProductInfoResponse } from "../../../types/IProductInfoResponse";
@@ -106,17 +107,17 @@ export const deleteProductByID = createAsyncThunk(
   }
 );
 
-// export const updateProductAmountByID = createAsyncThunk(
-//   'PRODUCT/updateProductAmountByID',
-//   async (newProduct: IProductUpdate, {rejectWithValue}) => {
-//     try {
-//       return await (await ProductService.updateProductAmountByID(newProduct)).data;
+export const updateProductPriceByID = createAsyncThunk(
+  'PRODUCT/updateProductPriceByID',
+  async (data: IProductPriceUpdate, {rejectWithValue}) => {
+    try {
+      return await (await ProductService.updateProductPriceByID(data)).data;
       
-//     } catch (error: any) {
-//       return rejectWithValue(error.message)
-//     }
-//   }
-// );
+    } catch (error: any) {
+      return rejectWithValue(error.message)
+    }
+  }
+);
 
 // export const getAllGenres = createAsyncThunk(
 //   'PRODUCT/getAllGenres',

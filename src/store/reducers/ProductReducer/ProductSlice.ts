@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IProductInfoResponse } from "../../../types/IProductInfoResponse";
 // import { IBook } from "../../../types/IBook";
 import { IProductResponse } from "../../../types/IProductResponse";
-import { addProduct, addProductInfoType, deleteProductByID, getAllProductsInfo, getProductByID, getProductInfoByProductID, getProducts } from "./ProductActionCreators";
+import { addProduct, addProductInfoType, deleteProductByID, getAllProductsInfo, getProductByID, getProductInfoByProductID, getProducts, updateProductPriceByID } from "./ProductActionCreators";
 // import { IGenreResponse } from "../../../types/IGenreResponse";
 // import { addBook, getAllGenres, getBookByID, getBooks, updateBookAmountByID } from "./ProductActionCreatores";
 
@@ -108,12 +108,22 @@ export const productSlice = createSlice({
     [deleteProductByID.pending.type]: (state) => {
       state.isLoading = true;
     },
-    [deleteProductByID.fulfilled.type]: (state, action: PayloadAction<IProductInfoResponse>) => {
+    [deleteProductByID.fulfilled.type]: (state) => {
       state.isLoading = false;
-      // state.productInfoNewType = action.payload;
       state.error = '';
     },
     [deleteProductByID.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [updateProductPriceByID.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [updateProductPriceByID.fulfilled.type]: (state) => {
+      state.isLoading = false;
+      state.error = '';
+    },
+    [updateProductPriceByID.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },
