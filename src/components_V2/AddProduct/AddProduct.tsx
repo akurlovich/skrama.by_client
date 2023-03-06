@@ -40,7 +40,7 @@ const AddProductInner: FC = () => {
   const [brandID, setBrandID] = useState('');
   const [showImg, setShowImg] = useState('');
   const [infoBlock, setInfoBlock] = useState<IInfoBlock[]>([]);
-  const [addProductError, setAddProductError] = useState(false);
+  // const [addProductError, setAddProductError] = useState(false);
   const [showAddBlock, setShowAddBlock] = useState({type: false, brand: false, product: false, infoType: false})
   const dispatch = useAppDispatch();
 
@@ -64,7 +64,7 @@ const AddProductInner: FC = () => {
   }
 
   const addInfo = () => {
-    const filltered = productsAllInfo.filter(item => item.typeID === typeID);
+    // const filltered = productsAllInfo.filter(item => item.typeID === typeID);
     // const newFiltered = [...new Set(filltered.map(o => JSON.stringify(o)))].map(s => JSON.parse(s));
     // @ts-ignore
     const newFiltered = uniqItemsFilter(productsAllInfo, 'title');
@@ -126,25 +126,39 @@ const AddProductInner: FC = () => {
     const productInfo: IProductInfoNew[] = [] as IProductInfoNew[];
     for (let i = 0; i < infoBlock.length; i++) {
       productInfo.push({typeID, title: infoBlock[i].title, description: infoBlock[i].description});
-    }
-    await dispatch(addProduct({product: formData, productInfo: productInfo}));
+    };
 
-    if (!error) {
-      alert(`Товар добавлен!`)
+    if (name && price && rating && count && typeID && brandID && coverImage) {
+      await dispatch(addProduct({product: formData, productInfo: productInfo}));
+      if (!error) {
+        alert(`Товар добавлен!`);
+        setName('');
+        setPrice('');
+        setRating('');
+        setCount('');
+        setTypeID('');
+        setBrandID('');
+        setcoverImage(null);
+        setShowImg('');
+        setInfoBlock([]);
+      } else {
+        alert(`Что-то пошло не так! ${error}`)
+      }
     } else {
-      alert(`Что-то пошло не так! ${error}`)
+      alert(`Не все поля заполнены`)
     }
+
     
     // await dispatch(addProduct({name, price, rating, count, coverImage, typeID, brandID}));
-    setName('');
-    setPrice('');
-    setRating('');
-    setCount('');
-    setTypeID('');
-    setBrandID('');
-    setcoverImage(null);
-    setShowImg('');
-    setInfoBlock([]);
+    // setName('');
+    // setPrice('');
+    // setRating('');
+    // setCount('');
+    // setTypeID('');
+    // setBrandID('');
+    // setcoverImage(null);
+    // setShowImg('');
+    // setInfoBlock([]);
   };
 
   useEffect(() => {
@@ -239,7 +253,7 @@ const AddProductInner: FC = () => {
                   <label className='inputs__files__label' htmlFor="label_for_file">Виберите файл</label>
                 </div>
                 <div className="inputs__files__view">
-                  <img  className='inputs__files__view_img' src={showImg}/>
+                  <img  className='inputs__files__view_img' src={showImg} alt='эскиз'/>
                 </div>
               </div>
             </div>

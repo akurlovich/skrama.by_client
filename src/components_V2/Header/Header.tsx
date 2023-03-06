@@ -1,7 +1,5 @@
 import { FC, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-// @ts-ignore
-import logoSvg from '../../assets/img/logo.png';
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { BiPhoneCall } from "react-icons/bi"
 import './header.scss';

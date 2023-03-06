@@ -111,9 +111,8 @@
       width: 28%;
       text-align: end;
       display: flex;
-      text-align: end;
-      align-items: end;
-      justify-content: end;
+      align-items: flex-end;
+      justify-content: flex-end;
 
       @media (max-width: 767px) { 
         justify-content: start;

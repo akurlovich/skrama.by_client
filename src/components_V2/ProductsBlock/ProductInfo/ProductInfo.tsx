@@ -9,8 +9,6 @@ import minusSvg from '../../../assets/img/minus.png';
 // @ts-ignore
 import plusSvg from '../../../assets/img/plus.png';
 // @ts-ignore
-import cartSvg from '../../../assets/img/cart.svg';
-// @ts-ignore
 import beliy from '../../../assets/img/colors/beliy.jpg'
 // @ts-ignore
 import biruza from '../../../assets/img/colors/biruza.jpg'
@@ -228,11 +226,11 @@ const ProductInfoInner: FC = () => {
                 
               </div>
               <div className="productinfo__rating">
-                <img src={starRatingSvg}/>
-                <img src={starRatingSvg}/>
-                <img src={starRatingSvg}/>
-                <img src={starRatingSvg}/>
-                <img src={starRatingSvg}/>
+                <img src={starRatingSvg} alt='star'/>
+                <img src={starRatingSvg} alt='star'/>
+                <img src={starRatingSvg} alt='star'/>
+                <img src={starRatingSvg} alt='star'/>
+                <img src={starRatingSvg} alt='star'/>
                 <div className="productinfo__rating_review">
                   8 просмотров
                 </div>
