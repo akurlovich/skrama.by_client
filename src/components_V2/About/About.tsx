@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { AiOutlineEnvironment, AiOutlineMail, AiOutlinePhone } from 'react-icons/ai';
 import './about.scss';
+import {isMobile} from 'react-device-detect';
 
 const AboutInner: FC = () => {
   return (
@@ -49,9 +50,10 @@ const AboutInner: FC = () => {
               <div className="about__adress__item__info__title">
                 Телефон
               </div>
-              <div className="about__adress__item__info__text">
+              <a 
+                href={isMobile ? "tel:+375299846746" : '/'} className="about__adress__item__info__text">
                 +375(29) 984-67-46
-              </div>
+              </a>
             </div>
           </div>
         </div>

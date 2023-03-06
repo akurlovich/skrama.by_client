@@ -7,6 +7,7 @@ import { BiPhoneCall } from "react-icons/bi"
 import './header.scss';
 import { ICartItem } from "../../types/ICartItem";
 import { addItem } from "../../store/reducers/CartReducer/CartSlice";
+import {isMobile} from 'react-device-detect';
 
 export const Header: FC = () => {
   const { totalPrice, items } = useAppSelector(state => state.cartReducer);
@@ -28,7 +29,7 @@ export const Header: FC = () => {
         dispatch(addItem(item));
       }
     }
-  }, [])
+  }, []);
   
   
   return (
@@ -38,14 +39,14 @@ export const Header: FC = () => {
           <div className="header__toolbar__tel__icon">
             <BiPhoneCall size={40}/>
           </div>
-          <div className="header__toolbar__tel__text">
+          <a href={isMobile ? "tel:+375299846746" : '/'} className="header__toolbar__tel__text">
             +375(29) 984-67-46
-          </div>
+          </a>
         </div>
         <Link to='/'>
           <h1 className="header__toolbar__title">
-            <span>Farm</span>
-            Fresh
+            Skrama
+            <span>24</span>
           </h1>
         </Link>
         <div className="header__toolbar__cart">

@@ -8,7 +8,7 @@ const PageNotFoundInner: FC = () => {
   return (
     <div className='pagenotfound'>
       <div className="pagenotfound__text">
-        Sorry, page not found!
+        Страница не найдена!
       </div>
       <button onClick={() => navigate('/')} className="btn btn-lg btn-primary">Go home</button>
     </div>

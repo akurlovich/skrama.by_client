@@ -86,6 +86,12 @@ const ProductsBlockInner: FC = () => {
           </div> */}
         </div>
         <div className="productsblock__container">
+          {!readyProductsArray.length ? 
+            <div className="productsblock__notfound">
+              Товары не найдены!
+            </div>
+            : null
+          }
           {readyProductsArray.map(item => 
             <ProductItem key={item._id} item={item} productsInfo={productsAllInfo}/>
           )}
