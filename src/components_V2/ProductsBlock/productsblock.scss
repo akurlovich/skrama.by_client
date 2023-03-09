@@ -48,6 +48,11 @@
       @media (max-width: 575px) { 
         display: none;
       }
+
+      &.dop-el {
+        line-height: 1.2;
+        font-size: 28px;
+      }
     }
 
     &__item {
@@ -64,6 +69,7 @@
       @media (max-width: 575px) { 
         flex: 1 0 auto;
         padding: 8px 0px;
+        font-size: 18px;
       }
 
       &.active {
@@ -85,6 +91,7 @@
     align-items: center;
     text-align: center;
     justify-content: center;
+    height: 100%;
     
   }
 

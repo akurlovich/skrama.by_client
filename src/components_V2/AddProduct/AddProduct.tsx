@@ -15,6 +15,7 @@ import { setAuthAdmin } from '../../store/reducers/AuthReducer/AuthSlice';
 import { AdminLogin } from '../AdminLogin/AdminLogin';
 import { SelectOption } from '../UI/SelectOption';
 import { Loader } from '../UI/Loader/Loader';
+import { AddProductType } from './AddProductType/AddProductType';
 
 initializeIcons();
 
@@ -184,7 +185,7 @@ const AddProductInner: FC = () => {
       {!isAdminAuth && <AdminLogin/>}
       <AddProductNavButtons setShowAddBlock={showAddBlockHandler}/>
       <div className="addproduct__container">
-        {showAddBlock.type && <div>TYPE</div>}
+        {showAddBlock.type && <AddProductType types={types}/>}
         {showAddBlock.infoType && <AddProductInfoType types={types}/>}
         {showAddBlock.product && (
           <form onSubmit={handlerAddProduct} className='addproduct'>

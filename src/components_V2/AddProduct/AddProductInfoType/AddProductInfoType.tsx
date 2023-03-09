@@ -17,7 +17,7 @@ const addIcon: IIconProps = { iconName: 'Add' };
 const AddProductInfoTypeInner: FC<IProps> = ({types}) => {
   const dispatch = useAppDispatch();
   const [typeID, setTypeID] = useState('');
-  const [title, setTitle] = useState('')
+  const [title, setTitle] = useState('');
 
   const typeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTypeID(event.target.value);
@@ -44,7 +44,7 @@ const AddProductInfoTypeInner: FC<IProps> = ({types}) => {
         text="Добавить тип"
         onClick={infoTypeHandler}
       />
-  </div>
+    </div>
   )
 }
 

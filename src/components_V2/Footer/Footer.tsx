@@ -1,30 +1,32 @@
 import React, { FC } from 'react';
 import { AiOutlineArrowRight, AiOutlineCopyrightCircle, AiOutlineMail } from "react-icons/ai";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './footer.scss';
 
 const FooterInner: FC = () => {
   return (
     <footer className="footer">
       <div className="footer__wrapper">
-        <Link to='/' className="footer__links">
+        <NavLink 
+          to='/' 
+          className={({ isActive }) => isActive ? 'footer__links active' : 'footer__links'}>
           <AiOutlineArrowRight size={30} />
           <div className="footer__links__text">
-            О нас
+            Главная
           </div>
-        </Link>
-        <Link to='/products' className="footer__links">
+        </NavLink>
+        <NavLink to='/polikarbonat' className={({ isActive }) => isActive ? 'footer__links active' : 'footer__links'}>
           <AiOutlineArrowRight size={30}/>
           <div className="footer__links__text">
             Продукция
           </div>
-        </Link>
-        <Link to='/about' className="footer__links">
+        </NavLink>
+        <NavLink to='/about' className={({ isActive }) => isActive ? 'footer__links active' : 'footer__links'}>
           <AiOutlineArrowRight size={30}/>
           <div className="footer__links__text">
             Контакты
           </div>
-        </Link>
+        </NavLink>
       </div>
       <div className="footer__copywrite">
         <div className="footer__item">

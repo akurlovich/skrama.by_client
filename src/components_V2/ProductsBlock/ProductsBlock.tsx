@@ -3,7 +3,7 @@ import './productsblock.scss';
 import { ProductItem } from './ProductItem/ProductItem';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getAllProductsInfo, getProducts } from '../../store/reducers/ProductReducer/ProductActionCreators';
-import { DEFAULT_POLIRBONAT_FILTER_TITLE, DEFAULT_TYPE_ID_POLIKARBONAT } from '../../constants/user';
+import { DEFAULT_POLIRBONAT_FILTER_TITLE, DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, DEFAULT_TYPE_ID_POLIK_PLANKI } from '../../constants/user';
 import { Loader } from '../UI/Loader/Loader';
 import { IProductResponse } from '../../types/IProductResponse';
 
@@ -27,6 +27,16 @@ const ProductsBlockInner: FC = () => {
   };
 
   const changeSortData = (sort: string) => {
+    if (sort === DEFAULT_TYPE_ID_POLIK_KREPEZH) {
+      const productsFilter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIK_KREPEZH);
+      setReadyProductsArray(productsFilter);
+      return;
+    };
+    if (sort === DEFAULT_TYPE_ID_POLIK_PLANKI) {
+      const productsFilter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIK_PLANKI);
+      setReadyProductsArray(productsFilter);
+      return;
+    };
     setSortData(sort);
     const productsFilter = readyFilterd(sort);
     setReadyProductsArray(productsFilter);
@@ -42,8 +52,10 @@ const ProductsBlockInner: FC = () => {
 
   useEffect(() => {
     if (!sortData) {
-      const productsFilter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT);
-      setReadyProductsArray(productsFilter);
+      const productsFilterPolik = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT);
+      const productsFilterPolikepezh = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIK_KREPEZH);
+      const productsFilterPolikPlanki = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIK_PLANKI);
+      setReadyProductsArray([...productsFilterPolik, ...productsFilterPolikepezh, ...productsFilterPolikPlanki]);
     } else {
       const productsFilter = readyFilterd(sortData);
       setReadyProductsArray(productsFilter);
@@ -81,9 +93,19 @@ const ProductsBlockInner: FC = () => {
               {item}
             </div>
           ))}
-          {/* <div className="productsblock__sort__title">
-            Очистить
-          </div> */}
+          <div className="productsblock__sort__title dop-el">
+            Доборные элементы
+          </div>
+          <div 
+            className={`productsblock__sort__item`}
+            onClick={() => changeSortData(DEFAULT_TYPE_ID_POLIK_KREPEZH)}>
+            Крепеж
+          </div>
+          <div 
+            className={`productsblock__sort__item`}
+            onClick={() => changeSortData(DEFAULT_TYPE_ID_POLIK_PLANKI)}>
+            Планки
+          </div>
         </div>
         <div className="productsblock__container">
           {!readyProductsArray.length ? 

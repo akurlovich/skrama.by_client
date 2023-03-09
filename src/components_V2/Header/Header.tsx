@@ -90,7 +90,7 @@ export const Header: FC = () => {
         <NavLink
           to='/'
           className={({ isActive }) => isActive ? 'header__navbar__item active' : 'header__navbar__item'}>
-          О нас
+          Главная
         </NavLink>
         <NavLink 
           to='/polikarbonat' 

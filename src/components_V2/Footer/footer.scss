@@ -34,6 +34,10 @@
     cursor: pointer;
     transition: 0.3s;
 
+    &.active {
+      color: var(--secondary)
+    }
+
     &:hover {
       scale: 1.05;
     }
@@ -41,7 +45,7 @@
     &__text {
       font-family: "Open Sans", sans-serif;
       font-size: 25px;
-      color: #fff;
+      // color: #fff;
       font-weight: 600;
       line-height: 1.5;
 
