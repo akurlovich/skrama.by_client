@@ -6,6 +6,7 @@ import { IProductResponse } from '../../../types/IProductResponse';
 import { IProductInfoResponse } from '../../../types/IProductInfoResponse';
 import { useNavigate } from 'react-router-dom';
 import { SERVER_URL } from '../../../constants/http';
+import { DEFAULT_TYPE_ID_POLIK_KREPEZH } from '../../../constants/user';
 
 interface IProps {
   item: IProductResponse;
@@ -40,12 +41,12 @@ const ProductItemInner: FC <IProps> = ({item, productsInfo}) => {
 
 
 
-          {/* <div className="productitem__item__text">
-            Размер листа: 6х2,1м
-          </div> */}
-          <div className="productitem__item__text">
-            Цвет: прозрачный
-          </div>
+          {item.typeID === DEFAULT_TYPE_ID_POLIK_KREPEZH ? null :
+            <div className="productitem__item__text">
+              Цвет: прозрачный
+            </div>
+          }
+
         </div>
         <div className="productitem__item__price">
           {item.price}.00 руб

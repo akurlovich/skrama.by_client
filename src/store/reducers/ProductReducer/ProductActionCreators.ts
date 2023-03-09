@@ -84,7 +84,7 @@ export const getProductInfoByProductID = createAsyncThunk(
 export const addProductInfoType = createAsyncThunk(
   'PRODUCT/addProductInfoType',
   async (productInfo: IProductInfoNew, {rejectWithValue}) => {
-    console.log(productInfo)
+    // console.log(productInfo)
     try {
       const newProductInfo = await (await ProductInfoService.addProductInfo({...productInfo, productID: productInfo.typeID, description: ''})).data;
       

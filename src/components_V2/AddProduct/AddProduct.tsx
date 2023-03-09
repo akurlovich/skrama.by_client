@@ -58,6 +58,7 @@ const AddProductInner: FC = () => {
     setCount(newValue || '');
   }
   const typeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    // console.log(event.target.value);
     setTypeID(event.target.value);
   }
   const brandHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -65,10 +66,12 @@ const AddProductInner: FC = () => {
   }
 
   const addInfo = () => {
-    // const filltered = productsAllInfo.filter(item => item.typeID === typeID);
+    const filltered = productsAllInfo.filter(item => item.typeID === typeID);
+    // console.log(filltered);
     // const newFiltered = [...new Set(filltered.map(o => JSON.stringify(o)))].map(s => JSON.parse(s));
     // @ts-ignore
-    const newFiltered = uniqItemsFilter(productsAllInfo, 'title');
+    // const newFiltered = uniqItemsFilter(productsAllInfo, 'title');
+    const newFiltered = uniqItemsFilter(filltered, 'title');
     // productsAllInfo.reduce((acc, item) => {
     //   // @ts-ignore
     //   if (acc.map[item.title]) return acc;
