@@ -29,18 +29,18 @@ const ProductsBlockInner: FC = () => {
   const changeSortData = (sort: string) => {
     setSortData(sort);
     const productsFilterKrepezh = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIK_KREPEZH);
+    const productsFilterPlanki = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIK_PLANKI);
     if (sort === 'Крепеж') {
       setReadyProductsArray(productsFilterKrepezh);
       return;
     };
     if (sort === 'Планки') {
-      const productsFilter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIK_PLANKI);
-      setReadyProductsArray(productsFilter);
+      setReadyProductsArray(productsFilterPlanki);
       return;
     };
     // setSortData(sort);
     const productsFilter = readyFilterd(sort);
-    setReadyProductsArray([...productsFilter, ...productsFilterKrepezh]);
+    setReadyProductsArray([...productsFilter, ...productsFilterKrepezh, ...productsFilterPlanki]);
   };
 
   useEffect(() => {

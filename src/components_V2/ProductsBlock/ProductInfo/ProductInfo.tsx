@@ -40,7 +40,7 @@ import { addItem } from '../../../store/reducers/CartReducer/CartSlice';
 import { SERVER_URL } from '../../../constants/http';
 import { ICartItem } from '../../../types/ICartItem';
 import { Loader } from '../../UI/Loader/Loader';
-import { NO_IMAGE } from '../../../constants/user';
+import { DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, NO_IMAGE } from '../../../constants/user';
 import { setAuthAdmin } from '../../../store/reducers/AuthReducer/AuthSlice';
 import { ProductUpdate } from '../ProductUpdate/ProductUpdate';
 
@@ -178,47 +178,50 @@ const ProductInfoInner: FC = () => {
             <div className="productinfo__imageblock">
               {/* <img className="productinfo__image" src={SERVER_URL + product?.coverImage} alt="product cover"/> */}
               <img className="productinfo__image" src={colorImage.imageData} alt="поликарбонат"/>
-              <div className="productinfo__image__colors">
-                <img
-                  onClick={() => setColorImage({imageData: SERVER_URL + product?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
-                  className="productinfo__image__item" src={SERVER_URL + product?.coverImage} alt="поликарбонат" />
-                <img
-                  onClick={() => setColorImage({imageData: beliy, isColor: true, choosenColor: 'Белый'})}
-                  className="productinfo__image__item" src={beliy} alt="белый" />
-                <img
-                  onClick={() => setColorImage({imageData: biruza, isColor: true, choosenColor: 'Бирюза'})}
-                  className="productinfo__image__item" src={biruza} alt="бирюза" />
-                <img
-                  onClick={() => setColorImage({imageData: bronza, isColor: true, choosenColor: 'Бронза'})}
-                  className="productinfo__image__item" src={bronza} alt="бронза" />
-                <img
-                  onClick={() => setColorImage({imageData: granat, isColor: true, choosenColor: 'Гранат'})}
-                  className="productinfo__image__item" src={granat} alt="гранат" />
-                <img 
-                  onClick={() => setColorImage({imageData: krasniy, isColor: true, choosenColor: 'Красный'})}
-                  className="productinfo__image__item" src={krasniy} alt="красный" />
-                <img
-                  onClick={() => setColorImage({imageData: oranzhevi, isColor: true, choosenColor: 'Оранжевый'})}
-                  className="productinfo__image__item" src={oranzhevi} alt="оранжевый" />
-                <img
-                  onClick={() => setColorImage({imageData: prozrachniy, isColor: true, choosenColor: 'Прозрачный'})}
-                  className="productinfo__image__item" src={prozrachniy} alt="прозрачный" />
-                <img
-                  onClick={() => setColorImage({imageData: serebro, isColor: true, choosenColor: 'Серебро'})}
-                  className="productinfo__image__item" src={serebro} alt="серебро" />
-                <img
-                  onClick={() => setColorImage({imageData: seriy, isColor: true, choosenColor: 'Серый'})}
-                  className="productinfo__image__item" src={seriy} alt="серый" />
-                <img
-                  onClick={() => setColorImage({imageData: siniy, isColor: true, choosenColor: 'Синий'})}
-                  className="productinfo__image__item" src={siniy} alt="синий" />
-                <img 
-                  onClick={() => setColorImage({imageData: zeleniy, isColor: true, choosenColor: 'Зеленый'})}
-                  className="productinfo__image__item" src={zeleniy} alt="зеленый" />
-                <img
-                  onClick={() => setColorImage({imageData: zheltiy, isColor: true, choosenColor: 'Желтый'})}
-                  className="productinfo__image__item" src={zheltiy} alt="желтый" />
-              </div>
+              {product.typeID === DEFAULT_TYPE_ID_POLIKARBONAT ? 
+                <div className="productinfo__image__colors">
+                  <img
+                    onClick={() => setColorImage({imageData: SERVER_URL + product?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
+                    className="productinfo__image__item" src={SERVER_URL + product?.coverImage} alt="поликарбонат" />
+                  <img
+                    onClick={() => setColorImage({imageData: beliy, isColor: true, choosenColor: 'Белый'})}
+                    className="productinfo__image__item" src={beliy} alt="белый" />
+                  <img
+                    onClick={() => setColorImage({imageData: biruza, isColor: true, choosenColor: 'Бирюза'})}
+                    className="productinfo__image__item" src={biruza} alt="бирюза" />
+                  <img
+                    onClick={() => setColorImage({imageData: bronza, isColor: true, choosenColor: 'Бронза'})}
+                    className="productinfo__image__item" src={bronza} alt="бронза" />
+                  <img
+                    onClick={() => setColorImage({imageData: granat, isColor: true, choosenColor: 'Гранат'})}
+                    className="productinfo__image__item" src={granat} alt="гранат" />
+                  <img 
+                    onClick={() => setColorImage({imageData: krasniy, isColor: true, choosenColor: 'Красный'})}
+                    className="productinfo__image__item" src={krasniy} alt="красный" />
+                  <img
+                    onClick={() => setColorImage({imageData: oranzhevi, isColor: true, choosenColor: 'Оранжевый'})}
+                    className="productinfo__image__item" src={oranzhevi} alt="оранжевый" />
+                  <img
+                    onClick={() => setColorImage({imageData: prozrachniy, isColor: true, choosenColor: 'Прозрачный'})}
+                    className="productinfo__image__item" src={prozrachniy} alt="прозрачный" />
+                  <img
+                    onClick={() => setColorImage({imageData: serebro, isColor: true, choosenColor: 'Серебро'})}
+                    className="productinfo__image__item" src={serebro} alt="серебро" />
+                  <img
+                    onClick={() => setColorImage({imageData: seriy, isColor: true, choosenColor: 'Серый'})}
+                    className="productinfo__image__item" src={seriy} alt="серый" />
+                  <img
+                    onClick={() => setColorImage({imageData: siniy, isColor: true, choosenColor: 'Синий'})}
+                    className="productinfo__image__item" src={siniy} alt="синий" />
+                  <img 
+                    onClick={() => setColorImage({imageData: zeleniy, isColor: true, choosenColor: 'Зеленый'})}
+                    className="productinfo__image__item" src={zeleniy} alt="зеленый" />
+                  <img
+                    onClick={() => setColorImage({imageData: zheltiy, isColor: true, choosenColor: 'Желтый'})}
+                    className="productinfo__image__item" src={zheltiy} alt="желтый" />
+                </div>
+                : null
+              }
             </div>
             <div className="productinfo__info">
               <div className="productinfo__titleblock">
@@ -244,10 +247,14 @@ const ProductInfoInner: FC = () => {
                   </div>
                 ))}
 
-                <div className="productinfo__addinfo">
-                  <div className="">Цвет:</div>
-                  <div className="productinfo__addinfo__secondary">{colorImage.choosenColor}</div>
-                </div>
+                {product.typeID !== DEFAULT_TYPE_ID_POLIK_KREPEZH ? 
+                  <div className="productinfo__addinfo">
+                    <div className="">Цвет:</div>
+                    <div className="productinfo__addinfo__secondary">{colorImage.choosenColor}</div>
+                  </div>
+                  : null
+                }
+
 
               <div className="productinfo__cartinfo">
                 <div className="productinfo__cartinfo_count">
