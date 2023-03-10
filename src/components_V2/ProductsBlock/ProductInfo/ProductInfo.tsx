@@ -32,7 +32,7 @@ import siniy from '../../../assets/img/colors/siniy.jpg'
 import zeleniy from '../../../assets/img/colors/zeleniy.jpg'
 // @ts-ignore
 import zheltiy from '../../../assets/img/colors/zheltiy.jpg'
-import { deleteProductByID, getProductByID, getProductInfoByProductID } from '../../../store/reducers/ProductReducer/ProductActionCreators';
+import { deleteProductByID, deleteProductInfos, getProductByID, getProductInfoByProductID } from '../../../store/reducers/ProductReducer/ProductActionCreators';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { SuccessModal } from '../../UI/SuccessModal/SuccessModal';
@@ -68,6 +68,7 @@ const ProductInfoInner: FC = () => {
   const deleteProductHandler = async () => {
     if (params.id) {
       await dispatch(deleteProductByID(params.id));
+      await dispatch(deleteProductInfos(params.id))
       alert(`Товар ${product?.name} удален!`);
       navigate(`/products`);
     }

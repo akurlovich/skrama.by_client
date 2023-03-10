@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IProductInfoResponse } from "../../../types/IProductInfoResponse";
 // import { IBook } from "../../../types/IBook";
 import { IProductResponse } from "../../../types/IProductResponse";
-import { addProduct, addProductInfoType, deleteProductByID, getAllProductsInfo, getProductByID, getProductInfoByProductID, getProducts, updateProductPriceByID } from "./ProductActionCreators";
+import { addProduct, addProductInfoType, deleteProductByID, deleteProductInfos, getAllProductsInfo, getProductByID, getProductInfoByProductID, getProducts, updateProductPriceByID } from "./ProductActionCreators";
 // import { IGenreResponse } from "../../../types/IGenreResponse";
 // import { addBook, getAllGenres, getBookByID, getBooks, updateBookAmountByID } from "./ProductActionCreatores";
 
@@ -124,6 +124,17 @@ export const productSlice = createSlice({
       state.error = '';
     },
     [updateProductPriceByID.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [deleteProductInfos.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [deleteProductInfos.fulfilled.type]: (state) => {
+      state.isLoading = false;
+      state.error = '';
+    },
+    [deleteProductInfos.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },

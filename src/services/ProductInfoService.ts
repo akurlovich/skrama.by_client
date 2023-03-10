@@ -20,6 +20,10 @@ export default class ProductInfoService {
     return serverApi.get<IProductInfoResponse[]>(`/productinfos`);
   };
 
+  static async deleteProductInfos(id: string): Promise<AxiosResponse<IProductInfoResponse>> {
+    return serverApi.delete<IProductInfoResponse>(`/productinfo/${id}`);
+  };
+
   // static async updateProductAmountByID(newProduct: IProductUpdate): Promise<AxiosResponse<IProductResponse>> {
   //   return serverApi.put<IProductResponse>(`/product`, newProduct);
   // };
