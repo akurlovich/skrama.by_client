@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.5ebc6e62.css",
-    "main.js": "/static/js/main.8888a69a.js",
+    "main.css": "/static/css/main.0d500a0f.css",
+    "main.js": "/static/js/main.8bcfe115.js",
     "static/media/main_img4.jpg": "/static/media/main_img4.7c64eb22247659521993.jpg",
     "static/media/backgraund.jpg": "/static/media/backgraund.f788efc193741849dd54.jpg",
     "static/media/main_about-rem-bg.png": "/static/media/main_about-rem-bg.e084145319d1e65dc2f0.png",
@@ -23,11 +23,11 @@
     "static/media/beliy.jpg": "/static/media/beliy.220b8785d2682a3e223b.jpg",
     "static/media/prozrachniy.jpg": "/static/media/prozrachniy.0608b0b03be24c760933.jpg",
     "index.html": "/index.html",
-    "main.5ebc6e62.css.map": "/static/css/main.5ebc6e62.css.map",
-    "main.8888a69a.js.map": "/static/js/main.8888a69a.js.map"
+    "main.0d500a0f.css.map": "/static/css/main.0d500a0f.css.map",
+    "main.8bcfe115.js.map": "/static/js/main.8bcfe115.js.map"
   },
   "entrypoints": [
-    "static/css/main.5ebc6e62.css",
-    "static/js/main.8888a69a.js"
+    "static/css/main.0d500a0f.css",
+    "static/js/main.8bcfe115.js"
   ]
 }
