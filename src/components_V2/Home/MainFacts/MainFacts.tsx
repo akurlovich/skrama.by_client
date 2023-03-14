@@ -41,7 +41,7 @@ const MainFactsInner: FC = () => {
               Доставка по
             </div>
             <div className="main__facts__item__text">
-              ргионам
+              регионам
             </div>
           </div>
         </div>
