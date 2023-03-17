@@ -1,7 +1,7 @@
 {
   "name": "skrama.by",
   "version": "0.1.0",
-  "private": true,
+  "homepage": ".",
   "dependencies": {
     "@fluentui/react": "^8.105.7",
     "@reduxjs/toolkit": "^1.9.2",
