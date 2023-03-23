@@ -8,6 +8,13 @@
   color: #263A4F;
   font-size: 32px;
 
+  &__h1 {
+    width: 1px;
+    height: 1px;
+    font-size: 1px;
+    visibility: hidden;
+  }
+
   @media (min-width: 992px) and (max-width: 1199px) { 
     font-size: 25px;
   }
