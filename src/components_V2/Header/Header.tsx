@@ -32,7 +32,7 @@ export const Header: FC = () => {
   
   return (
     <header className="header">
-      <div className="header__toolbar">
+      <section className="header__toolbar">
         <div className="header__toolbar__tel">
           <div className="header__toolbar__tel__icon">
             <BiPhoneCall size={40}/>
@@ -86,8 +86,8 @@ export const Header: FC = () => {
             </Link>
           )}
         </div>
-      </div>
-      <div className="header__navbar">
+      </section>
+      <nav className="header__navbar">
         <NavLink
           to='/'
           className={({ isActive }) => isActive ? 'header__navbar__item active' : 'header__navbar__item'}>
@@ -103,7 +103,7 @@ export const Header: FC = () => {
           className={({ isActive }) => isActive ? 'header__navbar__item active' : 'header__navbar__item'}>
           Контакты
         </NavLink>
-      </div>
+      </nav>
     </header>
   );
 };

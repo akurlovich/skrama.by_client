@@ -75,25 +75,28 @@ const ProductsBlockInner: FC = () => {
   }, [products, productsAllInfo]);
 
   return (
-    <div className='productsblock'>
+    <section className='productsblock'>
       {isLoading && <Loader/>}
-      <div className="productsblock__title">
+      <h2 className="productsblock__title">
         Сотовый поликабонат
-      </div>
+      </h2>
       <div className="productsblock__main">
         <div className="productsblock__sort">
           <div className="productsblock__sort__title">
             {DEFAULT_POLIRBONAT_FILTER_TITLE}
           </div>
-          {sortArrayValue.map(item => (
-            <div
-              key={item}
-              className={`productsblock__sort__item ${sortData === item ? 'active' : null}`}
-              onClick={() => changeSortData(item)}
-            >
-              {item}
-            </div>
-          ))}
+          <ul>
+            {sortArrayValue.map(item => (
+              <li
+                key={item}
+                className={`productsblock__sort__item ${sortData === item ? 'active' : null}`}
+                onClick={() => changeSortData(item)}
+              >
+                {item}
+              </li>
+            ))}
+            
+          </ul>
           {/* <div className="productsblock__sort__title dop-el">
             Доборные элементы
           </div>
@@ -120,7 +123,7 @@ const ProductsBlockInner: FC = () => {
           )}
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

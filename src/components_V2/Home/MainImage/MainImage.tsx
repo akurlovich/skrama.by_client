@@ -7,9 +7,9 @@ import './mainimage.scss';
 const MainImageInner: FC = () => {
   return (
     <section className="main__title">
-      <div className="main__title__text">
+      <h1 className="main__title__text">
         Поликарбонат для Вашего дома: высокое качество и низкие цены!
-      </div>
+      </h1>
       <div className="main__title__buttons">
         <Link to='/polikarbonat' className="btn btn-primary btn-lg">Купить</Link>
         <Link to='/about' className="btn btn-secondary btn-lg">Контакты</Link>

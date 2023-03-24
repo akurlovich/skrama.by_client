@@ -33,10 +33,20 @@
     & p {
       color: var(--secondary);
     }
-  } 
+  }
+
+  &__img {
+    padding-left: 20px;
+    float: right;
+    width: 50%;
+  
+    @media (max-width: 575px) { 
+      
+    }
+  }
   
   &__info {
-    padding: 20px;
+    padding: 20px 5%;
     background-color: #fff;
     font-family: "Open Sans", sans-serif;
     font-weight: 400;
@@ -45,13 +55,14 @@
     font-size: 18px;
 
     &__text {
-      text-indent: 20px;
+      // text-indent: 20px;
       margin-top: 10px;
       margin-left: 20px;
 
       & li {
         list-style: circle;
         padding-top: 10px;
+        text-align: justify;
 
         & strong {
           color: var(--primary);
@@ -59,10 +70,6 @@
           font-size: 20px;
         }
 
-        & b {
-          // color: var(--secondary);
-          // font-weight: 600;
-        }
       }
 
     }

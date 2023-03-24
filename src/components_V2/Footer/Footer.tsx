@@ -6,7 +6,7 @@ import './footer.scss';
 const FooterInner: FC = () => {
   return (
     <footer className="footer">
-      <div className="footer__wrapper">
+      <nav className="footer__wrapper">
         <NavLink 
           to='/' 
           className={({ isActive }) => isActive ? 'footer__links active' : 'footer__links'}>
@@ -27,7 +27,7 @@ const FooterInner: FC = () => {
             Контакты
           </div>
         </NavLink>
-      </div>
+      </nav>
       <div className="footer__copywrite">
         <div className="footer__item">
           <AiOutlineCopyrightCircle size={30}/>
