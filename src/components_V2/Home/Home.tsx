@@ -1,16 +1,10 @@
-import React, { FC, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { setPageCount } from "../../store/reducers/FilterReducer/FilterSlice";
-// @ts-ignore
-import mainAvatar from '../../assets/img/main_avatar.png';
+import React, { FC } from "react";
 import './home.scss';
 import { MainImage } from "./MainImage/MainImage";
 import { MainAbout } from "./MainAbout/MainAbout";
 import { MainFacts } from "./MainFacts/MainFacts";
 import { MainServices } from "./MainServices/MainServices";
-import { ProductsBlock } from "../ProductsBlock/ProductsBlock";
-import { ProductInfo } from "../ProductsBlock/ProductInfo/ProductInfo";
+import { MainChooseUs } from "./MainChooseUs/MainChooseUs";
 
 const Home: FC = () => {
   return (
@@ -19,6 +13,7 @@ const Home: FC = () => {
       {/* <ProductsBlock/> */}
       <MainImage/>
       <MainAbout/>
+      <MainChooseUs/>
       <MainFacts/>
       <MainServices/>
     </main>

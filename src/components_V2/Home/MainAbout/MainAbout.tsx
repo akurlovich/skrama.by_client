@@ -5,14 +5,14 @@ import mainAbout from '../../../assets/img/main_about-rem-bg.png'
 
 const MainAboutInner: FC = () => {
   return (
-    <div className='main__about'>
+    <section className='main__about'>
       <div className="main__about__image">
         <img src={mainAbout} alt="man" />
       </div>
       <div className="main__about__info">
-        <div className="main__about__info__title">
+        <h2 className="main__about__info__title">
           О поликарбонате
-        </div>
+        </h2>
         <div className="main__about__info__text">
           <p>
             Теплицы играют важную роль в создании условий для успешного выращивания растений. Одним из наиболее популярных материалов, используемых для строительства теплиц, является поликарбонат. Этот материал имеет ряд преимуществ, которые делают его идеальным для строительства теплиц.
@@ -45,7 +45,7 @@ const MainAboutInner: FC = () => {
 
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

@@ -4,7 +4,7 @@ import './mainfacts.scss';
 
 const MainFactsInner: FC = () => {
   return (
-    <div className='main__facts'>
+    <section className='main__facts'>
       <div className="main__facts__container">
         <div className="main__facts__item">
           <div className="main__facts__item__circle">    
@@ -46,7 +46,7 @@ const MainFactsInner: FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
