@@ -37,7 +37,7 @@ export const Header: FC = () => {
           <div className="header__toolbar__tel__icon">
             <BiPhoneCall size={40}/>
           </div>
-          <h1 className="header__h1">Купить поликарбонат по доступной цене. Гарантия. Доставка.</h1>
+          {/* <h1 className="header__h1">Купить поликарбонат по доступной цене. Гарантия. Доставка.</h1> */}
           <a href={isMobile ? "tel:+375299846746" : '/'} className="header__toolbar__tel__text">
             +375(29) 984-67-46
           </a>
