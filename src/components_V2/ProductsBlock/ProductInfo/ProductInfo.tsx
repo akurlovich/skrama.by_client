@@ -36,13 +36,15 @@ import { deleteProductByID, deleteProductInfos, getProductByID, getProductInfoBy
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { SuccessModal } from '../../UI/SuccessModal/SuccessModal';
-import { addItem } from '../../../store/reducers/CartReducer/CartSlice';
+import { addItem, clearItems } from '../../../store/reducers/CartReducer/CartSlice';
 import { SERVER_URL } from '../../../constants/http';
 import { ICartItem } from '../../../types/ICartItem';
 import { Loader } from '../../UI/Loader/Loader';
 import { DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, NO_IMAGE } from '../../../constants/user';
 import { setAuthAdmin } from '../../../store/reducers/AuthReducer/AuthSlice';
 import { ProductUpdate } from '../ProductUpdate/ProductUpdate';
+import { randomInteger } from '../../../services/ClientServices/RandomInteger';
+import { ConfirmOrder } from '../../ConfirmOrder/ConfirmOrder';
 
 initializeIcons();
 
@@ -51,6 +53,7 @@ const editIcon: IIconProps = { iconName: 'Edit' };
 
 const ProductInfoInner: FC = () => {
   const { product, productInfo, isLoading } = useAppSelector(state => state.productReducer);
+  const { items } = useAppSelector(state => state.cartReducer);
   const { isAdminAuth } = useAppSelector(state => state.authReducer);
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -61,9 +64,51 @@ const ProductInfoInner: FC = () => {
   const [updateProductModal, setUpdateProductModal] = useState(false);
   const [colorImage, setColorImage] = useState({imageData: NO_IMAGE, isColor: false, choosenColor: 'Прозрачный'});
 
+  const [confirmOrder, setConfirmOrder] = useState(false);
+  const [consultation, setConsultation] = useState(false);
+
   const price = colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price;
 
+  const views = randomInteger(30, 455);
+
   // const admin = true;
+
+  const onClickClear = () => {
+    dispatch(clearItems());
+  };
+
+  const confirmOrderHandler = () => {
+    let thickness = '';
+    let density = '';
+    let size = '';
+    for (const element of productInfo) {
+      switch (element.title) {
+        case 'Плотность':
+          density = element.description;
+          break;
+        case 'Толщина':
+          thickness = element.description;
+          break;
+        case 'Размер листа':
+          size = element.description;
+          break;
+      }
+    }
+    const item: ICartItem = {
+      id: product._id,
+      title: product.name,
+      price: product.price,
+      imageUrl: SERVER_URL + product.coverImage,
+      color: colorImage.choosenColor,
+      thickness,
+      density,
+      size,
+      count: count,
+      // productInfo: productInfo,
+    };
+    dispatch(addItem(item));
+    setConfirmOrder(true);
+  };
 
   const deleteProductHandler = async () => {
     if (params.id) {
@@ -159,6 +204,8 @@ const ProductInfoInner: FC = () => {
           productPrice={product.price}
         />
       }
+      {confirmOrder && <ConfirmOrder setModal={setConfirmOrder} onClickClear={onClickClear} items={items} long={true}/>}
+      {consultation && <ConfirmOrder setModal={setConsultation} items={[]} short={true}/>}
       <div className="productinfo">
         <div className="productinfo__wrapper">
           {isAdminAuth && (
@@ -226,7 +273,7 @@ const ProductInfoInner: FC = () => {
             </div>
             <div className="productinfo__info">
               <div className="productinfo__titleblock">
-                <div className="productinfo__title">{product?.name}</div>
+                <h2 className="productinfo__title">{product?.name}</h2>
                 
               </div>
               <div className="productinfo__rating">
@@ -236,7 +283,7 @@ const ProductInfoInner: FC = () => {
                 <img src={starRatingSvg} alt='star'/>
                 <img src={starRatingSvg} alt='star'/>
                 <div className="productinfo__rating_review">
-                  8 просмотров
+                  Просмотров: {views} 
                 </div>
               </div>
               <div className="productinfo__price">{`${price}.00 руб.`}</div>
@@ -285,13 +332,22 @@ const ProductInfoInner: FC = () => {
                   <div className="productinfo__cart_btn">В корзину</div>
                 </div>
               </div>
-              
+              <button
+                onClick={confirmOrderHandler}
+                className="productinfo__oneclick">
+                Оформить заказ
+              </button>
+              <div className="productinfo__consultation">
+                <div className="productinfo__consultation_text">
+                  Подробно проконсультируем о наших товарах, способах оплаты и доставки.
+                </div>
+                <button
+                  onClick={() => setConsultation(true)}
+                  className="productinfo__consultation_btn">
+                  Заказать консультацию
+                </button>
+              </div>
             </div>
-            {/* <div
-              // onClick={canselHandler}
-              className="producinfo__cansel">
-              <FcCancel size={60}/>
-            </div> */}
           </div>
           <div className="productinfo__description">
             <div className="productinfo__description_title">

@@ -243,10 +243,6 @@
     @media (max-width: 991px) { 
       margin-right: 0;
     }
-        
-    // &_img {
-      
-    // }
 
     &_btn {
       font-family: "Open Sans", sans-serif;
@@ -258,6 +254,74 @@
 
     &:hover {
       background-color: var(--secondary);
+    }
+    
+  }
+
+  &__oneclick {
+    width: 160px;
+    height: 42px;
+    margin-right: 100px;
+    align-self: flex-end;
+    background-color: var(--secondary);
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 2px;
+    // border: 3px solid var(--secondary);
+    transition: 0.5s;
+
+    &:hover {
+      background-color: var(--primary);
+      // border-color: var(--primary);
+    }
+
+    @media (max-width: 991px) { 
+      align-self: flex-start;
+      margin-left: 153px;
+      margin-right: 0;
+    }
+  }
+
+  &__consultation {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 20px;
+    text-align: center;
+    align-items: center;
+    margin-right: 100px;
+
+    @media (max-width: 991px) { 
+      margin-right: 0;
+    }
+
+    &_text {
+      font-family: "Open Sans", sans-serif;
+      font-weight: 600;
+      line-height: 1.2;
+      font-size: 20px;
+    }
+
+    &_btn {
+      width: 280px;
+      height: 48px;
+      background-color: var(--primary);
+      font-family: "Open Sans", sans-serif;
+      font-weight: 600;
+      line-height: 1.2;
+      font-size: 20px;
+      color: #fff;
+      border-radius: 2px;
+      // border: 4px solid var(--primary);
+      transition: 0.5s;
+
+      &:hover {
+        background-color: var(--secondary);
+        // border-color: var(--secondary);
+      }
     }
   }
 

@@ -7,11 +7,13 @@ import { ICartItem } from '../../types/ICartItem';
 
 interface IProps {
   setModal: (bol: boolean) => void;
-  onClickClear: () => void;
+  onClickClear?: () => void;
   items: ICartItem[];
+  short?: boolean;
+  long?: boolean;
 }
 
-const ConfirmOrderInner: FC<IProps> = ({setModal, onClickClear, items}) => {
+const ConfirmOrderInner: FC<IProps> = ({setModal, onClickClear, items, short, long}) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
@@ -30,7 +32,14 @@ const ConfirmOrderInner: FC<IProps> = ({setModal, onClickClear, items}) => {
     });
     setModal(false);
     navigate('/');
-    onClickClear();
+    onClickClear && onClickClear();
+  };
+
+  const canselOrderHandler = () => {
+    if (long) {
+      onClickClear && onClickClear();
+    }
+    setModal(false);
   }
 
   const nameHandler = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => {
@@ -53,7 +62,7 @@ const ConfirmOrderInner: FC<IProps> = ({setModal, onClickClear, items}) => {
     <div className='confirmorder__wrapper'>
       <div className="confirmorder__container">
         <div className="confirmorder__title">
-          Подтверждение заказа
+          {!short ? `Подтверждение заказа` : 'Заказ консультации'}
         </div>
         <div className="confirmorder__inputs">
           <TextField 
@@ -65,14 +74,18 @@ const ConfirmOrderInner: FC<IProps> = ({setModal, onClickClear, items}) => {
             size={100}
             // placeholder="Введите Ваше имя" 
           />
-          <TextField 
-            value={email}
-            onChange={emailHandler}
-            label="E-mail:" 
-            // required
-            underlined  
-            // placeholder="Введите Вашу фамилию" 
-          />
+          {!short &&
+            <TextField 
+              value={email}
+              onChange={emailHandler}
+              label="E-mail:" 
+              // required
+              underlined  
+              // placeholder="Введите Вашу фамилию" 
+            />
+
+          }
+            
           <TextField 
             value={phone}
             onChange={phoneHandler}
@@ -81,19 +94,22 @@ const ConfirmOrderInner: FC<IProps> = ({setModal, onClickClear, items}) => {
             underlined  
             // placeholder="Введите Ваш телефон" 
           />
-          <TextField 
-            value={address}
-            onChange={addressHandler}
-            label="Адрес доставки:" 
-            // required
-            underlined  
-            // placeholder="Введите Ваш адрес доставки" 
-          />
+          {!short &&
+            <TextField 
+              value={address}
+              onChange={addressHandler}
+              label="Адрес доставки:" 
+              // required
+              underlined  
+              // placeholder="Введите Ваш адрес доставки" 
+            />
+
+          }
 
         </div>
         <div className="confirmorder__buttons">
           <button
-            onClick={() => setModal(false)} 
+            onClick={canselOrderHandler} 
             className="btn btn-secondary btn-lg">
             Отмена
           </button>
