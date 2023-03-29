@@ -8,6 +8,13 @@
   color: #263A4F;
   font-size: 32px;
 
+  @media (max-width: 575px) {
+    position: sticky;
+    top: 0px;
+    border-radius: 0px;
+    z-index: 1000000;
+  }
+    
   &__h1 {
     width: 1px;
     height: 1px;
