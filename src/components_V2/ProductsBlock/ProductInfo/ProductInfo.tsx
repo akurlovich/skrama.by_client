@@ -45,6 +45,7 @@ import { setAuthAdmin } from '../../../store/reducers/AuthReducer/AuthSlice';
 import { ProductUpdate } from '../ProductUpdate/ProductUpdate';
 import { randomInteger } from '../../../services/ClientServices/RandomInteger';
 import { ConfirmOrder } from '../../ConfirmOrder/ConfirmOrder';
+import { AiFillDownCircle } from 'react-icons/ai';
 
 initializeIcons();
 
@@ -287,6 +288,12 @@ const ProductInfoInner: FC = () => {
                 </div>
               </div>
               <div className="productinfo__price">{`${price}.00 руб.`}</div>
+              <div className="productinfo__instock">
+                <AiFillDownCircle size={24}/>
+                <div className="productinfo__instock_text">
+                  В наличии
+                </div>
+              </div>
               
                 {productInfo.map(item => (
                   <div key={item._id} className="productinfo__addinfo">

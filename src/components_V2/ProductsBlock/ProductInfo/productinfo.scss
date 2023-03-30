@@ -141,7 +141,22 @@
     color: var(--primary);
     border-top: 2px solid #F6F7F8;
     border-bottom: 2px solid #F6F7F8;
-}
+  }
+
+  &__instock {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 16px;
+    color: var(--primary);
+    
+    &_text {
+      color: #8D9AA8;
+    }
+  }
 
   &__addinfo {
     padding-top: 15px;
