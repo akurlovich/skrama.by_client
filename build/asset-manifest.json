@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.d9f5c6db.css",
-    "main.js": "/static/js/main.a9e9089a.js",
+    "main.js": "/static/js/main.e1da8a35.js",
     "static/media/main_img4.jpg": "/static/media/main_img4.7c64eb22247659521993.jpg",
     "static/media/backgraund.jpg": "/static/media/backgraund.f788efc193741849dd54.jpg",
     "static/media/main_about-rem-bg.png": "/static/media/main_about-rem-bg.e084145319d1e65dc2f0.png",
@@ -25,10 +25,10 @@
     "static/media/prozrachniy.jpg": "/static/media/prozrachniy.0608b0b03be24c760933.jpg",
     "index.html": "/index.html",
     "main.d9f5c6db.css.map": "/static/css/main.d9f5c6db.css.map",
-    "main.a9e9089a.js.map": "/static/js/main.a9e9089a.js.map"
+    "main.e1da8a35.js.map": "/static/js/main.e1da8a35.js.map"
   },
   "entrypoints": [
     "static/css/main.d9f5c6db.css",
-    "static/js/main.a9e9089a.js"
+    "static/js/main.e1da8a35.js"
   ]
 }
