@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import ProductService from '../../../services/ProductService';
 import { getProductByID, getProductInfoByProductID } from '../../../store/reducers/ProductReducer/ProductActionCreators';
 import { Loader } from '../../UI/Loader/Loader';
+import { Loader_v2 } from '../../UI/Loader_v2/Loader_v2';
 
 interface IProps {
   closeModal: (bol: boolean) => void;
@@ -37,7 +38,7 @@ const ProductUpdateInner: FC<IProps> = ({closeModal, productID, productPrice}) =
 
   return (
     <>
-      {isLoading && <Loader/>}
+      {isLoading && <Loader_v2/>}
       <div className='productupdate__wrapper'>
         <div className="productupdate__container">
           <div className="productupdate__title">

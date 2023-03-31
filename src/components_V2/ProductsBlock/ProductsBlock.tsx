@@ -6,6 +6,7 @@ import { getAllProductsInfo, getProducts } from '../../store/reducers/ProductRed
 import { DEFAULT_POLIRBONAT_FILTER_TITLE, DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, DEFAULT_TYPE_ID_POLIK_PLANKI } from '../../constants/user';
 import { Loader } from '../UI/Loader/Loader';
 import { IProductResponse } from '../../types/IProductResponse';
+import { Loader_v2 } from '../UI/Loader_v2/Loader_v2';
 
 const ProductsBlockInner: FC = () => {
   const dispatch = useAppDispatch();
@@ -76,7 +77,7 @@ const ProductsBlockInner: FC = () => {
 
   return (
     <section className='productsblock'>
-      {isLoading && <Loader/>}
+      {isLoading && <Loader_v2/>}
       <h2 className="productsblock__title">
         Сотовый поликабонат
       </h2>

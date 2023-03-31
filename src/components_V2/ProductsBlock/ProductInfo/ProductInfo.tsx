@@ -46,6 +46,8 @@ import { ProductUpdate } from '../ProductUpdate/ProductUpdate';
 import { randomInteger } from '../../../services/ClientServices/RandomInteger';
 import { ConfirmOrder } from '../../ConfirmOrder/ConfirmOrder';
 import { AiFillDownCircle } from 'react-icons/ai';
+import { Loader_v2 } from '../../UI/Loader_v2/Loader_v2';
+import { ProductDescription } from '../ProductDescription/ProductDescription';
 
 initializeIcons();
 
@@ -196,7 +198,7 @@ const ProductInfoInner: FC = () => {
   
   return (
     <>
-      {isLoading && <Loader/>}
+      {isLoading && <Loader_v2/>}
       {successModal && 
         <SuccessModal
           title='Товар добавлен в корзину!'
@@ -361,42 +363,7 @@ const ProductInfoInner: FC = () => {
               </div>
             </div>
           </div>
-          <div className="productinfo__description">
-            <div className="productinfo__description_title">
-              Описание
-            </div>
-            <div className="productinfo__description_line"></div>
-            <div className="productinfo__description_main">
-              <p>
-              Теплицы играют важную роль в создании условий для успешного выращивания растений. Одним из наиболее популярных материалов, используемых для строительства теплиц, является поликарбонат. Этот материал имеет ряд преимуществ, которые делают его идеальным для строительства теплиц.
-              </p>
-              <p>
-                Во-первых, поликарбонат является очень легким материалом, что делает его легко устанавливать. Это означает, что установку можно быстро и легко завершить.
-
-              </p>
-              <p>
-              Во-вторых, поликарбонат является очень прочным материалом, что увеличивает срок службы теплицы. Также он является устойчивым к ультрафиолетовым лучам, что означает, что солнечные лучи не будут повреждать структуру.
-
-              </p>
-              <p>
-              Третьим, поликарбонат – экологически чистый материал. Он не содержит химических веществ, что делает его безопасным для выращивания растений.
-
-              </p>
-              <p>
-                В-четвертых, поликарбонат – экономичный материал. Он является доступным, что уменьшает сумму, которую нужно заплатить, чтобы сделать теплицу.
-
-              </p>
-              <p>
-              В-пятых, поликарбонат – энергосберегающий материал. Он способствует удержанию условной температуры, уменьшая, таким образом, расходы на энергоснабжение.
-
-              </p>
-              <p>
-              Вывод:
-              Поликарбонат – экономичный, устойчивый, удобный, экологичный и энергосберегающий – является идеальным материалом для строительства теплиц.
-
-              </p>
-            </div>
-          </div>
+          <ProductDescription/>
         </div>
       </div>
     

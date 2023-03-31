@@ -16,6 +16,7 @@ import { AdminLogin } from '../AdminLogin/AdminLogin';
 import { SelectOption } from '../UI/SelectOption';
 import { Loader } from '../UI/Loader/Loader';
 import { AddProductType } from './AddProductType/AddProductType';
+import { Loader_v2 } from '../UI/Loader_v2/Loader_v2';
 
 initializeIcons();
 
@@ -184,7 +185,7 @@ const AddProductInner: FC = () => {
   return (
     <div className="addproduct__wrapper">
       {/* {addProductError && <UserErrorWarning canselHandler={canselHandler} message='Can`t add book, try late!'/>} */}
-      {isLoading && <Loader/>}
+      {isLoading && <Loader_v2/>}
       {!isAdminAuth && <AdminLogin/>}
       <AddProductNavButtons setShowAddBlock={showAddBlockHandler}/>
       <div className="addproduct__container">

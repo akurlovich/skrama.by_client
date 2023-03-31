@@ -1,0 +1,9 @@
+.loaderv2 {
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(12,16,26,.95) url(../../../assets/preloader.svg) center/150px no-repeat;
+}
