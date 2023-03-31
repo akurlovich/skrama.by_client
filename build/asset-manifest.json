@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.d9f5c6db.css",
-    "main.js": "/static/js/main.e1da8a35.js",
+    "main.css": "/static/css/main.d5bf1776.css",
+    "main.js": "/static/js/main.75a3c9b5.js",
     "static/media/main_img4.jpg": "/static/media/main_img4.7c64eb22247659521993.jpg",
     "static/media/backgraund.jpg": "/static/media/backgraund.f788efc193741849dd54.jpg",
     "static/media/main_about-rem-bg.png": "/static/media/main_about-rem-bg.e084145319d1e65dc2f0.png",
@@ -24,11 +24,12 @@
     "static/media/beliy.jpg": "/static/media/beliy.220b8785d2682a3e223b.jpg",
     "static/media/prozrachniy.jpg": "/static/media/prozrachniy.0608b0b03be24c760933.jpg",
     "index.html": "/index.html",
-    "main.d9f5c6db.css.map": "/static/css/main.d9f5c6db.css.map",
-    "main.e1da8a35.js.map": "/static/js/main.e1da8a35.js.map"
+    "static/media/preloader.svg": "/static/media/preloader.b94609d750e4b5e12012.svg",
+    "main.d5bf1776.css.map": "/static/css/main.d5bf1776.css.map",
+    "main.75a3c9b5.js.map": "/static/js/main.75a3c9b5.js.map"
   },
   "entrypoints": [
-    "static/css/main.d9f5c6db.css",
-    "static/js/main.e1da8a35.js"
+    "static/css/main.d5bf1776.css",
+    "static/js/main.75a3c9b5.js"
   ]
 }
