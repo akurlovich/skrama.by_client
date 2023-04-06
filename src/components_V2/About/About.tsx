@@ -51,7 +51,7 @@ const AboutInner: FC = () => {
                 Телефон
               </div>
               <a 
-                href={isMobile ? "tel:+375299846746" : '/'} className="about__adress__item__info__text">
+                href={isMobile ? "tel:+375291342197" : '/'} className="about__adress__item__info__text">
                 +375(29) 134-21-97
               </a>
             </div>

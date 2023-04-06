@@ -69,6 +69,9 @@ const ProductInfoInner: FC = () => {
 
   const [confirmOrder, setConfirmOrder] = useState(false);
   const [consultation, setConsultation] = useState(false);
+  const [itemThickness, setItemThickness] = useState('');
+  const [itemDensity, setItemDensity] = useState('');
+  const [itemName, setItemName] = useState('');
 
   const price = colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price;
 
@@ -193,6 +196,20 @@ const ProductInfoInner: FC = () => {
 
   useEffect(() => {
     setColorImage(prev => ({...prev, imageData: SERVER_URL + product?.coverImage}));
+    for (const element of productInfo) {
+      switch (element.title) {
+        case 'Плотность':
+          setItemDensity(element.description);
+          break;
+        case 'Толщина':
+          setItemThickness(element.description);
+          break;
+      }
+    };
+    if (product.name) {
+      const result = product.name.charAt(0).toLowerCase() + product.name.slice(1);
+      setItemName(result);
+    }
   }, [product])
   
   
@@ -281,7 +298,7 @@ const ProductInfoInner: FC = () => {
             </div>
             <div className="productinfo__info">
               <div className="productinfo__titleblock">
-                <h2 className="productinfo__title">{product?.name}</h2>
+                <h2 className="productinfo__title">Сотовый {itemName} {itemThickness}</h2>
                 
               </div>
               <div className="productinfo__rating">
