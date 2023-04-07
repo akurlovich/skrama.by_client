@@ -4,6 +4,7 @@ export interface IProductResponse {
   price: number,
   rating: number,
   count: number,
+  views: number,
   coverImage: string,
   typeID: string,
   brandID: string,

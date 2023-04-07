@@ -39,11 +39,9 @@ import { SuccessModal } from '../../UI/SuccessModal/SuccessModal';
 import { addItem, clearItems } from '../../../store/reducers/CartReducer/CartSlice';
 import { SERVER_URL } from '../../../constants/http';
 import { ICartItem } from '../../../types/ICartItem';
-import { Loader } from '../../UI/Loader/Loader';
 import { DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, NO_IMAGE } from '../../../constants/user';
 import { setAuthAdmin } from '../../../store/reducers/AuthReducer/AuthSlice';
 import { ProductUpdate } from '../ProductUpdate/ProductUpdate';
-import { randomInteger } from '../../../services/ClientServices/RandomInteger';
 import { ConfirmOrder } from '../../ConfirmOrder/ConfirmOrder';
 import { AiFillDownCircle } from 'react-icons/ai';
 import { Loader_v2 } from '../../UI/Loader_v2/Loader_v2';
@@ -70,12 +68,10 @@ const ProductInfoInner: FC = () => {
   const [confirmOrder, setConfirmOrder] = useState(false);
   const [consultation, setConsultation] = useState(false);
   const [itemThickness, setItemThickness] = useState('');
-  const [itemDensity, setItemDensity] = useState('');
-  const [itemName, setItemName] = useState('');
 
   const price = colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price;
 
-  const views = randomInteger(30, 455);
+  // const views = randomInteger(30, 455);
 
   // const admin = true;
 
@@ -198,18 +194,11 @@ const ProductInfoInner: FC = () => {
     setColorImage(prev => ({...prev, imageData: SERVER_URL + product?.coverImage}));
     for (const element of productInfo) {
       switch (element.title) {
-        case 'Плотность':
-          setItemDensity(element.description);
-          break;
         case 'Толщина':
           setItemThickness(element.description);
           break;
       }
     };
-    if (product.name) {
-      const result = product.name.charAt(0).toLowerCase() + product.name.slice(1);
-      setItemName(result);
-    }
   }, [product])
   
   
@@ -298,7 +287,7 @@ const ProductInfoInner: FC = () => {
             </div>
             <div className="productinfo__info">
               <div className="productinfo__titleblock">
-                <h2 className="productinfo__title">Сотовый {itemName} {itemThickness}</h2>
+                <h2 className="productinfo__title">{product.name} {itemThickness}</h2>
                 
               </div>
               <div className="productinfo__rating">
@@ -308,7 +297,7 @@ const ProductInfoInner: FC = () => {
                 <img src={starRatingSvg} alt='star'/>
                 <img src={starRatingSvg} alt='star'/>
                 <div className="productinfo__rating_review">
-                  Просмотров: {views} 
+                  Просмотров: {product.views} 
                 </div>
               </div>
               <div className="productinfo__price">{`${price}.00 руб.`}</div>

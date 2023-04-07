@@ -24,6 +24,10 @@ export default class ProductService {
   };
 
   static async updateProductPriceByID(data: IProductPriceUpdate): Promise<AxiosResponse<IProductResponse>> {
-    return serverApi.put<IProductResponse>(`/product/${data.id}`, {price: data.price});
+    if (data.price) {
+      return serverApi.put<IProductResponse>(`/product/${data.id}`, {price: data.price});
+    } else {
+      return serverApi.put<IProductResponse>(`/product/${data.id}`, {views: data.views});
+    }
   };
 }

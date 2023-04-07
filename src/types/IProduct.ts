@@ -3,6 +3,7 @@ export interface IProduct {
   price: number,
   rating: number,
   count: number,
+  views: number,
   coverImage: string,
   typeID: string,
   brandID: string,
@@ -10,5 +11,6 @@ export interface IProduct {
 
 export interface IProductPriceUpdate {
   id: string,
-  price: number,
+  price?: number,
+  views?: number,
 }
