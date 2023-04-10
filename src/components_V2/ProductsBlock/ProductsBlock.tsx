@@ -79,7 +79,7 @@ const ProductsBlockInner: FC = () => {
     <section className='productsblock'>
       {isLoading && <Loader_v2/>}
       <h2 className="productsblock__title">
-        Сотовый поликабонат
+        Сотовый поликарбонат
       </h2>
       <div className="productsblock__main">
         <div className="productsblock__sort">
