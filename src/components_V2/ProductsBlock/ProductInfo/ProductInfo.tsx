@@ -46,6 +46,7 @@ import { ConfirmOrder } from '../../ConfirmOrder/ConfirmOrder';
 import { AiFillDownCircle } from 'react-icons/ai';
 import { Loader_v2 } from '../../UI/Loader_v2/Loader_v2';
 import { ProductDescription } from '../ProductDescription/ProductDescription';
+import { ProductNavigation } from '../ProductNavigation/ProductNavigation';
 
 initializeIcons();
 
@@ -79,7 +80,21 @@ const ProductInfoInner: FC = () => {
     dispatch(clearItems());
   };
 
+  const confirmConsultation = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+    setConsultation(true);
+  };
+
   const confirmOrderHandler = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
     let thickness = '';
     let density = '';
     let size = '';
@@ -221,6 +236,7 @@ const ProductInfoInner: FC = () => {
       {confirmOrder && <ConfirmOrder setModal={setConfirmOrder} onClickClear={onClickClear} items={items} long={true}/>}
       {consultation && <ConfirmOrder setModal={setConsultation} items={[]} short={true}/>}
       <div className="productinfo">
+        <ProductNavigation itemThickness={itemThickness}/>
         <div className="productinfo__wrapper">
           {isAdminAuth && (
                   <div className="productinfo__title_btns">
@@ -362,7 +378,7 @@ const ProductInfoInner: FC = () => {
                   Подробно проконсультируем о наших товарах, способах оплаты и доставки.
                 </div>
                 <button
-                  onClick={() => setConsultation(true)}
+                  onClick={confirmConsultation}
                   className="productinfo__consultation_btn">
                   Заказать консультацию
                 </button>
