@@ -26,6 +26,12 @@ const ProductItemInner: FC <IProps> = ({item, productsInfo}) => {
   return (   
     <div className="productitem__item" onClick={clickHandler}>
       <div className="productitem__item__image">
+        {item._id === '63ff49791ef9e0bf73a48519' && 
+          <span className='productitem__item__image_span'>Хит</span>
+        }
+        {item._id === '63ff49bc1ef9e0bf73a48521' && 
+          <span className='productitem__item__image_span'>Хит</span>
+        }
         <img className="productitem__item__image_img" src={SERVER_URL + item.coverImage} alt="parnichok" />
       </div>
       <div className="productitem__item__info">
