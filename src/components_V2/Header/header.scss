@@ -52,9 +52,40 @@
       padding: 10px 10px;
     }
 
-    &__tel {
+    &__viber {
+      display: flex;
+      gap: 5px;
+      font-family: "Roboto",sans-serif;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #263A4F;
+      font-size: 16px;
+
+      & svg {
+        width: 40px;
+        height: 40px;
+        display: flex;
+
+        @media (max-width: 768px) { 
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+
+    &__contacts {
       flex: 0 0 auto;
       width: 32%;
+      display: flex;
+      flex-direction: column;
+
+      @media (max-width: 768px) { 
+        width: auto;
+      }
+    }
+
+    &__tel {
+      
       display: flex;
       gap: 5px;
       align-items: center;
