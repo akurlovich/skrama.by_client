@@ -47,6 +47,7 @@ import { AiFillDownCircle } from 'react-icons/ai';
 import { Loader_v2 } from '../../UI/Loader_v2/Loader_v2';
 import { ProductDescription } from '../ProductDescription/ProductDescription';
 import { ProductNavigation } from '../ProductNavigation/ProductNavigation';
+import { smoothScroll } from '../../../services/ClientServices/SmothScroll';
 
 initializeIcons();
 
@@ -81,20 +82,11 @@ const ProductInfoInner: FC = () => {
   };
 
   const confirmConsultation = () => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    });
+    smoothScroll();
     setConsultation(true);
   };
 
-  const confirmOrderHandler = () => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    });
+  const itemForOrder = () => {
     let thickness = '';
     let density = '';
     let size = '';
@@ -121,8 +113,13 @@ const ProductInfoInner: FC = () => {
       density,
       size,
       count: count,
-      // productInfo: productInfo,
     };
+    return item;
+  };
+
+  const confirmOrderHandler = () => {
+    smoothScroll();
+    const item = itemForOrder();
     dispatch(addItem(item));
     setConfirmOrder(true);
   };
@@ -151,34 +148,7 @@ const ProductInfoInner: FC = () => {
   };
 
   const addToCartHandler = () => {
-    let thickness = '';
-    let density = '';
-    let size = '';
-    for (const element of productInfo) {
-      switch (element.title) {
-        case 'Плотность':
-          density = element.description;
-          break;
-        case 'Толщина':
-          thickness = element.description;
-          break;
-        case 'Размер листа':
-          size = element.description;
-          break;
-      }
-    }
-    const item: ICartItem = {
-      id: product._id,
-      title: product.name,
-      price: product.price,
-      imageUrl: SERVER_URL + product.coverImage,
-      color: colorImage.choosenColor,
-      thickness,
-      density,
-      size,
-      count: count,
-      // productInfo: productInfo,
-    };
+    const item = itemForOrder();
     dispatch(addItem(item));
     setSuccessModal(true);
     // console.log(productInfo);
@@ -198,11 +168,7 @@ const ProductInfoInner: FC = () => {
     if (localStorage.getItem('token') === 'skrama@tut.by') {
       dispatch(setAuthAdmin());
     };
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    });
+    smoothScroll();
   }, []);
 
   useEffect(() => {
@@ -362,7 +328,6 @@ const ProductInfoInner: FC = () => {
                 <div 
                   onClick={addToCartHandler}
                   className="productinfo__cart">
-                  {/* <img className="productinfo__cart_img" src={cartSvg} alt="cart" /> */}
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 512 512"><title/><g data-name="1" id="_1"><path fill="#fff" d="M397.78,316H192.65A15,15,0,0,1,178,304.33L143.46,153.85a15,15,0,0,1,14.62-18.36H432.35A15,15,0,0,1,447,153.85L412.4,304.33A15,15,0,0,1,397.78,316ZM204.59,286H385.84l27.67-120.48H176.91Z"/><path fill="#fff" d="M222,450a57.48,57.48,0,1,1,57.48-57.48A57.54,57.54,0,0,1,222,450Zm0-84.95a27.48,27.48,0,1,0,27.48,27.47A27.5,27.5,0,0,0,222,365.05Z"/><path fill="#fff" d="M368.42,450a57.48,57.48,0,1,1,57.48-57.48A57.54,57.54,0,0,1,368.42,450Zm0-84.95a27.48,27.48,0,1,0,27.48,27.47A27.5,27.5,0,0,0,368.42,365.05Z"/><path fill="#fff" d="M158.08,165.49a15,15,0,0,1-14.23-10.26L118.14,78H70.7a15,15,0,1,1,0-30H129a15,15,0,0,1,14.23,10.26l29.13,87.49a15,15,0,0,1-14.23,19.74Z"/></g></svg>
 
                   <div className="productinfo__cart_btn">В корзину</div>
