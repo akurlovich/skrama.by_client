@@ -45,6 +45,18 @@ export const getProducts = createAsyncThunk(
   }
 );
 
+export const getProductsByType = createAsyncThunk(
+  'PRODUCT/getProductsByType',
+  async (typeID: string, {rejectWithValue}) => {
+    try {
+      return await (await ProductService.getProductsByType(typeID)).data;
+      
+    } catch (error: any) {
+      return rejectWithValue(error.message)
+    }
+  }
+);
+
 export const getProductByID = createAsyncThunk(
   'PRODUCT/getProductByID',
   async (id: string, {rejectWithValue}) => {
@@ -62,6 +74,18 @@ export const getAllProductsInfo = createAsyncThunk(
   async (_, {rejectWithValue}) => {
     try {
       return await (await ProductInfoService.getAllProductsInfo()).data;
+      
+    } catch (error: any) {
+      return rejectWithValue(error.message)
+    }
+  }
+);
+
+export const getAllProductsInfoByTypeID = createAsyncThunk(
+  'PRODUCT/getAllProductsInfoByTypeID',
+  async (typeID: string, {rejectWithValue}) => {
+    try {
+      return await (await ProductInfoService.getProductsInfosByTypeID(typeID)).data;
       
     } catch (error: any) {
       return rejectWithValue(error.message)

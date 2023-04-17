@@ -15,6 +15,10 @@ export default class ProductService {
     return serverApi.get<IProductResponse[]>('/products');
   };
 
+  static async getProductsByType(typeID: string): Promise<AxiosResponse<IProductResponse>> {
+    return serverApi.get<IProductResponse>(`/products/${typeID}`);
+  };
+
   static async getProductByID(id: string): Promise<AxiosResponse<IProductResponse>> {
     return serverApi.get<IProductResponse>(`/product/${id}`);
   };

@@ -244,9 +244,23 @@
   &__navbar {
     display: flex;
     justify-content: center;
-    background-color: #34AD54;
+    background-color: var(--primary);
     // padding: 30px;
     color: #fff;
+
+    &__list {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+
+      &_items {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        top: 78px;
+        z-index: 200000;
+      }
+    }
 
     &__item {
       padding: 30px 15px;
@@ -257,6 +271,7 @@
       text-transform: uppercase;
       color: #fff;
       transition: .5s;
+      cursor: pointer;
 
       @media (max-width: 575px) { 
         padding: 12px 15px;
@@ -264,12 +279,21 @@
       }
 
       &:hover {
-        background-color: #f93;
+        background-color: var(--secondary);
         transition: .5s;
       }
 
       &.active {
-        background-color: #f93;
+        background-color: var(--secondary);
+      }
+
+      &.show {
+        background-color: var(--primary);
+
+        &:hover {
+          background-color: var(--secondary);
+          transition: .5s;
+        }
       }
     }
   }

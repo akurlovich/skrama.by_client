@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import './successmodal.scss';
 // @ts-ignore
 import successIcon from '../../../assets/img/success_icon.png';
@@ -11,8 +11,17 @@ interface IProps {
 }
 
 const SuccessModalInner: FC<IProps> = ({title, closeModal}) => {
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    setActive(true);
+    // setTimeout(() => {
+    // }, 1000);
+  }, [])
+  
+
   return (
-    <div className='successmodal__wrapper'>
+    <div className={active ? 'successmodal__wrapper active' : 'successmodal__wrapper'}>
       <div className="successmodal__container">
         <div className="successmodal__title">
           {title}

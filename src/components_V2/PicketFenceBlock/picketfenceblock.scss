@@ -1,0 +1,114 @@
+.productsblock {
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  flex: 1 0 auto;
+  width: 100%;
+  padding: 15px;
+  text-align: center;
+  background-color: #fff;
+
+  &__title {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    font-size: 48px;
+    color: var(--dark);
+
+    @media (max-width: 575px) { 
+      font-size: 28px;
+    }
+  }
+
+  &__main {
+    display: flex;
+
+    @media (max-width: 575px) { 
+      flex-direction: column;
+    }
+  }
+
+  &__sort {
+    flex: 0 0 auto;
+    width: 200px;
+
+    @media (max-width: 575px) { 
+      width: 100%;
+      display: flex;
+    }
+
+    & ul {
+      @media (max-width: 575px) {
+        display: flex;
+        width: 100%;
+
+      }
+    }
+
+    &__title {
+      font-family: "Open Sans", sans-serif;
+      font-weight: 600;
+      line-height: 1.5;
+      font-size: 32px;
+      color: #8D9AA8;
+      
+      @media (max-width: 575px) { 
+        display: none;
+      }
+
+      &.dop-el {
+        line-height: 1.2;
+        font-size: 28px;
+      }
+    }
+
+    &__item {
+      padding: 10px 20px;
+      background-color: var(--primary);
+      font-family: "Roboto", sans-serif;
+      // font-weight: 700;
+      // line-height: 1.2;
+      font-size: 24px;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.5s;
+
+      @media (max-width: 575px) { 
+        flex: 1 0 auto;
+        padding: 8px 0px;
+        font-size: 18px;
+      }
+
+      &.active {
+        background-color: #f93;
+      }
+
+      &:hover {
+        background-color: #f93;
+      }
+      
+    }
+  }
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    height: 100%;
+    
+  }
+
+  &__notfound {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 32px;
+    color: #8D9AA8;
+  }
+  
+}

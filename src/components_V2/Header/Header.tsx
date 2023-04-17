@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { BiPhoneCall } from "react-icons/bi"
@@ -12,6 +12,11 @@ export const Header: FC = () => {
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const [showItems, setShowItems] = useState(false);
+
+  const showItemsHandler = () => {
+    setShowItems(prev => !prev);
+  }
 
   // useEffect(() => {
   //   const json = JSON.stringify(items);
@@ -31,7 +36,9 @@ export const Header: FC = () => {
   
   
   return (
-    <header className="header">
+    <header 
+    onMouseLeave={() => setShowItems(false)}
+      className="header">
       <section className="header__toolbar">
         <div className="header__toolbar__contacts">
           <div className="header__toolbar__tel">
@@ -99,11 +106,31 @@ export const Header: FC = () => {
           className={({ isActive }) => isActive ? 'header__navbar__item active' : 'header__navbar__item'}>
           Главная
         </NavLink>
-        <NavLink 
-          to='/polikarbonat' 
-          className={({ isActive }) => isActive ? 'header__navbar__item active' : 'header__navbar__item'}>
-          Продукция
-        </NavLink>
+        <div className="header__navbar__list">
+          <div
+            onClick={showItemsHandler}
+            className="header__navbar__item">
+            Продукция
+          </div>
+          {showItems && 
+            <div 
+              onMouseLeave={() => setShowItems(false)}
+              className="header__navbar__list_items">
+              <NavLink
+                to='/polikarbonat'
+                onClick={() => setShowItems(false)}
+                className={({ isActive }) => isActive ? 'header__navbar__item active' : 'header__navbar__item show'}>
+                Поликарбонат
+              </NavLink>
+              <NavLink 
+                to='/shtaketnik'
+                onClick={() => setShowItems(false)}
+                className={({ isActive }) => isActive ? 'header__navbar__item active' : 'header__navbar__item show'}>
+                Штакетник
+              </NavLink>
+            </div> 
+          }
+        </div>
         <NavLink
           to='/about'
           className={({ isActive }) => isActive ? 'header__navbar__item active' : 'header__navbar__item'}>
