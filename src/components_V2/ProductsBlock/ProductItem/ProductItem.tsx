@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import './productitem.scss';
 // @ts-ignore
-import itemImage from '../../../assets/img/parnichok3.jpg'
+import itemImage from '../../../assets/img/parnichok3.jpg';
 import { IProductResponse } from '../../../types/IProductResponse';
 import { IProductInfoResponse } from '../../../types/IProductInfoResponse';
 import { useNavigate } from 'react-router-dom';
@@ -20,13 +20,15 @@ interface IProps {
 }
 
 const ProductItemInner: FC <IProps> = ({item, productsInfo}) => {
+  const price = item.price.toFixed(2);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const foundProductInfo = productsInfo.filter(i => i.productID === item._id);
   const [successModal, setSuccessModal] = useState(false);
 
   const clickHandler = async () => {
-    navigate(`/polikarbonat/${item._id}`);
+    // navigate(`/polikarbonat/${item._id}`);
+    navigate(`/shtaketnik/${item._id}`);
     await ProductService.updateProductPriceByID({id: item._id, views: item.views + 1});
   };
 
@@ -119,7 +121,7 @@ const ProductItemInner: FC <IProps> = ({item, productsInfo}) => {
 
           </div>
           <div className="productitem__item__price">
-            {item.price}.00 руб
+            {price} руб
           </div>
         </div>
         <div 

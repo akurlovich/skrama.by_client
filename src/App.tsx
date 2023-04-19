@@ -11,6 +11,7 @@ import { PageNotFound } from "./components_V2/PageNotFound/PageNotFound";
 import { AdminAuthRouter } from "./components_V2/RoutersComponents/AdminAuth/AdminAuthRouter";
 import { AddProduct } from "./components_V2/AddProduct/AddProduct";
 import { PicketFenceBlock } from "./components_V2/PicketFenceBlock/PicketFenceBlock";
+import { PicketFenceInfo } from "./components_V2/PicketFenceBlock/PicketFenceInfo/PicketFenceInfo";
 
 const App: FC = () => {
 
@@ -28,6 +29,7 @@ const App: FC = () => {
         <Route path="polikarbonat" element={<ProductsBlock/>}/>
         <Route path="polikarbonat/:id" element={<ProductInfo/>}/>
         <Route path="shtaketnik" element={<PicketFenceBlock/>}/>
+        <Route path="shtaketnik/:id" element={<PicketFenceInfo/>}/>
         <Route path="about" element={<About/>}/>
         <Route path="*" element={<PageNotFound/>}/>
       </Route>

@@ -7,8 +7,9 @@ import filterReducer from "./reducers/FilterReducer/FilterSlice";
 import brandReducer from "./reducers/BrandReducer/BrandSlice";
 import typeReducer from "./reducers/TypeReducer/TypeSlice";
 import navigationBarReducer from './reducers/NavigationBarReducer/NavigationBarSlice';
-// @ts-ignore
+
 import cartReducer from "./reducers/CartReducer/CartSlice";
+import colorsReducer from './reducers/ColorReducer/ColorSlice';
 
 const rootReducer = combineReducers({
   userReducer,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   typeReducer,
   cartReducer,
   navigationBarReducer,
+  colorsReducer,
 })
 
 export const setupStore = () => {

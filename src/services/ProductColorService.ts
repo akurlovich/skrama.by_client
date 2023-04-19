@@ -3,13 +3,13 @@ import serverApi from "../http";
 import { IProductColor, IProductColorResponse } from "../types/IProductColor";
 
 export default class ProductInfoService {
-  static async addProductColor(color: IProductColor): Promise<AxiosResponse<IProductColorResponse>> {
+  static async addProductColor(color: FormData): Promise<AxiosResponse<IProductColorResponse>> {
     return serverApi.post<IProductColorResponse>('/color', color);
   };
 
-  // static async getProductsInfoByProductID(productID: string): Promise<AxiosResponse<IProductInfoResponse[]>> {
-  //   return serverApi.get<IProductInfoResponse[]>(`/productinfos/${productID}`);
-  // };
+  static async getProductColorsByProductID(productID: string): Promise<AxiosResponse<IProductColorResponse[]>> {
+    return serverApi.get<IProductColorResponse[]>(`/color/${productID}`);
+  };
 
   // static async getProductInfoByID(id: string): Promise<AxiosResponse<IProductInfoResponse>> {
   //   return serverApi.get<IProductInfoResponse>(`/productinfo/${id}`);

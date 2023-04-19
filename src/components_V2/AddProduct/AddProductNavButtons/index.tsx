@@ -9,11 +9,12 @@ export interface IShowProps {
   type: boolean, 
   brand: boolean, 
   product: boolean, 
-  infoType: boolean
+  infoType: boolean,
+  images: boolean,
 }
 
 interface IProps {
-  setShowAddBlock: ({type, brand, product, infoType} : IShowProps) => void,
+  setShowAddBlock: ({type, brand, product, infoType, images} : IShowProps) => void,
 }
 
 const AddProductNavButtonsInner: FC<IProps> = ({setShowAddBlock}) => {
@@ -22,22 +23,27 @@ const AddProductNavButtonsInner: FC<IProps> = ({setShowAddBlock}) => {
       <CommandBarButton
         iconProps={addIcon}
         text="Добавить продукт"
-        onClick={() => setShowAddBlock({type: false, brand: false, product: true, infoType: false})}
+        onClick={() => setShowAddBlock({type: false, brand: false, product: true, infoType: false, images: false})}
       />
       <CommandBarButton
         iconProps={addIcon}
         text="Добавить тип"
-        onClick={() => setShowAddBlock({type: true, brand: false, product: false, infoType: false})}
+        onClick={() => setShowAddBlock({type: true, brand: false, product: false, infoType: false, images: false})}
       />
       <CommandBarButton
         iconProps={addIcon}
         text="Добавить бренд"
-        onClick={() => setShowAddBlock({type: false, brand: true, product: false, infoType: false})}
+        onClick={() => setShowAddBlock({type: false, brand: true, product: false, infoType: false, images: false})}
       />
       <CommandBarButton
         iconProps={addIcon}
         text="Добавить тип характеристики"
-        onClick={() => setShowAddBlock({type: false, brand: false, product: false, infoType: true})}
+        onClick={() => setShowAddBlock({type: false, brand: false, product: false, infoType: true, images: false})}
+      />
+      <CommandBarButton
+        iconProps={addIcon}
+        text="Добавить картинку к продукту"
+        onClick={() => setShowAddBlock({type: false, brand: false, product: false, infoType: false, images: true})}
       />
     </div>
   )

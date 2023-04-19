@@ -283,6 +283,12 @@
         transition: .5s;
       }
 
+      &.list {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
       &.active {
         background-color: var(--secondary);
       }

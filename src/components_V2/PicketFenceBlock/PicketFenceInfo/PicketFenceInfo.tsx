@@ -1,37 +1,7 @@
 import { IIconProps, initializeIcons } from '@fluentui/react';
 import { CommandBarButton } from '@fluentui/react';
 import React, { FC, useEffect, useState } from 'react';
-import './productinfo.scss';
-// @ts-ignore
-import starRatingSvg from '../../../assets/img/star_rating.png';
-// @ts-ignore
-import minusSvg from '../../../assets/img/minus.png';
-// @ts-ignore
-import plusSvg from '../../../assets/img/plus.png';
-// @ts-ignore
-import beliy from '../../../assets/img/colors/beliy.jpg'
-// @ts-ignore
-import biruza from '../../../assets/img/colors/biruza.jpg'
-// @ts-ignore
-import bronza from '../../../assets/img/colors/bronza.jpg'
-// @ts-ignore
-import granat from '../../../assets/img/colors/granat.jpg'
-// @ts-ignore
-import krasniy from '../../../assets/img/colors/krasniy.jpg'
-// @ts-ignore
-import oranzhevi from '../../../assets/img/colors/oranzhevi.jpg'
-// @ts-ignore
-import prozrachniy from '../../../assets/img/colors/prozrachniy.jpg'
-// @ts-ignore
-import serebro from '../../../assets/img/colors/serebro.jpg'
-// @ts-ignore
-import seriy from '../../../assets/img/colors/seriy.jpg'
-// @ts-ignore
-import siniy from '../../../assets/img/colors/siniy.jpg'
-// @ts-ignore
-import zeleniy from '../../../assets/img/colors/zeleniy.jpg'
-// @ts-ignore
-import zheltiy from '../../../assets/img/colors/zheltiy.jpg'
+import './picketfenceinfo.scss';
 import { deleteProductByID, deleteProductInfos, getProductByID, getProductInfoByProductID } from '../../../store/reducers/ProductReducer/ProductActionCreators';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
@@ -41,20 +11,26 @@ import { SERVER_URL } from '../../../constants/http';
 import { ICartItem } from '../../../types/ICartItem';
 import { DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, NO_IMAGE } from '../../../constants/user';
 import { setAuthAdmin } from '../../../store/reducers/AuthReducer/AuthSlice';
-import { ProductUpdate } from '../ProductUpdate/ProductUpdate';
 import { ConfirmOrder } from '../../ConfirmOrder/ConfirmOrder';
 import { AiFillDownCircle } from 'react-icons/ai';
 import { Loader_v2 } from '../../UI/Loader_v2/Loader_v2';
-import { ProductDescription } from '../ProductDescription/ProductDescription';
-import { ProductNavigation } from '../ProductNavigation/ProductNavigation';
 import { smoothScroll } from '../../../services/ClientServices/SmothScroll';
+import { ProductUpdate } from '../../ProductsBlock/ProductUpdate/ProductUpdate';
+import { ProductNavigation } from '../../ProductsBlock/ProductNavigation/ProductNavigation';
+// @ts-ignore
+import starRatingSvg from '../../../assets/img/star_rating.png';
+// @ts-ignore
+import minusSvg from '../../../assets/img/minus.png';
+// @ts-ignore
+import plusSvg from '../../../assets/img/plus.png';
+import { ProductDescription } from '../../ProductsBlock/ProductDescription/ProductDescription';
 
 initializeIcons();
 
 const deleteIcon: IIconProps = { iconName: 'Cancel' };
 const editIcon: IIconProps = { iconName: 'Edit' };
 
-const ProductInfoInner: FC = () => {
+const PicketFenceInfoInner: FC = () => {
   const { product, productInfo, isLoading } = useAppSelector(state => state.productReducer);
   const { items } = useAppSelector(state => state.cartReducer);
   const { isAdminAuth } = useAppSelector(state => state.authReducer);
@@ -71,7 +47,7 @@ const ProductInfoInner: FC = () => {
   const [consultation, setConsultation] = useState(false);
   const [itemThickness, setItemThickness] = useState('');
 
-  const price = (colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price).toFixed(2);
+  const price = colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price;
 
   // const views = randomInteger(30, 455);
 
@@ -227,7 +203,7 @@ const ProductInfoInner: FC = () => {
                   <img
                     onClick={() => setColorImage({imageData: SERVER_URL + product?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
                     className="productinfo__image__item" src={SERVER_URL + product?.coverImage} alt="поликарбонат" />
-                  <img
+                  {/* <img
                     onClick={() => setColorImage({imageData: beliy, isColor: true, choosenColor: 'Белый'})}
                     className="productinfo__image__item" src={beliy} alt="белый" />
                   <img
@@ -262,7 +238,7 @@ const ProductInfoInner: FC = () => {
                     className="productinfo__image__item" src={zeleniy} alt="зеленый" />
                   <img
                     onClick={() => setColorImage({imageData: zheltiy, isColor: true, choosenColor: 'Желтый'})}
-                    className="productinfo__image__item" src={zheltiy} alt="желтый" />
+                    className="productinfo__image__item" src={zheltiy} alt="желтый" /> */}
                 </div>
                 : null
               }
@@ -282,7 +258,7 @@ const ProductInfoInner: FC = () => {
                   Просмотров: {product.views} 
                 </div>
               </div>
-              <div className="productinfo__price">{`${price} руб.`}</div>
+              <div className="productinfo__price">{`${price}.00 руб.`}</div>
               <div className="productinfo__instock">
                 <AiFillDownCircle size={24}/>
                 <div className="productinfo__instock_text">
@@ -358,4 +334,4 @@ const ProductInfoInner: FC = () => {
   )
 }
 
-export const ProductInfo = React.memo(ProductInfoInner);
+export const PicketFenceInfo = React.memo(PicketFenceInfoInner);

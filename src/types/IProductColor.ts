@@ -1,14 +1,14 @@
 export interface IProductColor {
-  name: string,
+  title: string,
   coverImage: string,
+  productID: string,
   typeID: string,
-  brandID: string,
 }
 
 export interface IProductColorResponse {
   _id: string,
-  name: string,
+  title: string,
   coverImage: string,
+  productID: string,
   typeID: string,
-  brandID: string,
 }

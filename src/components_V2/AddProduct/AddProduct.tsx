@@ -17,6 +17,7 @@ import { SelectOption } from '../UI/SelectOption';
 import { Loader } from '../UI/Loader/Loader';
 import { AddProductType } from './AddProductType/AddProductType';
 import { Loader_v2 } from '../UI/Loader_v2/Loader_v2';
+import { AddProductImages } from './AddProductImages/AddProductImages';
 
 initializeIcons();
 
@@ -43,7 +44,7 @@ const AddProductInner: FC = () => {
   const [showImg, setShowImg] = useState('');
   const [infoBlock, setInfoBlock] = useState<IInfoBlock[]>([]);
   // const [addProductError, setAddProductError] = useState(false);
-  const [showAddBlock, setShowAddBlock] = useState({type: false, brand: false, product: false, infoType: false})
+  const [showAddBlock, setShowAddBlock] = useState({type: false, brand: false, product: false, infoType: false, images: false})
   const dispatch = useAppDispatch();
 
   const nameHandler = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => {
@@ -113,8 +114,8 @@ const AddProductInner: FC = () => {
   //   setAddProductError(false);
   // };
  
-  const showAddBlockHandler = ({type, brand, product, infoType} : IShowProps) => {
-    setShowAddBlock({type: type, brand: brand, product: product, infoType: infoType})
+  const showAddBlockHandler = ({type, brand, product, infoType, images} : IShowProps) => {
+    setShowAddBlock({type: type, brand: brand, product: product, infoType: infoType, images: images})
   }
   
   const handlerAddProduct = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -191,6 +192,7 @@ const AddProductInner: FC = () => {
       <div className="addproduct__container">
         {showAddBlock.type && <AddProductType types={types}/>}
         {showAddBlock.infoType && <AddProductInfoType types={types}/>}
+        {showAddBlock.images && <AddProductImages types={types}/>}
         {showAddBlock.product && (
           <form onSubmit={handlerAddProduct} className='addproduct'>
             <div className="addproduct__inputs">
