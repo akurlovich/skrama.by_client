@@ -9,7 +9,7 @@ import { SuccessModal } from '../../UI/SuccessModal/SuccessModal';
 import { addItem, clearItems } from '../../../store/reducers/CartReducer/CartSlice';
 import { SERVER_URL } from '../../../constants/http';
 import { ICartItem } from '../../../types/ICartItem';
-import { DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, NO_IMAGE } from '../../../constants/user';
+import { DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, DEFAULT_TYPE_ID_SHTAKETNIK, NO_IMAGE } from '../../../constants/user';
 import { setAuthAdmin } from '../../../store/reducers/AuthReducer/AuthSlice';
 import { ConfirmOrder } from '../../ConfirmOrder/ConfirmOrder';
 import { AiFillDownCircle } from 'react-icons/ai';
@@ -24,6 +24,7 @@ import minusSvg from '../../../assets/img/minus.png';
 // @ts-ignore
 import plusSvg from '../../../assets/img/plus.png';
 import { ProductDescription } from '../../ProductsBlock/ProductDescription/ProductDescription';
+import { getProductColorsByProductID } from '../../../store/reducers/ColorReducer/ColorActionCreaters';
 
 initializeIcons();
 
@@ -32,6 +33,7 @@ const editIcon: IIconProps = { iconName: 'Edit' };
 
 const PicketFenceInfoInner: FC = () => {
   const { product, productInfo, isLoading } = useAppSelector(state => state.productReducer);
+  const { colorsByProduct } = useAppSelector(state => state.colorsReducer);
   const { items } = useAppSelector(state => state.cartReducer);
   const { isAdminAuth } = useAppSelector(state => state.authReducer);
   const dispatch = useAppDispatch();
@@ -46,8 +48,9 @@ const PicketFenceInfoInner: FC = () => {
   const [confirmOrder, setConfirmOrder] = useState(false);
   const [consultation, setConsultation] = useState(false);
   const [itemThickness, setItemThickness] = useState('');
+  const [price, setPrice] = useState('0');
 
-  const price = colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price;
+  // let price: number | string = colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price;
 
   // const views = randomInteger(30, 455);
 
@@ -148,6 +151,8 @@ const PicketFenceInfoInner: FC = () => {
   }, []);
 
   useEffect(() => {
+    // console.log(product._id)
+    (async () => { 
     setColorImage(prev => ({...prev, imageData: SERVER_URL + product?.coverImage}));
     for (const element of productInfo) {
       switch (element.title) {
@@ -156,6 +161,12 @@ const PicketFenceInfoInner: FC = () => {
           break;
       }
     };
+    if (product.price) {
+      await dispatch(getProductColorsByProductID(product._id));
+      setPrice((colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price).toFixed(2));
+
+    }
+  })();
   }, [product])
   
   
@@ -198,11 +209,14 @@ const PicketFenceInfoInner: FC = () => {
             <div className="productinfo__imageblock">
               {/* <img className="productinfo__image" src={SERVER_URL + product?.coverImage} alt="product cover"/> */}
               <img className="productinfo__image" src={colorImage.imageData} alt="поликарбонат"/>
-              {product.typeID === DEFAULT_TYPE_ID_POLIKARBONAT ? 
+              {product.typeID === DEFAULT_TYPE_ID_SHTAKETNIK ? 
                 <div className="productinfo__image__colors">
-                  <img
+                  {/* <img
                     onClick={() => setColorImage({imageData: SERVER_URL + product?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
-                    className="productinfo__image__item" src={SERVER_URL + product?.coverImage} alt="поликарбонат" />
+                    className="productinfo__image__item" src={SERVER_URL + product?.coverImage} alt="поликарбонат" /> */}
+                  <img
+                    onClick={() => setColorImage({imageData: SERVER_URL + '/product-color/' + colorsByProduct[0].coverImage, isColor: false, choosenColor: 'Прозрачный'})}
+                    className="productinfo__image__item" src={SERVER_URL + '/product-color/' + colorsByProduct[0].coverImage} alt="поликарбонат" />
                   {/* <img
                     onClick={() => setColorImage({imageData: beliy, isColor: true, choosenColor: 'Белый'})}
                     className="productinfo__image__item" src={beliy} alt="белый" />
@@ -258,10 +272,11 @@ const PicketFenceInfoInner: FC = () => {
                   Просмотров: {product.views} 
                 </div>
               </div>
-              <div className="productinfo__price">{`${price}.00 руб.`}</div>
+              <div className="productinfo__price">{`${price} руб.`}</div>
               <div className="productinfo__instock">
                 <AiFillDownCircle size={24}/>
-                <div className="productinfo__instock_text">
+                <div
+                  className="productinfo__instock_text">
                   В наличии
                 </div>
               </div>

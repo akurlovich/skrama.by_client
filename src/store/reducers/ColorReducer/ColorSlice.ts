@@ -32,7 +32,6 @@ export const colorsSlice = createSlice({
       state.isLoading = false;
       state.color = action.payload;
       state.error = '';
-      console.log('3333')
     },
     [addProductColor.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -42,6 +41,7 @@ export const colorsSlice = createSlice({
       state.isLoading = true;
     },
     [getProductColorsByProductID.fulfilled.type]: (state, action: PayloadAction<IProductColorResponse[]>) => {
+      console.log('slicer');
       state.isLoading = false;
       state.colorsByProduct = action.payload;
       state.error = '';
