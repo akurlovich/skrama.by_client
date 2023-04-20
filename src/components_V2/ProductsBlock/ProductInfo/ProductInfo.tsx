@@ -71,7 +71,8 @@ const ProductInfoInner: FC = () => {
   const [consultation, setConsultation] = useState(false);
   const [itemThickness, setItemThickness] = useState('');
 
-  const price = (colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price).toFixed(2);
+  const [price, setPrice] = useState('0');
+  // const price = (colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price).toFixed(2);
 
   // const views = randomInteger(30, 455);
 
@@ -180,6 +181,10 @@ const ProductInfoInner: FC = () => {
           break;
       }
     };
+    if (product.price) {
+      setPrice((colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price).toFixed(2));
+
+    }
   }, [product])
   
   

@@ -41,7 +41,6 @@ export const colorsSlice = createSlice({
       state.isLoading = true;
     },
     [getProductColorsByProductID.fulfilled.type]: (state, action: PayloadAction<IProductColorResponse[]>) => {
-      console.log('slicer');
       state.isLoading = false;
       state.colorsByProduct = action.payload;
       state.error = '';

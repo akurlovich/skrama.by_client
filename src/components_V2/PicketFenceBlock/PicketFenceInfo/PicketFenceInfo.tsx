@@ -215,8 +215,8 @@ const PicketFenceInfoInner: FC = () => {
                     onClick={() => setColorImage({imageData: SERVER_URL + product?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
                     className="productinfo__image__item" src={SERVER_URL + product?.coverImage} alt="поликарбонат" /> */}
                   <img
-                    onClick={() => setColorImage({imageData: SERVER_URL + '/product-color/' + colorsByProduct[0].coverImage, isColor: false, choosenColor: 'Прозрачный'})}
-                    className="productinfo__image__item" src={SERVER_URL + '/product-color/' + colorsByProduct[0].coverImage} alt="поликарбонат" />
+                    onClick={() => setColorImage({imageData: SERVER_URL + '/product-color/' + colorsByProduct[0]?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
+                    className="productinfo__image__item" src={SERVER_URL + '/product-color/' + colorsByProduct[0]?.coverImage} alt="поликарбонат" />
                   {/* <img
                     onClick={() => setColorImage({imageData: beliy, isColor: true, choosenColor: 'Белый'})}
                     className="productinfo__image__item" src={beliy} alt="белый" />
