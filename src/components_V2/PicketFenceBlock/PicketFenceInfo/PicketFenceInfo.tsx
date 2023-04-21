@@ -31,6 +31,10 @@ initializeIcons();
 const deleteIcon: IIconProps = { iconName: 'Cancel' };
 const editIcon: IIconProps = { iconName: 'Edit' };
 
+type PopupClick = MouseEvent & {
+  path: Node[];
+};
+
 const PicketFenceInfoInner: FC = () => {
   const { product, productInfo, isLoading } = useAppSelector(state => state.productReducer);
   const { colorsByProduct } = useAppSelector(state => state.colorsReducer);
@@ -49,6 +53,7 @@ const PicketFenceInfoInner: FC = () => {
   const [consultation, setConsultation] = useState(false);
   const [itemThickness, setItemThickness] = useState('');
   const [price, setPrice] = useState('0');
+  const colorsRef = React.useRef<HTMLDivElement>(null);
   const [isOpenColors, setIsOpenColors] = useState(false);
   const [selectedColor, setSelectedColor] = useState('Выберите цвет:');
 
@@ -163,8 +168,27 @@ const PicketFenceInfoInner: FC = () => {
 
     }
   })();
-  }, [product])
+  }, [product]);
   
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const _event = event as PopupClick;
+
+      // console.log('colorsRef.current', colorsRef.current);
+      // console.log('_event', _event.composedPath())
+
+      // if (colorsRef.current && !_event.composedPath().includes(colorsRef.current)) {
+        //@ts-ignore
+      if (colorsRef.current?.contains(_event.target)) {
+        console.log('true');
+        setIsOpenColors(false);
+      }
+    };
+
+    document.body.addEventListener('click', handleClickOutside);
+
+    return () => document.body.removeEventListener('click', handleClickOutside);
+  }, []);
   
   return (
     <>
@@ -184,7 +208,9 @@ const PicketFenceInfoInner: FC = () => {
       }
       {confirmOrder && <ConfirmOrder setModal={setConfirmOrder} onClickClear={onClickClear} items={items} long={true}/>}
       {consultation && <ConfirmOrder setModal={setConsultation} items={[]} short={true}/>}
-      <div className="picketfenceinfo">
+      <div 
+        ref={colorsRef}
+        className="picketfenceinfo">
         <ProductNavigation itemThickness={itemThickness}/>
         <div className="picketfenceinfo__wrapper">
           {isAdminAuth && (
@@ -252,7 +278,7 @@ const PicketFenceInfoInner: FC = () => {
                     {/* <div className="picketfenceinfo__addinfo__secondary">{colorImage.choosenColor}</div> */}
                     <div 
                       onClick={() => setIsOpenColors(prev => !prev)}
-                      onMouseLeave={() => setIsOpenColors(false)}
+                      // onMouseLeave={() => setIsOpenColors(false)}
                       className="picketfenceinfo__addinfo__secondary colorsmain">
                       <div className="">{selectedColor}</div>
                       {isOpenColors &&
