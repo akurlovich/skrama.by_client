@@ -9,7 +9,7 @@ import { SuccessModal } from '../../UI/SuccessModal/SuccessModal';
 import { addItem, clearItems } from '../../../store/reducers/CartReducer/CartSlice';
 import { SERVER_URL } from '../../../constants/http';
 import { ICartItem } from '../../../types/ICartItem';
-import { DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, DEFAULT_TYPE_ID_SHTAKETNIK, NO_IMAGE } from '../../../constants/user';
+import { DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, DEFAULT_TYPE_ID_SHTAKETNIK, NO_IMAGE, SHTAKETNIK_COLORS } from '../../../constants/user';
 import { setAuthAdmin } from '../../../store/reducers/AuthReducer/AuthSlice';
 import { ConfirmOrder } from '../../ConfirmOrder/ConfirmOrder';
 import { AiFillDownCircle } from 'react-icons/ai';
@@ -49,12 +49,8 @@ const PicketFenceInfoInner: FC = () => {
   const [consultation, setConsultation] = useState(false);
   const [itemThickness, setItemThickness] = useState('');
   const [price, setPrice] = useState('0');
-
-  // let price: number | string = colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price;
-
-  // const views = randomInteger(30, 455);
-
-  // const admin = true;
+  const [isOpenColors, setIsOpenColors] = useState(false);
+  const [selectedColor, setSelectedColor] = useState('Выберите цвет:');
 
   const onClickClear = () => {
     dispatch(clearItems());
@@ -188,11 +184,11 @@ const PicketFenceInfoInner: FC = () => {
       }
       {confirmOrder && <ConfirmOrder setModal={setConfirmOrder} onClickClear={onClickClear} items={items} long={true}/>}
       {consultation && <ConfirmOrder setModal={setConsultation} items={[]} short={true}/>}
-      <div className="productinfo">
+      <div className="picketfenceinfo">
         <ProductNavigation itemThickness={itemThickness}/>
-        <div className="productinfo__wrapper">
+        <div className="picketfenceinfo__wrapper">
           {isAdminAuth && (
-                  <div className="productinfo__title_btns">
+                  <div className="picketfenceinfo__title_btns">
                   <CommandBarButton
                     iconProps={editIcon}
                     text="Изменить цену"
@@ -205,112 +201,97 @@ const PicketFenceInfoInner: FC = () => {
                   />
                 </div>)
               }
-          <div className="productinfo__container">
-            <div className="productinfo__imageblock">
-              {/* <img className="productinfo__image" src={SERVER_URL + product?.coverImage} alt="product cover"/> */}
-              <img className="productinfo__image" src={colorImage.imageData} alt="поликарбонат"/>
-              {product.typeID === DEFAULT_TYPE_ID_SHTAKETNIK ? 
-                <div className="productinfo__image__colors">
-                  {/* <img
-                    onClick={() => setColorImage({imageData: SERVER_URL + product?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
-                    className="productinfo__image__item" src={SERVER_URL + product?.coverImage} alt="поликарбонат" /> */}
+          <div className="picketfenceinfo__container">
+            <div className="picketfenceinfo__imageblock">
+              {/* <img className="picketfenceinfo__image" src={SERVER_URL + product?.coverImage} alt="product cover"/> */}
+              <img className="picketfenceinfo__image" src={colorImage.imageData} alt="поликарбонат"/>
+              { (product.typeID === DEFAULT_TYPE_ID_SHTAKETNIK &&
+                colorsByProduct.length) ? 
+                <div className="picketfenceinfo__image__colors">
                   <img
                     onClick={() => setColorImage({imageData: SERVER_URL + '/product-color/' + colorsByProduct[0]?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
-                    className="productinfo__image__item" src={SERVER_URL + '/product-color/' + colorsByProduct[0]?.coverImage} alt="поликарбонат" />
-                  {/* <img
-                    onClick={() => setColorImage({imageData: beliy, isColor: true, choosenColor: 'Белый'})}
-                    className="productinfo__image__item" src={beliy} alt="белый" />
-                  <img
-                    onClick={() => setColorImage({imageData: biruza, isColor: true, choosenColor: 'Бирюза'})}
-                    className="productinfo__image__item" src={biruza} alt="бирюза" />
-                  <img
-                    onClick={() => setColorImage({imageData: bronza, isColor: true, choosenColor: 'Бронза'})}
-                    className="productinfo__image__item" src={bronza} alt="бронза" />
-                  <img
-                    onClick={() => setColorImage({imageData: granat, isColor: true, choosenColor: 'Гранат'})}
-                    className="productinfo__image__item" src={granat} alt="гранат" />
-                  <img 
-                    onClick={() => setColorImage({imageData: krasniy, isColor: true, choosenColor: 'Красный'})}
-                    className="productinfo__image__item" src={krasniy} alt="красный" />
-                  <img
-                    onClick={() => setColorImage({imageData: oranzhevi, isColor: true, choosenColor: 'Оранжевый'})}
-                    className="productinfo__image__item" src={oranzhevi} alt="оранжевый" />
-                  <img
-                    onClick={() => setColorImage({imageData: prozrachniy, isColor: true, choosenColor: 'Прозрачный'})}
-                    className="productinfo__image__item" src={prozrachniy} alt="прозрачный" />
-                  <img
-                    onClick={() => setColorImage({imageData: serebro, isColor: true, choosenColor: 'Серебро'})}
-                    className="productinfo__image__item" src={serebro} alt="серебро" />
-                  <img
-                    onClick={() => setColorImage({imageData: seriy, isColor: true, choosenColor: 'Серый'})}
-                    className="productinfo__image__item" src={seriy} alt="серый" />
-                  <img
-                    onClick={() => setColorImage({imageData: siniy, isColor: true, choosenColor: 'Синий'})}
-                    className="productinfo__image__item" src={siniy} alt="синий" />
-                  <img 
-                    onClick={() => setColorImage({imageData: zeleniy, isColor: true, choosenColor: 'Зеленый'})}
-                    className="productinfo__image__item" src={zeleniy} alt="зеленый" />
-                  <img
-                    onClick={() => setColorImage({imageData: zheltiy, isColor: true, choosenColor: 'Желтый'})}
-                    className="productinfo__image__item" src={zheltiy} alt="желтый" /> */}
+                    className="picketfenceinfo__image__item" src={SERVER_URL + '/product-color/' + colorsByProduct[0]?.coverImage} alt="поликарбонат" />
                 </div>
                 : null
               }
             </div>
-            <div className="productinfo__info">
-              <div className="productinfo__titleblock">
-                <h2 className="productinfo__title">{product.name} {itemThickness}</h2>
+            <div className="picketfenceinfo__info">
+              <div className="picketfenceinfo__titleblock">
+                <h2 className="picketfenceinfo__title">{product.name} {itemThickness}</h2>
                 
               </div>
-              <div className="productinfo__rating">
+              <div className="picketfenceinfo__rating">
                 <img src={starRatingSvg} alt='star'/>
                 <img src={starRatingSvg} alt='star'/>
                 <img src={starRatingSvg} alt='star'/>
                 <img src={starRatingSvg} alt='star'/>
                 <img src={starRatingSvg} alt='star'/>
-                <div className="productinfo__rating_review">
+                <div className="picketfenceinfo__rating_review">
                   Просмотров: {product.views} 
                 </div>
               </div>
-              <div className="productinfo__price">{`${price} руб.`}</div>
-              <div className="productinfo__instock">
+              <div className="picketfenceinfo__price">{`${price} руб.`}</div>
+              <div className="picketfenceinfo__instock">
                 <AiFillDownCircle size={24}/>
                 <div
-                  className="productinfo__instock_text">
+                  className="picketfenceinfo__instock_text">
                   В наличии
                 </div>
               </div>
               
                 {productInfo.map(item => (
-                  <div key={item._id} className="productinfo__addinfo">
+                  <div key={item._id} className="picketfenceinfo__addinfo">
                     <div className="">{item.title}:</div>
-                    <div className="productinfo__addinfo__secondary">{item.description}</div>
+                    <div className="picketfenceinfo__addinfo__secondary">{item.description}</div>
                   </div>
                 ))}
 
                 {product.typeID !== DEFAULT_TYPE_ID_POLIK_KREPEZH ? 
-                  <div className="productinfo__addinfo">
+                  <div className="picketfenceinfo__addinfo">
                     <div className="">Цвет:</div>
-                    <div className="productinfo__addinfo__secondary">{colorImage.choosenColor}</div>
+                    {/* <div className="picketfenceinfo__addinfo__secondary">{colorImage.choosenColor}</div> */}
+                    <div 
+                      onClick={() => setIsOpenColors(prev => !prev)}
+                      onMouseLeave={() => setIsOpenColors(false)}
+                      className="picketfenceinfo__addinfo__secondary colorsmain">
+                      <div className="">{selectedColor}</div>
+                      {isOpenColors &&
+                        <div className="picketfenceinfo__addinfo__secondary colorsblock">
+                          {SHTAKETNIK_COLORS.map(item => 
+                            <div 
+                              onClick={() => setSelectedColor(item.title)}
+                              key={item.title} 
+                              className="picketfenceinfo__colorselect">
+                              <div
+                                style={{backgroundColor: item.color}}
+                                className="picketfenceinfo__colorselect__img"></div>
+                              <div className="picketfenceinfo__colorselect__text">
+                                {item.title}
+                              </div>
+                            </div>  
+                          )}
+                        </div>
+                      }
+                    </div>
                   </div>
                   : null
                 }
 
 
-              <div className="productinfo__cartinfo">
-                <div className="productinfo__cartinfo_count">
+              <div className="picketfenceinfo__cartinfo">
+                <div className="picketfenceinfo__cartinfo_count">
                   <button 
                     disabled={count === 1}
-                    className={count < 2 ? "productinfo__cartinfo_block notActive" : "productinfo__cartinfo_block"}
+                    className={count < 2 ? "picketfenceinfo__cartinfo_block notActive" : "picketfenceinfo__cartinfo_block"}
                     onClick={handlerMinusCount}
                   >
                     <img src={minusSvg} alt="minus" />
                   </button>
-                  <div className="productinfo__cartinfo_block nothover">
+                  <div className="picketfenceinfo__cartinfo_block nothover">
                     <div>{count}</div>
                   </div>
                   <button 
-                    className="productinfo__cartinfo_block"
+                    className="picketfenceinfo__cartinfo_block"
                     onClick={handlerPlusCount}
                   >
                     <img src={plusSvg} alt="plus" />
@@ -318,24 +299,24 @@ const PicketFenceInfoInner: FC = () => {
                 </div>
                 <div 
                   onClick={addToCartHandler}
-                  className="productinfo__cart">
+                  className="picketfenceinfo__cart">
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 512 512"><title/><g data-name="1" id="_1"><path fill="#fff" d="M397.78,316H192.65A15,15,0,0,1,178,304.33L143.46,153.85a15,15,0,0,1,14.62-18.36H432.35A15,15,0,0,1,447,153.85L412.4,304.33A15,15,0,0,1,397.78,316ZM204.59,286H385.84l27.67-120.48H176.91Z"/><path fill="#fff" d="M222,450a57.48,57.48,0,1,1,57.48-57.48A57.54,57.54,0,0,1,222,450Zm0-84.95a27.48,27.48,0,1,0,27.48,27.47A27.5,27.5,0,0,0,222,365.05Z"/><path fill="#fff" d="M368.42,450a57.48,57.48,0,1,1,57.48-57.48A57.54,57.54,0,0,1,368.42,450Zm0-84.95a27.48,27.48,0,1,0,27.48,27.47A27.5,27.5,0,0,0,368.42,365.05Z"/><path fill="#fff" d="M158.08,165.49a15,15,0,0,1-14.23-10.26L118.14,78H70.7a15,15,0,1,1,0-30H129a15,15,0,0,1,14.23,10.26l29.13,87.49a15,15,0,0,1-14.23,19.74Z"/></g></svg>
 
-                  <div className="productinfo__cart_btn">В корзину</div>
+                  <div className="picketfenceinfo__cart_btn">В корзину</div>
                 </div>
               </div>
               <button
                 onClick={confirmOrderHandler}
-                className="productinfo__oneclick">
+                className="picketfenceinfo__oneclick">
                 Оформить заказ
               </button>
-              <div className="productinfo__consultation">
-                <div className="productinfo__consultation_text">
+              <div className="picketfenceinfo__consultation">
+                <div className="picketfenceinfo__consultation_text">
                   Подробно проконсультируем о наших товарах, способах оплаты и доставки.
                 </div>
                 <button
                   onClick={confirmConsultation}
-                  className="productinfo__consultation_btn">
+                  className="picketfenceinfo__consultation_btn">
                   Заказать консультацию
                 </button>
               </div>

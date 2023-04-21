@@ -1,4 +1,4 @@
-.productinfo {
+.picketfenceinfo {
   flex: 1 0 auto;
   width: 100%;
   // padding: 0 10%;
@@ -162,7 +162,7 @@
 
   &__addinfo {
     padding-top: 15px;
-    max-width: 290px;
+    max-width: 400px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -176,6 +176,29 @@
     &__secondary {
       font-weight: 700;
       font-size: 18px;
+
+      &.colorsblock {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-color: #fff;
+        // padding: 10px;
+        // box-shadow: 0 0 0 0 rgba(0,0,0,.2), 0 0 0 0 rgba(0,0,0,.14), 0 0 0 0 rgba(0,0,0,.12);
+        transform: scale(1);
+        box-shadow: 0 0 5px 5px rgba(34, 60, 80, 0.2);
+        transition: box-shadow 0.5s, transform 0.5s;
+
+        // &:hover {
+        //   transform: scale(1.1);
+        //   box-shadow: 0 0 15px 7px rgba(34, 60, 80, 0.2);
+        //   transition: box-shadow 0.5s, transform 0.5s;
+        // }
+      }
+
+      &.colorsmain {
+        position: relative;
+        cursor: pointer;
+      }
     }
   }
 
@@ -339,6 +362,30 @@
         background-color: var(--secondary);
         // border-color: var(--secondary);
       }
+    }
+  }
+
+  &__colorselect {
+    padding: 10px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: #ececec;
+      border-radius: 5px;
+    }
+
+    &__img {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      // background-color: #442f29; //8017
+      // background-color: #59191f; //3005
+      // background-color: #114232; //6005
+      // background-color: #45494e; //7024
     }
   }
 

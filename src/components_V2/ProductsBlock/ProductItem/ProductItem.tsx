@@ -119,7 +119,8 @@ const ProductItemInner: FC <IProps> = ({item, productsInfo}) => {
 
 
 
-            {item.typeID === DEFAULT_TYPE_ID_POLIK_KREPEZH ? null :
+            {(item.typeID === DEFAULT_TYPE_ID_POLIK_KREPEZH || 
+              item.typeID === DEFAULT_TYPE_ID_SHTAKETNIK) ? null :
               <div className="productitem__item__text">
                 Цвет: прозрачный
               </div>
