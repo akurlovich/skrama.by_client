@@ -174,15 +174,11 @@ const PicketFenceInfoInner: FC = () => {
     const handleClickOutside = (event: MouseEvent) => {
       const _event = event as PopupClick;
 
-      // console.log('colorsRef.current', colorsRef.current);
-      // console.log('_event', _event.composedPath())
-
-      // if (colorsRef.current && !_event.composedPath().includes(colorsRef.current)) {
-        //@ts-ignore
-      if (colorsRef.current?.contains(_event.target)) {
-        console.log('true');
-        setIsOpenColors(false);
+      //@ts-ignore
+      if (!colorsRef.current?.contains(_event.target)) {
+          setIsOpenColors(false);
       }
+     
     };
 
     document.body.addEventListener('click', handleClickOutside);
@@ -209,24 +205,24 @@ const PicketFenceInfoInner: FC = () => {
       {confirmOrder && <ConfirmOrder setModal={setConfirmOrder} onClickClear={onClickClear} items={items} long={true}/>}
       {consultation && <ConfirmOrder setModal={setConsultation} items={[]} short={true}/>}
       <div 
-        ref={colorsRef}
+        // ref={colorsRef}
         className="picketfenceinfo">
         <ProductNavigation itemThickness={itemThickness}/>
         <div className="picketfenceinfo__wrapper">
           {isAdminAuth && (
-                  <div className="picketfenceinfo__title_btns">
-                  <CommandBarButton
-                    iconProps={editIcon}
-                    text="Изменить цену"
-                    onClick={updateProductHandler}
-                  />
-                  <CommandBarButton
-                    iconProps={deleteIcon}
-                    text="Удалить"
-                    onClick={deleteProductHandler}
-                  />
-                </div>)
-              }
+            <div className="picketfenceinfo__title_btns">
+            <CommandBarButton
+              iconProps={editIcon}
+              text="Изменить цену"
+              onClick={updateProductHandler}
+            />
+            <CommandBarButton
+              iconProps={deleteIcon}
+              text="Удалить"
+              onClick={deleteProductHandler}
+            />
+          </div>)
+        }
           <div className="picketfenceinfo__container">
             <div className="picketfenceinfo__imageblock">
               {/* <img className="picketfenceinfo__image" src={SERVER_URL + product?.coverImage} alt="product cover"/> */}
@@ -277,6 +273,7 @@ const PicketFenceInfoInner: FC = () => {
                     <div className="">Цвет:</div>
                     {/* <div className="picketfenceinfo__addinfo__secondary">{colorImage.choosenColor}</div> */}
                     <div 
+                      ref={colorsRef}
                       onClick={() => setIsOpenColors(prev => !prev)}
                       // onMouseLeave={() => setIsOpenColors(false)}
                       className="picketfenceinfo__addinfo__secondary colorsmain">
