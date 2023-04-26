@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { BiPhoneCall } from "react-icons/bi"
@@ -7,16 +7,21 @@ import { ICartItem } from "../../types/ICartItem";
 import { addItem } from "../../store/reducers/CartReducer/CartSlice";
 import {isMobile} from 'react-device-detect';
 
+type PopupClick = MouseEvent & {
+  path: Node[];
+};
+
 export const Header: FC = () => {
   const { totalPrice, items } = useAppSelector(state => state.cartReducer);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const dispatch = useAppDispatch();
   const location = useLocation();
   const [showItems, setShowItems] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const showItemsHandler = () => {
     setShowItems(prev => !prev);
-  }
+  };
 
   // useEffect(() => {
   //   const json = JSON.stringify(items);
@@ -33,11 +38,25 @@ export const Header: FC = () => {
       }
     }
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const _event = event as PopupClick;
+
+      if (!menuRef.current?.contains(_event.target as Node)) {
+          setShowItems(false);
+      };
+    };
+
+    document.body.addEventListener('click', handleClickOutside);
+
+    return () => document.body.removeEventListener('click', handleClickOutside);
+  }, []);
   
   
   return (
     <header 
-    onMouseLeave={() => setShowItems(false)}
+      // onMouseLeave={() => setShowItems(false)}
       className="header">
       <section className="header__toolbar">
         <div className="header__toolbar__contacts">
@@ -106,7 +125,9 @@ export const Header: FC = () => {
           className={({ isActive }) => isActive ? 'header__navbar__item active' : 'header__navbar__item'}>
           Главная
         </NavLink>
-        <div className="header__navbar__list">
+        <div
+          ref={menuRef}
+          className="header__navbar__list">
           <div
             onClick={showItemsHandler}
             className="header__navbar__item list">
@@ -120,7 +141,7 @@ export const Header: FC = () => {
           </div>
           {showItems && 
             <div 
-              onMouseLeave={() => setShowItems(false)}
+              // onMouseLeave={() => setShowItems(false)}
               className="header__navbar__list_items">
               <NavLink
                 to='/polikarbonat'

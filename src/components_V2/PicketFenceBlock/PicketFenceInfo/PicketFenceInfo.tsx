@@ -174,11 +174,9 @@ const PicketFenceInfoInner: FC = () => {
     const handleClickOutside = (event: MouseEvent) => {
       const _event = event as PopupClick;
 
-      //@ts-ignore
-      if (!colorsRef.current?.contains(_event.target)) {
+      if (!colorsRef.current?.contains(_event.target as Node)) {
           setIsOpenColors(false);
-      }
-     
+      };
     };
 
     document.body.addEventListener('click', handleClickOutside);

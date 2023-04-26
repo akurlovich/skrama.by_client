@@ -79,8 +79,7 @@ const PicketFenceBlockInner: FC = () => {
   return (
     <section className='productsblock'>
       {isLoading && <Loader_v2/>}
-      <h2 
-        onClick={() => console.log(products)}
+      <h2
         className="productsblock__title">
         Штакетник
       </h2>
