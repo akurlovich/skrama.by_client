@@ -3,8 +3,7 @@ import './productsblock.scss';
 import { ProductItem } from './ProductItem/ProductItem';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getAllProductsInfo, getProducts } from '../../store/reducers/ProductReducer/ProductActionCreators';
-import { DEFAULT_POLIRBONAT_FILTER_TITLE, DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, DEFAULT_TYPE_ID_POLIK_PLANKI } from '../../constants/user';
-import { Loader } from '../UI/Loader/Loader';
+import { DEFAULT_POLIKARBONAT_FILTER_TITLE, DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, DEFAULT_TYPE_ID_POLIK_PLANKI } from '../../constants/user';
 import { IProductResponse } from '../../types/IProductResponse';
 import { Loader_v2 } from '../UI/Loader_v2/Loader_v2';
 
@@ -62,7 +61,7 @@ const ProductsBlockInner: FC = () => {
       const productsFilter = readyFilterd(sortData);
       setReadyProductsArray(productsFilter);
     }  
-      const titleSortValue = productsAllInfo.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT).filter(item => item.title === DEFAULT_POLIRBONAT_FILTER_TITLE);
+      const titleSortValue = productsAllInfo.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT).filter(item => item.title === DEFAULT_POLIKARBONAT_FILTER_TITLE);
       const filterData: string[] = [];
       for  (const item of titleSortValue) {
         const found = filterData.find(element => element === item.description);
@@ -84,7 +83,7 @@ const ProductsBlockInner: FC = () => {
       <div className="productsblock__main">
         <div className="productsblock__sort">
           <div className="productsblock__sort__title">
-            {DEFAULT_POLIRBONAT_FILTER_TITLE}
+            {DEFAULT_POLIKARBONAT_FILTER_TITLE}
           </div>
           <ul>
             {sortArrayValue.map(item => (

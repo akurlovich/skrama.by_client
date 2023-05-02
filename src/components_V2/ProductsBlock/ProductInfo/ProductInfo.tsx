@@ -39,7 +39,7 @@ import { SuccessModal } from '../../UI/SuccessModal/SuccessModal';
 import { addItem, clearItems } from '../../../store/reducers/CartReducer/CartSlice';
 import { SERVER_URL } from '../../../constants/http';
 import { ICartItem } from '../../../types/ICartItem';
-import { DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, NO_IMAGE } from '../../../constants/user';
+import { DEFAULT_POLIKARBONAT_FILTER_TITLE, DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, NO_IMAGE } from '../../../constants/user';
 import { setAuthAdmin } from '../../../store/reducers/AuthReducer/AuthSlice';
 import { ProductUpdate } from '../ProductUpdate/ProductUpdate';
 import { ConfirmOrder } from '../../ConfirmOrder/ConfirmOrder';
@@ -176,7 +176,7 @@ const ProductInfoInner: FC = () => {
     setColorImage(prev => ({...prev, imageData: SERVER_URL + product?.coverImage}));
     for (const element of productInfo) {
       switch (element.title) {
-        case 'Толщина':
+        case DEFAULT_POLIKARBONAT_FILTER_TITLE:
           setItemThickness(element.description);
           break;
       }
@@ -207,7 +207,7 @@ const ProductInfoInner: FC = () => {
       {confirmOrder && <ConfirmOrder setModal={setConfirmOrder} onClickClear={onClickClear} items={items} long={true}/>}
       {consultation && <ConfirmOrder setModal={setConsultation} items={[]} short={true}/>}
       <div className="productinfo">
-        <ProductNavigation itemThickness={itemThickness}/>
+        <ProductNavigation itemThickness={itemThickness} productTitle='Поликарбонат' productPageLink='/polikarbonat'/>
         <div className="productinfo__wrapper">
           {isAdminAuth && (
                   <div className="productinfo__title_btns">

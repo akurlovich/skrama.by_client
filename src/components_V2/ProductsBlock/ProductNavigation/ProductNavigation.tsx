@@ -4,16 +4,18 @@ import './productnavigation.scss';
 
 interface IProps {
   itemThickness: string;
+  productTitle: string;
+  productPageLink: string;
 }
 
-const ProductNavigationInner: FC<IProps> = ({itemThickness}) => {
+const ProductNavigationInner: FC<IProps> = ({itemThickness, productTitle, productPageLink}) => {
   const navigate = useNavigate();
   return (
     <section className='productnavigation'>
       <div 
         className="productnavigation__item active"
-        onClick={() => navigate('/polikarbonat')}>
-        Поликарбонат
+        onClick={() => navigate(productPageLink)}>
+        {productTitle}
       </div>
       <div className="productnavigation__item small">
         /
@@ -23,6 +25,6 @@ const ProductNavigationInner: FC<IProps> = ({itemThickness}) => {
       </div>
     </section>
   )
-}
+};
 
 export const ProductNavigation = React.memo(ProductNavigationInner);

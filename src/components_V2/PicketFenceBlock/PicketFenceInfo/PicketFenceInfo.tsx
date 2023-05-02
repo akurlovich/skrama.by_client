@@ -9,7 +9,7 @@ import { SuccessModal } from '../../UI/SuccessModal/SuccessModal';
 import { addItem, clearItems } from '../../../store/reducers/CartReducer/CartSlice';
 import { SERVER_URL } from '../../../constants/http';
 import { ICartItem } from '../../../types/ICartItem';
-import { DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, DEFAULT_TYPE_ID_SHTAKETNIK, NO_IMAGE, SHTAKETNIK_COLORS } from '../../../constants/user';
+import { DEFAULT_SHTAKETNIK_FILTER_TITLE, DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, DEFAULT_TYPE_ID_SHTAKETNIK, NO_IMAGE, SHTAKETNIK_COLORS } from '../../../constants/user';
 import { setAuthAdmin } from '../../../store/reducers/AuthReducer/AuthSlice';
 import { ConfirmOrder } from '../../ConfirmOrder/ConfirmOrder';
 import { AiFillDownCircle } from 'react-icons/ai';
@@ -131,7 +131,6 @@ const PicketFenceInfoInner: FC = () => {
     const item = itemForOrder();
     dispatch(addItem(item));
     setSuccessModal(true);
-    // console.log(productInfo);
   };
 
   const updateProductHandler = () => {
@@ -152,12 +151,11 @@ const PicketFenceInfoInner: FC = () => {
   }, []);
 
   useEffect(() => {
-    // console.log(product._id)
     (async () => { 
     setColorImage(prev => ({...prev, imageData: SERVER_URL + product?.coverImage}));
     for (const element of productInfo) {
       switch (element.title) {
-        case 'Толщина':
+        case DEFAULT_SHTAKETNIK_FILTER_TITLE:
           setItemThickness(element.description);
           break;
       }
@@ -205,7 +203,7 @@ const PicketFenceInfoInner: FC = () => {
       <div 
         // ref={colorsRef}
         className="picketfenceinfo">
-        <ProductNavigation itemThickness={itemThickness}/>
+        <ProductNavigation itemThickness={itemThickness} productTitle='Штакетник' productPageLink='/shtaketnik'/>
         <div className="picketfenceinfo__wrapper">
           {isAdminAuth && (
             <div className="picketfenceinfo__title_btns">
@@ -224,7 +222,7 @@ const PicketFenceInfoInner: FC = () => {
           <div className="picketfenceinfo__container">
             <div className="picketfenceinfo__imageblock">
               {/* <img className="picketfenceinfo__image" src={SERVER_URL + product?.coverImage} alt="product cover"/> */}
-              <img className="picketfenceinfo__image" src={colorImage.imageData} alt="поликарбонат"/>
+              <img className="picketfenceinfo__image" src={colorImage.imageData} alt="штакетник"/>
               { (product.typeID === DEFAULT_TYPE_ID_SHTAKETNIK &&
                 colorsByProduct.length) ? 
                 <div className="picketfenceinfo__image__colors">
@@ -237,7 +235,7 @@ const PicketFenceInfoInner: FC = () => {
             </div>
             <div className="picketfenceinfo__info">
               <div className="picketfenceinfo__titleblock">
-                <h2 className="picketfenceinfo__title">{product.name} {itemThickness}</h2>
+                <h2 className="picketfenceinfo__title">{product.name}</h2>
                 
               </div>
               <div className="picketfenceinfo__rating">
