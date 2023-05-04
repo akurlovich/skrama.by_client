@@ -151,6 +151,7 @@ const PicketFenceInfoInner: FC = () => {
   }, []);
 
   useEffect(() => {
+    console.log(product._id);
     (async () => { 
     setColorImage(prev => ({...prev, imageData: SERVER_URL + product?.coverImage}));
     for (const element of productInfo) {
@@ -227,8 +228,17 @@ const PicketFenceInfoInner: FC = () => {
                 colorsByProduct.length) ? 
                 <div className="picketfenceinfo__image__colors">
                   <img
+                    onClick={() => setColorImage({imageData: SERVER_URL + product?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
+                    className="picketfenceinfo__image__item" src={SERVER_URL + product?.coverImage} alt="штакетник" />
+                  {colorsByProduct.map(item => (
+                    <img
+                    key={item.coverImage}
+                    onClick={() => setColorImage({imageData: SERVER_URL + '/product-color/' + item.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
+                    className="picketfenceinfo__image__item" src={SERVER_URL + '/product-color/' + item.coverImage} alt="штакетник" />
+                  ))}
+                  {/* <img
                     onClick={() => setColorImage({imageData: SERVER_URL + '/product-color/' + colorsByProduct[0]?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
-                    className="picketfenceinfo__image__item" src={SERVER_URL + '/product-color/' + colorsByProduct[0]?.coverImage} alt="поликарбонат" />
+                    className="picketfenceinfo__image__item" src={SERVER_URL + '/product-color/' + colorsByProduct[0]?.coverImage} alt="поликарбонат" /> */}
                 </div>
                 : null
               }

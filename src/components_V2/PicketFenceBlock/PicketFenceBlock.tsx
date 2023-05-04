@@ -74,7 +74,14 @@ const PicketFenceBlockInner: FC = () => {
         }
       };
      
-      setSortArrayValue([...filterData]);
+      // setSortArrayValue([...filterData.sort()]);
+      const toNumberSort = filterData.map(item => Number(item.slice(0, -2))).sort((a, b,) => a - b);
+      toNumberSort.shift();
+      // const qqqq = toNumberSort.shift();
+      const toStringSort = toNumberSort.map(item => item.toString() + 'мм')
+      // console.log(eeee);
+      setSortArrayValue([...toStringSort]);
+
 
   }, [products, productsAllInfo]);
 
@@ -82,6 +89,7 @@ const PicketFenceBlockInner: FC = () => {
     <section className='productsblock'>
       {isLoading && <Loader_v2/>}
       <h2
+        onClick={() => console.log(sortArrayValue)}
         className="productsblock__title">
         Штакетник
       </h2>
@@ -98,7 +106,7 @@ const PicketFenceBlockInner: FC = () => {
             >
               Ширина
             </li> */}
-            {sortArrayValue.map(item => (
+            {sortArrayValue && sortArrayValue.map(item => (
               <li
                 key={item}
                 className={`productsblock__sort__item ${sortData === item ? 'active' : null}`}
