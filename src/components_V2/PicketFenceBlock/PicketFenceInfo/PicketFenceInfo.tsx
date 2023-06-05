@@ -56,6 +56,7 @@ const PicketFenceInfoInner: FC = () => {
   const colorsRef = React.useRef<HTMLDivElement>(null);
   const [isOpenColors, setIsOpenColors] = useState(false);
   const [selectedColor, setSelectedColor] = useState('Выберите цвет:');
+  const [availableColors, setavailableColors] = useState(SHTAKETNIK_COLORS.slice(0, 4));
 
   const onClickClear = () => {
     dispatch(clearItems());
@@ -152,15 +153,24 @@ const PicketFenceInfoInner: FC = () => {
 
   useEffect(() => {
     console.log(product._id);
-    (async () => { 
-    setColorImage(prev => ({...prev, imageData: SERVER_URL + product?.coverImage}));
-    for (const element of productInfo) {
-      switch (element.title) {
-        case DEFAULT_SHTAKETNIK_FILTER_TITLE:
-          setItemThickness(element.description);
-          break;
+    for (const item of productInfo) {
+      if (item.title === 'Вид покрытия' && item.description === 'PrintTech') {
+        const newarr = SHTAKETNIK_COLORS.slice(4, 6);
+        setavailableColors(SHTAKETNIK_COLORS.slice(4, 6));
       }
     };
+    (async () => {
+      if (params.id) {
+        await dispatch(getProductInfoByProductID(params.id));
+      };
+      setColorImage(prev => ({...prev, imageData: SERVER_URL + product?.coverImage}));
+      for (const element of productInfo) {
+        switch (element.title) {
+          case DEFAULT_SHTAKETNIK_FILTER_TITLE:
+            setItemThickness(element.description);
+            break;
+        }
+      };
     if (product.price) {
       await dispatch(getProductColorsByProductID(product._id));
       setPrice((colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price).toFixed(2));
@@ -168,6 +178,16 @@ const PicketFenceInfoInner: FC = () => {
     }
   })();
   }, [product]);
+
+  // useEffect(() => {
+  //   for (const item of productInfo) {
+  //     if (item.title === 'Вид покрытия' && item.description === 'PrintTech') {
+  //       console.log('first', item.title,  item.description)
+  //     }
+  //   }
+
+  // }, [productInfo])
+  
   
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -286,7 +306,7 @@ const PicketFenceInfoInner: FC = () => {
                       <div className="">{selectedColor}</div>
                       {isOpenColors &&
                         <div className="picketfenceinfo__addinfo__secondary colorsblock">
-                          {SHTAKETNIK_COLORS.map(item => 
+                          {availableColors.map(item => 
                             <div 
                               onClick={() => setSelectedColor(item.title)}
                               key={item.title} 
