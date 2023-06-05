@@ -351,7 +351,7 @@ const PicketFenceInfoInner: FC = () => {
               </div>
             </div>
           </div>
-          <ProductDescription/>
+          <ProductDescription type={product.typeID}/>
         </div>
       </div>
     
