@@ -176,6 +176,11 @@
     &__secondary {
       font-weight: 700;
       font-size: 18px;
+      width: 150px;
+    }
+
+    &__selectedcolor {
+      width: 150px;
     }
   }
 
@@ -342,5 +347,10 @@
     }
   }
 
+}
+
+.picketfenceinfo__addinfo__selectedcolor {
+  min-width: 150px;
+  text-align: right;
 }
 

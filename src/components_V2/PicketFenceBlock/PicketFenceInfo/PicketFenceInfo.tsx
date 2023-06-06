@@ -303,24 +303,26 @@ const PicketFenceInfoInner: FC = () => {
                       onClick={() => setIsOpenColors(prev => !prev)}
                       // onMouseLeave={() => setIsOpenColors(false)}
                       className="picketfenceinfo__addinfo__secondary colorsmain">
-                      <div className="">{selectedColor}</div>
-                      {isOpenColors &&
-                        <div className="picketfenceinfo__addinfo__secondary colorsblock">
-                          {availableColors.map(item => 
-                            <div 
-                              onClick={() => setSelectedColor(item.title)}
-                              key={item.title} 
-                              className="picketfenceinfo__colorselect">
-                              <div
-                                style={{backgroundColor: item.color}}
-                                className="picketfenceinfo__colorselect__img"></div>
-                              <div className="picketfenceinfo__colorselect__text">
-                                {item.title}
-                              </div>
-                            </div>  
-                          )}
+                        <div className="picketfenceinfo__addinfo__selectedcolor">
+                          {selectedColor}
                         </div>
-                      }
+                        {isOpenColors &&
+                          <div className="picketfenceinfo__addinfo__secondary colorsblock">
+                            {availableColors.map(item => 
+                              <div 
+                                onClick={() => setSelectedColor(item.title)}
+                                key={item.title} 
+                                className="picketfenceinfo__colorselect">
+                                <div
+                                  style={{backgroundColor: item.color}}
+                                  className="picketfenceinfo__colorselect__img"></div>
+                                <div className="picketfenceinfo__colorselect__text">
+                                  {item.title}
+                                </div>
+                              </div>  
+                            )}
+                          </div>
+                        }
                     </div>
                   </div>
                   : null
