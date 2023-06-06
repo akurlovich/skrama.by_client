@@ -12,6 +12,7 @@ import { AdminAuthRouter } from "./components_V2/RoutersComponents/AdminAuth/Adm
 import { AddProduct } from "./components_V2/AddProduct/AddProduct";
 import { PicketFenceBlock } from "./components_V2/PicketFenceBlock/PicketFenceBlock";
 import { PicketFenceInfo } from "./components_V2/PicketFenceBlock/PicketFenceInfo/PicketFenceInfo";
+import PolikarbonatMain from "./components_V2/PolikarbonatMain/PolikarbonatMain";
 
 const App: FC = () => {
 
@@ -26,6 +27,7 @@ const App: FC = () => {
           </AdminAuthRouter>
         }/>
         {/* <Route path="products" element={<ProductListItems/>}/> */}
+        <Route path="polikarbonat-main" element={<PolikarbonatMain/>}/>
         <Route path="polikarbonat" element={<ProductsBlock/>}/>
         <Route path="polikarbonat/:id" element={<ProductInfo/>}/>
         <Route path="shtaketnik" element={<PicketFenceBlock/>}/>
