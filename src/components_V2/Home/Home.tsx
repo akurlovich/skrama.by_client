@@ -18,8 +18,18 @@ const Home: FC = () => {
     <main className="main__wrapper">
       {/* <ProductInfo/> */}
       {/* <ProductsBlock/> */}
-      <TypeBlock title='Поликарбонат' linkTo="polikarbonat-main" imgSrc={polik}/>
-      <TypeBlock title='Штакетник' linkTo="shtaketnik" imgSrc={shtak}/>
+      <div className="main__wrapper__title">
+        <div className="main__wrapper__title_primary">
+          Выберите
+        </div>
+        <div className="main__wrapper__title_secondary">
+          продукцию:
+        </div>
+      </div>
+      <div className="main__wrapper__main">
+        <TypeBlock title='Поликарбонат' linkTo="polikarbonat-main" imgSrc={polik}/>
+        <TypeBlock title='Штакетник' linkTo="shtaketnik" imgSrc={shtak}/>
+      </div>
       {/* <MainImage/>
       <MainAbout/>
       <MainChooseUs/>
