@@ -43,24 +43,22 @@ const PicketFenceInfoInner: FC = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
   const navigate = useNavigate();
-  // const foundProduct = products.find(item => item._id === params.id);
-  // const [count, setCount] = useState(1);
   const [successModal, setSuccessModal] = useState(false);
   const [updateProductModal, setUpdateProductModal] = useState(false);
   const [colorImage, setColorImage] = useState({imageData: NO_IMAGE, isColor: false, choosenColor: 'Прозрачный'});
-
   const [confirmOrder, setConfirmOrder] = useState(false);
   const [consultation, setConsultation] = useState(false);
   const [itemThickness, setItemThickness] = useState('');
-  const [price, setPrice] = useState('0');
+  // const [price, setPrice] = useState('0');
   const colorsRef = React.useRef<HTMLDivElement>(null);
   const [isOpenColors, setIsOpenColors] = useState(false);
   const [selectedColor, setSelectedColor] = useState('Выберите цвет:');
   const [availableColors, setavailableColors] = useState(SHTAKETNIK_COLORS.slice(0, 4));
-  const [itemLong, setItemLong] = useState('');
-  const [itemCount, setItemCount] = useState('');
-  const [totalCount, setTotalCount] = useState('0');
-  const [totalValue, setTotalValue] = useState('0');
+  const [itemData, setItemData] = useState({itemLong: '', itemCount: '', totalCount: '0', totalValue: '0', itemPrice: '0'})
+  // const [itemLong, setItemLong] = useState('');
+  // const [itemCount, setItemCount] = useState('');
+  // const [totalCount, setTotalCount] = useState('0');
+  // const [totalValue, setTotalValue] = useState('0');
 
   const onClickClear = () => {
     dispatch(clearItems());
@@ -97,7 +95,7 @@ const PicketFenceInfoInner: FC = () => {
       thickness,
       density,
       size,
-      count: +totalCount,
+      count: +itemData.totalCount,
     };
     return item;
   };
@@ -133,30 +131,65 @@ const PicketFenceInfoInner: FC = () => {
   // };
 
   const totalCountHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    // console.log(e.currentTarget.value);
-    setItemLong(e.currentTarget.value);
+    console.log(e.currentTarget.value);
+    // setItemData((prev) => {
+    //   return ({
+    //     ...prev, 
+    //     // itemLong: e.currentTarget.value ? e.currentTarget.value : '',
+    //   })
+    // });
+    setItemData({...itemData, itemLong: e.currentTarget.value})
     // const total: number = +itemLong * +itemCount;
     // setTotalCount(total);
     // setTotalValue(total * +price);
-    const total: number = +itemCount / 1000 * +e.currentTarget.value;
+    const total: number = +itemData.itemCount / 1000 * +e.currentTarget.value;
     // setTimeout(() => {
       // console.log(total)
       
     // }, 100);
-    setTotalCount(total.toFixed(3));
-    setTotalValue((total * +price).toFixed(2))
+    // setTotalCount(total.toFixed(3));
+    setItemData((prev) => {
+      return ({
+        ...prev, 
+        totalCount: total.toFixed(3)
+      })
+    });
+    // setTotalValue((total * +price).toFixed(2));
+    setItemData((prev) => {
+      return ({
+        ...prev,
+        totalValue: (total * +itemData.itemPrice).toFixed(2)
+      })
+    });
   };
 
   const totalValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setItemCount(e.currentTarget.value);
+    // setItemCount(e.currentTarget.value);
+    // setItemData((prev) => {
+    //   return ({
+    //     ...prev, 
+    //     itemCount: e.currentTarget.value ? e.currentTarget.value : '',
+    //   })
+    // });
+    setItemData({...itemData, itemCount: e.currentTarget.value})
     // setItemCount(prev => e.currentTarget.value);
-    const total: number = +itemLong / 1000 * +e.currentTarget.value;
+    const total: number = +itemData.itemLong / 1000 * +e.currentTarget.value;
     // setTimeout(() => {
       // console.log(total)
       
     // }, 100);
-    setTotalCount(total.toFixed(3));
-    setTotalValue((total * +price).toFixed(2));
+    setItemData((prev) => {
+      return ({
+        ...prev, 
+        totalCount: total.toFixed(3)
+      })
+    });
+    setItemData((prev) => {
+      return ({
+        ...prev,
+        totalValue: (total * +itemData.itemPrice).toFixed(2)
+      })
+    });
   };
 
   const addToCartHandler = () => {
@@ -218,7 +251,14 @@ const PicketFenceInfoInner: FC = () => {
       };
     if (product.price) {
       await dispatch(getProductColorsByProductID(product._id));
-      setPrice((colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price).toFixed(2));
+      // setPrice((colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price).toFixed(2));
+      // setPrice(product.price.toFixed(2));
+      setItemData((prev) => {
+        return ({
+          ...prev,
+          itemPrice: product.price.toFixed(2)
+        })
+      });
 
     }
   })();
@@ -323,7 +363,7 @@ const PicketFenceInfoInner: FC = () => {
                   Просмотров: {product.views} 
                 </div>
               </div>
-              <div className="picketfenceinfo__price">{`${price} руб. за 1 м.пог.`}</div>
+              <div className="picketfenceinfo__price">{`${itemData.itemPrice} руб. за 1 м.пог.`}</div>
               <div className="picketfenceinfo__instock">
                 <AiFillDownCircle size={24}/>
                 <div
@@ -398,7 +438,7 @@ const PicketFenceInfoInner: FC = () => {
                     <div className="picketfenceinfo__inputs__item">
                       <input
                         onChange={totalCountHandler}
-                        value={itemLong}
+                        // value={itemData.itemLong}
                         type="number"
                         name="input_long"
                         id="input_long"
@@ -409,7 +449,7 @@ const PicketFenceInfoInner: FC = () => {
                     <div className="picketfenceinfo__inputs__item">
                       <input
                         onChange={totalValueHandler}
-                        value={itemCount}
+                        // value={itemData.itemCount}
                         type="number"
                         name="input_count"
                         id="input_count"
@@ -419,10 +459,10 @@ const PicketFenceInfoInner: FC = () => {
                     </div>
                   </div>
                   <div className="picketfenceinfo__inputs__count">
-                    Итоговое количество: <b>{totalCount} м.пог.</b> 
+                    Итоговое количество: <b>{itemData.totalCount} м.пог.</b> 
                   </div>
                   <div className="picketfenceinfo__inputs__value">
-                    Итоговая цена: <b>{totalValue} руб.</b> 
+                    Итоговая цена: <b>{itemData.totalValue} руб.</b> 
                   </div>
                 </div>
                 <div 
