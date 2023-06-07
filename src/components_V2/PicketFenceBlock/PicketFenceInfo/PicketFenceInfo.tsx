@@ -1,6 +1,6 @@
 import { IIconProps, initializeIcons } from '@fluentui/react';
 import { CommandBarButton } from '@fluentui/react';
-import React, { FC, useEffect, useState } from 'react';
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 import './picketfenceinfo.scss';
 import { deleteProductByID, deleteProductInfos, getProductByID, getProductInfoByProductID } from '../../../store/reducers/ProductReducer/ProductActionCreators';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -44,7 +44,7 @@ const PicketFenceInfoInner: FC = () => {
   const params = useParams();
   const navigate = useNavigate();
   // const foundProduct = products.find(item => item._id === params.id);
-  const [count, setCount] = useState(1);
+  // const [count, setCount] = useState(1);
   const [successModal, setSuccessModal] = useState(false);
   const [updateProductModal, setUpdateProductModal] = useState(false);
   const [colorImage, setColorImage] = useState({imageData: NO_IMAGE, isColor: false, choosenColor: 'Прозрачный'});
@@ -57,6 +57,10 @@ const PicketFenceInfoInner: FC = () => {
   const [isOpenColors, setIsOpenColors] = useState(false);
   const [selectedColor, setSelectedColor] = useState('Выберите цвет:');
   const [availableColors, setavailableColors] = useState(SHTAKETNIK_COLORS.slice(0, 4));
+  const [itemLong, setItemLong] = useState('');
+  const [itemCount, setItemCount] = useState('');
+  const [totalCount, setTotalCount] = useState('0');
+  const [totalValue, setTotalValue] = useState('0');
 
   const onClickClear = () => {
     dispatch(clearItems());
@@ -93,7 +97,7 @@ const PicketFenceInfoInner: FC = () => {
       thickness,
       density,
       size,
-      count: count,
+      count: +totalCount,
     };
     return item;
   };
@@ -118,14 +122,41 @@ const PicketFenceInfoInner: FC = () => {
     setSuccessModal(false);
   };
 
-  const handlerMinusCount = () => {
-    if (count > 1) {
-      setCount(prev => prev - 1)
-    }
+  // const handlerMinusCount = () => {
+  //   if (count > 1) {
+  //     setCount(prev => prev - 1)
+  //   }
+  // };
+
+  // const handlerPlusCount = () => {
+  //   setCount(prev => prev + 1)
+  // };
+
+  const totalCountHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    // console.log(e.currentTarget.value);
+    setItemLong(e.currentTarget.value);
+    // const total: number = +itemLong * +itemCount;
+    // setTotalCount(total);
+    // setTotalValue(total * +price);
+    const total: number = +itemCount / 1000 * +e.currentTarget.value;
+    // setTimeout(() => {
+      // console.log(total)
+      
+    // }, 100);
+    setTotalCount(total.toFixed(3));
+    setTotalValue((total * +price).toFixed(2))
   };
 
-  const handlerPlusCount = () => {
-    setCount(prev => prev + 1)
+  const totalValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setItemCount(e.currentTarget.value);
+    // setItemCount(prev => e.currentTarget.value);
+    const total: number = +itemLong / 1000 * +e.currentTarget.value;
+    // setTimeout(() => {
+      // console.log(total)
+      
+    // }, 100);
+    setTotalCount(total.toFixed(3));
+    setTotalValue((total * +price).toFixed(2));
   };
 
   const addToCartHandler = () => {
@@ -344,7 +375,7 @@ const PicketFenceInfoInner: FC = () => {
 
 
               <div className="picketfenceinfo__cartinfo">
-                <div className="picketfenceinfo__cartinfo_count">
+                {/* <div className="picketfenceinfo__cartinfo_count">
                   <button 
                     disabled={count === 1}
                     className={count < 2 ? "picketfenceinfo__cartinfo_block notActive" : "picketfenceinfo__cartinfo_block"}
@@ -361,6 +392,38 @@ const PicketFenceInfoInner: FC = () => {
                   >
                     <img src={plusSvg} alt="plus" />
                   </button>
+                </div> */}
+                <div className="picketfenceinfo__inputs">
+                  <div className="picketfenceinfo__inputs__block">
+                    <div className="picketfenceinfo__inputs__item">
+                      <input
+                        onChange={totalCountHandler}
+                        value={itemLong}
+                        type="number"
+                        name="input_long"
+                        id="input_long"
+                        required
+                      />
+                      <label htmlFor="input_long">Длинна (высота) мм.</label>
+                    </div>
+                    <div className="picketfenceinfo__inputs__item">
+                      <input
+                        onChange={totalValueHandler}
+                        value={itemCount}
+                        type="number"
+                        name="input_count"
+                        id="input_count"
+                        required
+                      />
+                      <label htmlFor="input_count">Количество шт.</label>
+                    </div>
+                  </div>
+                  <div className="picketfenceinfo__inputs__count">
+                    Итоговое количество: <b>{totalCount} м.пог.</b> 
+                  </div>
+                  <div className="picketfenceinfo__inputs__value">
+                    Итоговая цена: <b>{totalValue} руб.</b> 
+                  </div>
                 </div>
                 <div 
                   onClick={addToCartHandler}
