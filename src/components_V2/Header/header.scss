@@ -259,6 +259,10 @@
         flex-direction: column;
         top: 78px;
         z-index: 200000;
+
+        @media (max-width: 575px) { 
+          top: 38px;
+        }
       }
     }
 
