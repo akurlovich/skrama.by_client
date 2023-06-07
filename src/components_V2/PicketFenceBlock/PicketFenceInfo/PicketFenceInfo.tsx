@@ -149,16 +149,30 @@ const PicketFenceInfoInner: FC = () => {
       dispatch(setAuthAdmin());
     };
     smoothScroll();
+    setavailableColors(SHTAKETNIK_COLORS);
   }, []);
 
   useEffect(() => {
     console.log(product._id);
+    // for (const item of productInfo) {
+    //   if (item.title === 'Вид покрытия' && item.description === 'PrintTech') {
+    //     const colors = SHTAKETNIK_COLORS.slice(4, 6);
+    //     setavailableColors(colors);
+    //   } else {
+    //     setavailableColors(SHTAKETNIK_COLORS.slice(0, 4));
+    //   }
+    // };
+    let flag = false;
     for (const item of productInfo) {
       if (item.title === 'Вид покрытия' && item.description === 'PrintTech') {
-        const newarr = SHTAKETNIK_COLORS.slice(4, 6);
-        setavailableColors(SHTAKETNIK_COLORS.slice(4, 6));
+        flag = true;
       }
     };
+    if (flag) {
+      setavailableColors(SHTAKETNIK_COLORS.slice(4, 6));
+    } else {
+      setavailableColors(SHTAKETNIK_COLORS.slice(0, 4));
+    }
     (async () => {
       if (params.id) {
         await dispatch(getProductInfoByProductID(params.id));
@@ -278,7 +292,7 @@ const PicketFenceInfoInner: FC = () => {
                   Просмотров: {product.views} 
                 </div>
               </div>
-              <div className="picketfenceinfo__price">{`${price} руб.`}</div>
+              <div className="picketfenceinfo__price">{`${price} руб. за 1 м.пог.`}</div>
               <div className="picketfenceinfo__instock">
                 <AiFillDownCircle size={24}/>
                 <div

@@ -196,6 +196,7 @@
       }
 
       &.colorsmain {
+        width: 100%;
         position: relative;
         cursor: pointer;
       }
@@ -372,6 +373,7 @@
     align-items: center;
     cursor: pointer;
     transition: 0.3s;
+    min-width: 300px;
 
     &:hover {
       background-color: #ececec;
