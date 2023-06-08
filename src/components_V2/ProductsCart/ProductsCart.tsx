@@ -101,11 +101,11 @@ const ProductsCartInner: FC = () => {
           <div className="cart__bottom-details">
             <span>
               {' '}
-              Всего товаров: <b>{totalCount.toFixed(3)} шт.</b>{' '}
+              Всего товаров: <b>{totalCount.toFixed(3)}шт.</b>{' '}
             </span>
             <span>
               {' '}
-              Сумма заказа: <b>{totalPrice.toFixed(2)} руб</b>{' '}
+              Сумма заказа: <b>{totalPrice.toFixed(2)}руб.</b>{' '}
             </span>
           </div>
           <div className="cart__bottom-buttons">
