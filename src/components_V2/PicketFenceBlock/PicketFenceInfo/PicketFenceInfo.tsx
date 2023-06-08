@@ -19,10 +19,6 @@ import { ProductUpdate } from '../../ProductsBlock/ProductUpdate/ProductUpdate';
 import { ProductNavigation } from '../../ProductsBlock/ProductNavigation/ProductNavigation';
 // @ts-ignore
 import starRatingSvg from '../../../assets/img/star_rating.png';
-// @ts-ignore
-import minusSvg from '../../../assets/img/minus.png';
-// @ts-ignore
-import plusSvg from '../../../assets/img/plus.png';
 import { ProductDescription } from '../../ProductsBlock/ProductDescription/ProductDescription';
 import { getProductColorsByProductID } from '../../../store/reducers/ColorReducer/ColorActionCreaters';
 
@@ -55,10 +51,7 @@ const PicketFenceInfoInner: FC = () => {
   const [selectedColor, setSelectedColor] = useState('Выберите цвет:');
   const [availableColors, setavailableColors] = useState(SHTAKETNIK_COLORS.slice(0, 4));
   const [itemData, setItemData] = useState({itemLong: '', itemCount: '', totalCount: '0', totalValue: '0', itemPrice: '0'})
-  // const [itemLong, setItemLong] = useState('');
-  // const [itemCount, setItemCount] = useState('');
-  // const [totalCount, setTotalCount] = useState('0');
-  // const [totalValue, setTotalValue] = useState('0');
+
 
   const onClickClear = () => {
     dispatch(clearItems());
@@ -70,31 +63,32 @@ const PicketFenceInfoInner: FC = () => {
   };
 
   const itemForOrder = () => {
-    let thickness = '';
-    let density = '';
-    let size = '';
+    let coverSides = '';
+    let coverType = '';
+    // let coverColor = '';
     for (const element of productInfo) {
       switch (element.title) {
-        case 'Плотность':
-          density = element.description;
+        case 'Вид покрытия':
+          coverType = element.description;
           break;
-        case 'Толщина':
-          thickness = element.description;
+        case 'Стороны покрытия':
+          coverSides = element.description;
           break;
-        case 'Размер листа':
-          size = element.description;
-          break;
+        // case 'Размер листа':
+        //   coverColor = element.description;
+        //   break;
       }
     }
     const item: ICartItem = {
       id: product._id,
+      typeID: product.typeID,
       title: product.name,
       price: product.price,
       imageUrl: SERVER_URL + product.coverImage,
-      color: colorImage.choosenColor,
-      thickness,
-      density,
-      size,
+      color: selectedColor,
+      thickness: coverSides,
+      density: coverType,
+      size: itemData.itemLong,
       count: +itemData.totalCount,
     };
     return item;
@@ -195,6 +189,7 @@ const PicketFenceInfoInner: FC = () => {
   const addToCartHandler = () => {
     const item = itemForOrder();
     dispatch(addItem(item));
+    setItemData({itemLong: '', itemCount: '', totalCount: '0', totalValue: '0', itemPrice: '0'});
     setSuccessModal(true);
   };
 
@@ -313,18 +308,18 @@ const PicketFenceInfoInner: FC = () => {
         <div className="picketfenceinfo__wrapper">
           {isAdminAuth && (
             <div className="picketfenceinfo__title_btns">
-            <CommandBarButton
-              iconProps={editIcon}
-              text="Изменить цену"
-              onClick={updateProductHandler}
-            />
-            <CommandBarButton
-              iconProps={deleteIcon}
-              text="Удалить"
-              onClick={deleteProductHandler}
-            />
-          </div>)
-        }
+              <CommandBarButton
+                iconProps={editIcon}
+                text="Изменить цену"
+                onClick={updateProductHandler}
+              />
+              <CommandBarButton
+                iconProps={deleteIcon}
+                text="Удалить"
+                onClick={deleteProductHandler}
+              />
+            </div>)
+          }
           <div className="picketfenceinfo__container">
             <div className="picketfenceinfo__imageblock">
               {/* <img className="picketfenceinfo__image" src={SERVER_URL + product?.coverImage} alt="product cover"/> */}
@@ -438,7 +433,7 @@ const PicketFenceInfoInner: FC = () => {
                     <div className="picketfenceinfo__inputs__item">
                       <input
                         onChange={totalCountHandler}
-                        // value={itemData.itemLong}
+                        value={itemData.itemLong}
                         type="number"
                         name="input_long"
                         id="input_long"
@@ -449,7 +444,7 @@ const PicketFenceInfoInner: FC = () => {
                     <div className="picketfenceinfo__inputs__item">
                       <input
                         onChange={totalValueHandler}
-                        // value={itemData.itemCount}
+                        value={itemData.itemCount}
                         type="number"
                         name="input_count"
                         id="input_count"

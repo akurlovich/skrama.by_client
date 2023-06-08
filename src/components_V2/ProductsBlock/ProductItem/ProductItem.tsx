@@ -57,6 +57,7 @@ const ProductItemInner: FC <IProps> = ({item, productsInfo}) => {
     }
     const itemCart: ICartItem = {
       id: item._id,
+      typeID: item.typeID,
       title: item.name,
       price: item.price,
       imageUrl: SERVER_URL + item.coverImage,

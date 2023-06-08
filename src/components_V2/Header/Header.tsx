@@ -83,7 +83,7 @@ export const Header: FC = () => {
         <div className="header__toolbar__cart">
           {location.pathname !== '/cart' && (
             <Link to="/cart" className="header__toolbar__cart__button">
-              <span>{totalPrice} руб</span>
+              <span>{totalPrice.toFixed(2)} руб</span>
               <div className="header__toolbar__cart__button__delimiter"></div>
               <svg
                 width="18"

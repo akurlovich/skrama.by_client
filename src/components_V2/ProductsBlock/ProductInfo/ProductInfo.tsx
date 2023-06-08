@@ -106,6 +106,7 @@ const ProductInfoInner: FC = () => {
     }
     const item: ICartItem = {
       id: product._id,
+      typeID: product.typeID,
       title: product.name,
       price: product.price,
       imageUrl: SERVER_URL + product.coverImage,

@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { SERVER_URL } from '../../../constants/http';
+import { DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_SHTAKETNIK } from '../../../constants/user';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { addItem, minusItem, removeItem } from '../../../store/reducers/CartReducer/CartSlice';
 import { getProductByID, getProductInfoByProductID } from '../../../store/reducers/ProductReducer/ProductActionCreators';
@@ -7,6 +8,7 @@ import { ICartItem } from '../../../types/ICartItem';
 
 const CartItem: FC<ICartItem> = ({
   id,
+  typeID,
   title,
   price,
   imageUrl,
@@ -22,6 +24,7 @@ const CartItem: FC<ICartItem> = ({
   const onClickPlus = () => {
     const item: ICartItem = {
       id,
+      typeID,
       title,
       price,
       imageUrl,
@@ -49,20 +52,39 @@ const CartItem: FC<ICartItem> = ({
       </div>
       <div className="cart__item-info">
         <h3>{title}</h3>
-        <div className="cart__item-info__description">
-          <div className="cart__item-info__description__item">
-            Толщина: {thickness}
+        {typeID  === DEFAULT_TYPE_ID_POLIKARBONAT && 
+          <div className="cart__item-info__description">
+            <div className="cart__item-info__description__item">
+              Толщина: {thickness}
+            </div>
+            <div className="cart__item-info__description__item">
+              Плотность: {density}
+            </div>
+            <div className="cart__item-info__description__item">
+              Размер листа: {size}
+            </div>
+            <div className="cart__item-info__description__item">
+              Цвет: {color}
+            </div>
           </div>
-          <div className="cart__item-info__description__item">
-            Плотность: {density}
+        }
+        {typeID  === DEFAULT_TYPE_ID_SHTAKETNIK && 
+          <div className="cart__item-info__description">
+            <div className="cart__item-info__description__item">
+              Вид покрытия: {density}
+            </div>
+            <div className="cart__item-info__description__item">
+              Стороны покрытия: {thickness}
+            </div>
+            <div className="cart__item-info__description__item">
+              Длинна 1 шт., мм: {size}
+            </div>
+            <div className="cart__item-info__description__item">
+              Цвет: {color}
+            </div>
           </div>
-          <div className="cart__item-info__description__item">
-            Размер листа: {size}
-          </div>
-          <div className="cart__item-info__description__item">
-            Цвет: {color}
-          </div>
-        </div>
+        }
+        
       </div>
       <div className="cart__item-count">
         <button
@@ -103,7 +125,7 @@ const CartItem: FC<ICartItem> = ({
         </button>
       </div>
       <div className="cart__item-price">
-        <b>{price * count} руб</b>
+        <b>{(price * count).toFixed(2)} руб</b>
       </div>
       <div className="cart__item-remove">
         <div 
