@@ -19,6 +19,7 @@ const CartItem: FC<ICartItem> = ({
   count,
 }) => {
   // const { product, productInfo, isLoading } = useAppSelector(state => state.productReducer);
+  const { items, totalPrice } = useAppSelector(state => state.cartReducer);
   const dispatch = useAppDispatch();
 
   const onClickPlus = () => {
@@ -38,11 +39,11 @@ const CartItem: FC<ICartItem> = ({
   };
 
   const onClickMinus = () => {
-    dispatch(minusItem({id, price}))
+    dispatch(minusItem({id, price}));
   };
 
   const onClickRemove = () => {
-    dispatch(removeItem({id, price}))
+    dispatch(removeItem({id, price: +((price * count).toFixed(2))}));
   };
 
   return (

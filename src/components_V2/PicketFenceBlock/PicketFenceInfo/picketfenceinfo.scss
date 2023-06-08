@@ -176,6 +176,8 @@
     &__secondary {
       font-weight: 700;
       font-size: 18px;
+      width: 100%;
+      text-align: end;
 
       &.colorsblock {
         position: absolute;
@@ -206,6 +208,7 @@
 
   &__cartinfo {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     margin-top: 20px;
     padding: 20px 0;
@@ -215,6 +218,7 @@
     @media (max-width: 991px) { 
       gap: 30px;
       justify-content: flex-start;
+      flex-direction: column;
     }
 
     &_count {
@@ -306,6 +310,7 @@
     height: 42px;
     margin-right: 100px;
     align-self: flex-end;
+    margin-top: 20px;
     background-color: var(--secondary);
     font-family: "Open Sans", sans-serif;
     font-weight: 600;
@@ -322,9 +327,10 @@
     }
 
     @media (max-width: 991px) { 
-      align-self: flex-start;
-      margin-left: 153px;
-      margin-right: 0;
+      align-self: flex-end;
+      // margin-left: 153px;
+      margin-top: 0px;
+      margin-right: 0px;
     }
   }
 

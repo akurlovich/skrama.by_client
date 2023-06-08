@@ -114,7 +114,7 @@ export const Header: FC = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>{totalCount}</span>
+              <span>{totalCount.toFixed(3)}</span>
             </Link>
           )}
         </div>

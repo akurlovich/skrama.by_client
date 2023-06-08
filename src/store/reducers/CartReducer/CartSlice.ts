@@ -45,7 +45,11 @@ const cartSlice = createSlice({
       state.items = state.items.filter((obj: ICartItem) => obj.id !== action.payload.id);
       state.totalPrice -= action.payload.price;
       localStorage.setItem('cart', JSON.stringify(state.items));
-      if (state.totalPrice === 0) {
+      // if (state.totalPrice === 0) {
+      //   clearItems();
+      // }
+      if (!state.items.length) {
+        state.totalPrice = 0;
         clearItems();
       }
     },
