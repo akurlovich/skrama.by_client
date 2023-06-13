@@ -1,9 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.1f849d6b.css",
-    "main.js": "/static/js/main.e238ef44.js",
-    "static/media/main_img.jpg": "/static/media/main_img.158f76857a510aa920a1.jpg",
-    "static/media/main_img4.jpg": "/static/media/main_img4.7c64eb22247659521993.jpg",
+    "main.css": "/static/css/main.27629367.css",
+    "main.js": "/static/js/main.e11f17e1.js",
     "static/media/backgraund.jpg": "/static/media/backgraund.f788efc193741849dd54.jpg",
     "static/media/main_about-rem-bg.png": "/static/media/main_about-rem-bg.e084145319d1e65dc2f0.png",
     "static/media/footer.png": "/static/media/footer.6b5bf20305e58b2c8797.png",
@@ -11,11 +9,13 @@
     "static/media/main_avatar.png": "/static/media/main_avatar.07acf34752b441a259b9.png",
     "static/media/vegerables.png": "/static/media/vegerables.bbe704dfcec2022d4360.png",
     "static/media/book-2.png": "/static/media/book-2.269e0ccde32872d8b649.png",
+    "static/media/main_img4.jpg": "/static/media/main_img4.023f71d4ab49ba1c3a15.jpg",
     "static/media/bronza.jpg": "/static/media/bronza.23ef0a985fe6d7fde3c2.jpg",
     "static/media/siniy.jpg": "/static/media/siniy.d3582ab9807dc73676f5.jpg",
     "static/media/book-1.png": "/static/media/book-1.aa4a4c414a2c9ac70f18.png",
     "static/media/oranzhevi.jpg": "/static/media/oranzhevi.9586b3867977be779525.jpg",
     "static/media/zeleniy.jpg": "/static/media/zeleniy.a2a070bda3c4b31b49b0.jpg",
+    "static/media/main_img.jpg": "/static/media/main_img.8e19a40ef9785d83858e.jpg",
     "static/media/krasniy.jpg": "/static/media/krasniy.088e7750acf874535b4c.jpg",
     "static/media/biruza.jpg": "/static/media/biruza.4cb472ec351290990012.jpg",
     "static/media/zheltiy.jpg": "/static/media/zheltiy.e5e0022b3d5c1508abc6.jpg",
@@ -26,11 +26,11 @@
     "static/media/prozrachniy.jpg": "/static/media/prozrachniy.0608b0b03be24c760933.jpg",
     "index.html": "/index.html",
     "static/media/preloader.svg": "/static/media/preloader.b94609d750e4b5e12012.svg",
-    "main.1f849d6b.css.map": "/static/css/main.1f849d6b.css.map",
-    "main.e238ef44.js.map": "/static/js/main.e238ef44.js.map"
+    "main.27629367.css.map": "/static/css/main.27629367.css.map",
+    "main.e11f17e1.js.map": "/static/js/main.e11f17e1.js.map"
   },
   "entrypoints": [
-    "static/css/main.1f849d6b.css",
-    "static/js/main.e238ef44.js"
+    "static/css/main.27629367.css",
+    "static/js/main.e11f17e1.js"
   ]
 }
