@@ -4,12 +4,14 @@ interface IProps {
   label: string,
   onChangeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
   value: string,
+  warning: boolean,
 }
 
-const PocketFenceInfoInputInner: FC<IProps> = ({label, onChangeHandler, value}) => {
+const PocketFenceInfoInputInner: FC<IProps> = ({label, onChangeHandler, value, warning}) => {
   return (
     <div className="picketfenceinfo__inputs__item">
       <input
+        className={warning ? 'warning_item' : ''}
         onChange={onChangeHandler}
         value={value}
         type="number"
@@ -17,7 +19,7 @@ const PocketFenceInfoInputInner: FC<IProps> = ({label, onChangeHandler, value}) 
         id="input_long"
         required
       />
-      <label htmlFor="input_long">{label}</label>
+      <label style={warning ? {color: "red"} : {}} htmlFor="input_long">{label}</label>
     </div>
   )
 }

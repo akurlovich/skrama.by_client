@@ -520,4 +520,38 @@
 
 .selected_colors {
   cursor: pointer;
+
+  &.warning_item {
+    border: 3px solid red;
+    animation: 1.0s ease-in-out 0s normal none running trambling-animation;
+  }
+  // @keyframes trambling-animation {
+  //     0%, 50%, 100% {
+  //         transform: rotate(0deg);
+  //     }
+  //     10%, 30% {
+  //         transform: rotate(-10deg);
+  //     }
+  //     20%, 40% {
+  //         transform: rotate(10deg);
+  //     }
+  // }
+}
+
+.warning_item {
+  border-color: red !important;
+  // color: red !important;
+  animation: 1.0s ease-in-out 0s normal none running trambling-animation;
+}
+
+@keyframes trambling-animation {
+  0%, 50%, 100% {
+      transform: rotate(0deg);
+  }
+  10%, 30% {
+      transform: rotate(-10deg);
+  }
+  20%, 40% {
+      transform: rotate(10deg);
+  }
 }

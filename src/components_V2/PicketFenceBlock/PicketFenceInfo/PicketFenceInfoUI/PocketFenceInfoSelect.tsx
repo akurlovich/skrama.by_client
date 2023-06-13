@@ -4,18 +4,25 @@ interface IProps {
   label: string,
   selectedColor: string,
   isOpenColors: boolean,
+  warning: boolean,
   setSelectedColor: (data: string) => void,
   setIsOpenColors: () => void,
+  setWarning: () => void,
   optionArray: { title: string; name: string; color: string; }[],
 }
 
 const PocketFenceInfoSelectInner = React.forwardRef<HTMLDivElement, IProps>((props, ref) => {
+  const onClickHandler = (title: string) => {
+    props.setSelectedColor(title);
+    props.setWarning();
+  };
+
   return (
     <div className="picketfenceinfo__inputs__item">
       <div
         ref={ref}
         onClick={props.setIsOpenColors}
-        className="selected_colors">
+        className={props.warning ? "selected_colors warning_item" : "selected_colors"}>
           <div className="picketfenceinfo__addinfo__selectedcolor">
             {props.selectedColor}
           </div>
@@ -23,7 +30,7 @@ const PocketFenceInfoSelectInner = React.forwardRef<HTMLDivElement, IProps>((pro
             <div className="picketfenceinfo__addinfo__secondary colorsblock">
               {props.optionArray.map(item => 
                 <div 
-                  onClick={() => props.setSelectedColor(item.title)}
+                  onClick={() => onClickHandler(item.title)}
                   key={item.title} 
                   className="picketfenceinfo__colorselect">
                   <div
@@ -37,7 +44,7 @@ const PocketFenceInfoSelectInner = React.forwardRef<HTMLDivElement, IProps>((pro
             </div>
           }
       </div>
-      <div className={props.selectedColor ? 'for_selected_colors active_color' : 'for_selected_colors'} >{props.label}</div>
+      <div style={props.warning ? {color: "red"} : {}} className={props.warning ? 'for_selected_colors warning_item' : (props.selectedColor ? 'for_selected_colors active_color' : 'for_selected_colors')} >{props.label}</div>
     </div>
   )
 })

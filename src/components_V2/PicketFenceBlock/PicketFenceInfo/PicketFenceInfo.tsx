@@ -46,6 +46,7 @@ const PicketFenceInfoInner: FC = () => {
   const [selectedColor, setSelectedColor] = useState('');
   const [availableColors, setavailableColors] = useState(SHTAKETNIK_COLORS.slice(0, 4));
   const [itemData, setItemData] = useState({itemLong: '', itemCount: '', totalCount: '0', totalValue: '0', itemPrice: '0'});
+  const [warnings, setWarnings] = useState({color: false, long: false, count: false});
 
 
   const onClickClear = () => {
@@ -108,42 +109,56 @@ const PicketFenceInfoInner: FC = () => {
   const totalCountHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setItemData({...itemData, itemLong: e.currentTarget.value})
     const total: number = +itemData.itemCount / 1000 * +e.currentTarget.value;
-    setItemData((prev) => {
-      return ({
+    setItemData(prev => ({
+      // return ({
         ...prev, 
         totalCount: total.toFixed(3)
-      })
-    });
-    setItemData((prev) => {
-      return ({
+      // })
+    }));
+    setItemData(prev => ({
+      // return ({
         ...prev,
         totalValue: (total * +itemData.itemPrice).toFixed(2)
-      })
-    });
+      // })
+    }));
+    if (e.currentTarget.value) {
+      setWarnings(prev => ({...prev, long: false}));
+    };
   };
 
   const totalValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setItemData({...itemData, itemCount: e.currentTarget.value})
     const total: number = +itemData.itemLong / 1000 * +e.currentTarget.value;
-    setItemData((prev) => {
-      return ({
+    setItemData(prev => ({
+      // return ({
         ...prev, 
         totalCount: total.toFixed(3)
-      })
-    });
-    setItemData((prev) => {
-      return ({
+      // })
+    }));
+    setItemData(prev => ({
+      // return ({
         ...prev,
         totalValue: (total * +itemData.itemPrice).toFixed(2)
-      })
-    });
+      // })
+    }));
+    if (e.currentTarget.value) {
+      setWarnings(prev => ({...prev, count: false}));
+    };
   };
 
-  const itemColorHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedColor(event.currentTarget.value)
-  }
-
   const addToCartHandler = () => {
+    if (!selectedColor) {
+      setWarnings(prev => ({...prev, color: true}));
+      return;
+    };
+    if (!itemData.itemLong) {
+      setWarnings(prev => ({...prev, long: true}));
+      return;
+    };
+    if (!itemData.itemCount) {
+      setWarnings(prev => ({...prev, count: true}));
+      return;
+    };
     const item = itemForOrder();
     dispatch(addItem(item));
     setItemData({itemLong: '', itemCount: '', totalCount: '0', totalValue: '0', itemPrice: '0'});
@@ -218,7 +233,7 @@ const PicketFenceInfoInner: FC = () => {
 
     return () => document.body.removeEventListener('click', handleClickOutside);
   }, []);
-  
+
   return (
     <>
       {isLoading && <Loader_v2/>}
@@ -308,16 +323,22 @@ const PicketFenceInfoInner: FC = () => {
                       setSelectedColor={setSelectedColor}
                       setIsOpenColors={() => setIsOpenColors(prev => !prev)}
                       optionArray={availableColors}
+                      warning={warnings.color}
+                      setWarning={() => setWarnings(prev => ({...prev, color: false}))}
                     />
                     <PocketFenceInfoInput 
                       label='Длинна (высота) мм.:'
                       value={itemData.itemLong}
                       onChangeHandler={totalCountHandler}
+                      warning={warnings.long}
+                      // setWarning={() => setWarnings(prev => ({...prev, long: false}))}
                     />
                     <PocketFenceInfoInput 
                       label='Количество шт.:'
                       value={itemData.itemCount}
                       onChangeHandler={totalValueHandler}
+                      warning={warnings.count}
+                      // setWarning={() => setWarnings(prev => ({...prev, count: false}))}
                     />
                   </div>
                   <div className="picketfenceinfo__inputs__count">
