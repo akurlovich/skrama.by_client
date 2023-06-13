@@ -41,9 +41,9 @@ const PicketFenceInfoInner: FC = () => {
   const [itemThickness, setItemThickness] = useState('');
   const colorsRef = React.useRef<HTMLDivElement>(null);
   const [isOpenColors, setIsOpenColors] = useState(false);
-  const [selectedColor, setSelectedColor] = useState('Выберите цвет:');
+  const [selectedColor, setSelectedColor] = useState('');
   const [availableColors, setavailableColors] = useState(SHTAKETNIK_COLORS.slice(0, 4));
-  const [itemData, setItemData] = useState({itemLong: '', itemCount: '', totalCount: '0', totalValue: '0', itemPrice: '0'})
+  const [itemData, setItemData] = useState({itemLong: '', itemCount: '', totalCount: '0', totalValue: '0', itemPrice: '0'});
 
 
   const onClickClear = () => {
@@ -136,6 +136,10 @@ const PicketFenceInfoInner: FC = () => {
       })
     });
   };
+
+  const itemColorHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedColor(event.currentTarget.value)
+  }
 
   const addToCartHandler = () => {
     const item = itemForOrder();
@@ -286,47 +290,43 @@ const PicketFenceInfoInner: FC = () => {
               
                 {productInfo.map(item => (
                   <div key={item._id} className="picketfenceinfo__addinfo">
-                    <div className="">{item.title}:</div>
+                    <div className="">{`${item.title}:`}</div>
                     <div className="picketfenceinfo__addinfo__secondary">{item.description}</div>
                   </div>
                 ))}
 
-                {product.typeID !== DEFAULT_TYPE_ID_POLIK_KREPEZH ? 
-                  <div className="picketfenceinfo__addinfo">
-                    <div className="">Цвет:</div>
-                    <div 
-                      ref={colorsRef}
-                      onClick={() => setIsOpenColors(prev => !prev)}
-                      // onMouseLeave={() => setIsOpenColors(false)}
-                      className="picketfenceinfo__addinfo__secondary colorsmain">
-                        <div className="picketfenceinfo__addinfo__selectedcolor">
-                          {selectedColor}
-                        </div>
-                        {isOpenColors &&
-                          <div className="picketfenceinfo__addinfo__secondary colorsblock">
-                            {availableColors.map(item => 
-                              <div 
-                                onClick={() => setSelectedColor(item.title)}
-                                key={item.title} 
-                                className="picketfenceinfo__colorselect">
-                                <div
-                                  style={{backgroundColor: item.color}}
-                                  className="picketfenceinfo__colorselect__img"></div>
-                                <div className="picketfenceinfo__colorselect__text">
-                                  {item.title}
-                                </div>
-                              </div>  
-                            )}
-                          </div>
-                        }
-                    </div>
-                  </div>
-                  : null
-                }
-
               <div className="picketfenceinfo__cartinfo">
                 <div className="picketfenceinfo__inputs">
                   <div className="picketfenceinfo__inputs__block">
+                    <div className="picketfenceinfo__inputs__item">
+                      <div 
+                        ref={colorsRef}
+                        onClick={() => setIsOpenColors(prev => !prev)}
+                        // onMouseLeave={() => setIsOpenColors(false)}
+                        className="selected_colors">
+                          <div className="picketfenceinfo__addinfo__selectedcolor">
+                            {selectedColor}
+                          </div>
+                          {isOpenColors &&
+                            <div className="picketfenceinfo__addinfo__secondary colorsblock">
+                              {availableColors.map(item => 
+                                <div 
+                                  onClick={() => setSelectedColor(item.title)}
+                                  key={item.title} 
+                                  className="picketfenceinfo__colorselect">
+                                  <div
+                                    style={{backgroundColor: item.color}}
+                                    className="picketfenceinfo__colorselect__img"></div>
+                                  <div className="picketfenceinfo__colorselect__text">
+                                    {item.title}
+                                  </div>
+                                </div>  
+                              )}
+                            </div>
+                          }
+                      </div>
+                      <div className={selectedColor ? 'for_selected_colors active_color' : 'for_selected_colors'} >Цвет:</div>
+                    </div>
                     <div className="picketfenceinfo__inputs__item">
                       <input
                         onChange={totalCountHandler}

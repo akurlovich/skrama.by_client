@@ -7,7 +7,7 @@ const MainAboutInner: FC = () => {
   return (
     <section className='main__about'>
       <div className="main__about__image">
-        <img src={mainAbout} alt="man" />
+        <img src={mainAbout} alt="man" loading="lazy"/>
       </div>
       <div className="main__about__info">
         <h2 className="main__about__info__title">

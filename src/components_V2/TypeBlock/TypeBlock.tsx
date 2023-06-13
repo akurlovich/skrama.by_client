@@ -24,7 +24,10 @@ const TypeBlockInner: FC<IProps> = ({title, linkTo, imgSrc}) => {
     // <div className="typeblock">
       <div className="card">
         <div className="lines"></div>
-        <div className="imgBx">
+        <div 
+          className="imgBx"
+          onClick={handlerMore}
+        >
           <img src={imgSrc}/>
         </div>
         <div className="card__content">

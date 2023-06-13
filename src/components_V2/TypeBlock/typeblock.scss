@@ -101,7 +101,8 @@
       z-index: 1;
       width: calc(100% - 20px);
       height: calc(100% - 20px);
-      filter: grayscale(1);
+      cursor: pointer;
+      // filter: grayscale(1);
 
       &:hover {
         filter: none;
