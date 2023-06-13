@@ -20,6 +20,7 @@ import starRatingSvg from '../../../assets/img/star_rating.png';
 import { ProductDescription } from '../../ProductsBlock/ProductDescription/ProductDescription';
 import { getProductColorsByProductID } from '../../../store/reducers/ColorReducer/ColorActionCreaters';
 import { AdminBtns } from '../../UI/AdminBtns/AdminBtns';
+import { PocketFenceInfoInput } from './PicketFenceInfoUI/PocketFenceInfoInput';
 
 type PopupClick = MouseEvent & {
   path: Node[];
@@ -327,28 +328,16 @@ const PicketFenceInfoInner: FC = () => {
                       </div>
                       <div className={selectedColor ? 'for_selected_colors active_color' : 'for_selected_colors'} >Цвет:</div>
                     </div>
-                    <div className="picketfenceinfo__inputs__item">
-                      <input
-                        onChange={totalCountHandler}
-                        value={itemData.itemLong}
-                        type="number"
-                        name="input_long"
-                        id="input_long"
-                        required
-                      />
-                      <label htmlFor="input_long">Длинна (высота) мм.</label>
-                    </div>
-                    <div className="picketfenceinfo__inputs__item">
-                      <input
-                        onChange={totalValueHandler}
-                        value={itemData.itemCount}
-                        type="number"
-                        name="input_count"
-                        id="input_count"
-                        required
-                      />
-                      <label htmlFor="input_count">Количество шт.</label>
-                    </div>
+                    <PocketFenceInfoInput 
+                      label='Длинна (высота) мм.:'
+                      value={itemData.itemLong}
+                      onChangeHandler={totalCountHandler}
+                    />
+                    <PocketFenceInfoInput 
+                      label='Количество шт.:'
+                      value={itemData.itemCount}
+                      onChangeHandler={totalValueHandler}
+                    />
                   </div>
                   <div className="picketfenceinfo__inputs__count">
                     Итоговое количество: <b>{itemData.totalCount} м.пог.</b> 
