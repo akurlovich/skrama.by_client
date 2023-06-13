@@ -21,6 +21,7 @@ import { ProductDescription } from '../../ProductsBlock/ProductDescription/Produ
 import { getProductColorsByProductID } from '../../../store/reducers/ColorReducer/ColorActionCreaters';
 import { AdminBtns } from '../../UI/AdminBtns/AdminBtns';
 import { PocketFenceInfoInput } from './PicketFenceInfoUI/PocketFenceInfoInput';
+import { PocketFenceInfoSelect } from './PicketFenceInfoUI/PocketFenceInfoSelect';
 
 type PopupClick = MouseEvent & {
   path: Node[];
@@ -299,35 +300,15 @@ const PicketFenceInfoInner: FC = () => {
               <div className="picketfenceinfo__cartinfo">
                 <div className="picketfenceinfo__inputs">
                   <div className="picketfenceinfo__inputs__block">
-                    <div className="picketfenceinfo__inputs__item">
-                      <div 
-                        ref={colorsRef}
-                        onClick={() => setIsOpenColors(prev => !prev)}
-                        // onMouseLeave={() => setIsOpenColors(false)}
-                        className="selected_colors">
-                          <div className="picketfenceinfo__addinfo__selectedcolor">
-                            {selectedColor}
-                          </div>
-                          {isOpenColors &&
-                            <div className="picketfenceinfo__addinfo__secondary colorsblock">
-                              {availableColors.map(item => 
-                                <div 
-                                  onClick={() => setSelectedColor(item.title)}
-                                  key={item.title} 
-                                  className="picketfenceinfo__colorselect">
-                                  <div
-                                    style={{backgroundColor: item.color}}
-                                    className="picketfenceinfo__colorselect__img"></div>
-                                  <div className="picketfenceinfo__colorselect__text">
-                                    {item.title}
-                                  </div>
-                                </div>  
-                              )}
-                            </div>
-                          }
-                      </div>
-                      <div className={selectedColor ? 'for_selected_colors active_color' : 'for_selected_colors'} >Цвет:</div>
-                    </div>
+                    <PocketFenceInfoSelect
+                      ref={colorsRef}
+                      label='Цвет:'
+                      selectedColor={selectedColor}
+                      isOpenColors={isOpenColors}
+                      setSelectedColor={setSelectedColor}
+                      setIsOpenColors={() => setIsOpenColors(prev => !prev)}
+                      optionArray={availableColors}
+                    />
                     <PocketFenceInfoInput 
                       label='Длинна (высота) мм.:'
                       value={itemData.itemLong}
