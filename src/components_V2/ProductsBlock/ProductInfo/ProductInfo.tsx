@@ -1,6 +1,6 @@
 import { IIconProps, initializeIcons } from '@fluentui/react';
 import { CommandBarButton } from '@fluentui/react';
-import React, { FC, useEffect, useState } from 'react';
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 import './productinfo.scss';
 // @ts-ignore
 import starRatingSvg from '../../../assets/img/star_rating.png';
@@ -48,6 +48,7 @@ import { Loader_v2 } from '../../UI/Loader_v2/Loader_v2';
 import { ProductDescription } from '../ProductDescription/ProductDescription';
 import { ProductNavigation } from '../ProductNavigation/ProductNavigation';
 import { smoothScroll } from '../../../services/ClientServices/SmothScroll';
+import { PocketFenceInfoInput } from '../../PicketFenceBlock/PicketFenceInfo/PicketFenceInfoUI/PocketFenceInfoInput';
 
 initializeIcons();
 
@@ -72,11 +73,9 @@ const ProductInfoInner: FC = () => {
   const [itemThickness, setItemThickness] = useState('');
 
   const [price, setPrice] = useState('0');
-  // const price = (colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price).toFixed(2);
 
-  // const views = randomInteger(30, 455);
-
-  // const admin = true;
+  const [itemData, setItemData] = useState({itemCount: '', totalValue: '0'});
+  const [warnings, setWarnings] = useState({count: false});
 
   const onClickClear = () => {
     dispatch(clearItems());
@@ -114,7 +113,7 @@ const ProductInfoInner: FC = () => {
       thickness,
       density,
       size,
-      count: count,
+      count: +itemData.itemCount,
     };
     return item;
   };
@@ -139,17 +138,41 @@ const ProductInfoInner: FC = () => {
     setSuccessModal(false);
   };
 
-  const handlerMinusCount = () => {
-    if (count > 1) {
-      setCount(prev => prev - 1)
-    }
-  };
+  // const handlerMinusCount = () => {
+  //   if (count > 1) {
+  //     setCount(prev => prev - 1)
+  //   }
+  // };
 
-  const handlerPlusCount = () => {
-    setCount(prev => prev + 1)
+  // const handlerPlusCount = () => {
+  //   setCount(prev => prev + 1)
+  // };
+
+  const totalValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setItemData({...itemData, itemCount: e.currentTarget.value});
+    const total: number = +e.currentTarget.value * +price;
+    // setItemData(prev => ({
+    //   // return ({
+    //     ...prev, 
+    //     totalCount: total.toFixed(3)
+    //   // })
+    // }));
+    setItemData(prev => ({
+      // return ({
+        ...prev,
+        totalValue: (total).toFixed(2)
+      // })
+    }));
+    if (e.currentTarget.value) {
+      setWarnings(prev => ({...prev, count: false}));
+    };
   };
 
   const addToCartHandler = () => {
+    if (!itemData.itemCount) {
+      setWarnings(prev => ({...prev, count: true}));
+      return;
+    };
     const item = itemForOrder();
     dispatch(addItem(item));
     setSuccessModal(true);
@@ -288,7 +311,7 @@ const ProductInfoInner: FC = () => {
                   Просмотров: {product.views} 
                 </div>
               </div>
-              <div className="productinfo__price">{`${price} руб.`}</div>
+              <div className="productinfo__price">{`${price} руб. за 1 лист`}</div>
               <div className="productinfo__instock">
                 <AiFillDownCircle size={24}/>
                 <div className="productinfo__instock_text">
@@ -313,7 +336,24 @@ const ProductInfoInner: FC = () => {
 
 
               <div className="productinfo__cartinfo">
-                <div className="productinfo__cartinfo_count">
+              <div className="picketfenceinfo__inputs">
+                <div className="picketfenceinfo__inputs__block">
+                  <PocketFenceInfoInput 
+                    label='Количество шт.:'
+                    value={itemData.itemCount}
+                    onChangeHandler={totalValueHandler}
+                    warning={warnings.count}
+                    // setWarning={() => setWarnings(prev => ({...prev, count: false}))}
+                  />
+                </div>
+                <div className="picketfenceinfo__inputs__count">
+                  Итоговое количество: <b>{itemData.itemCount} л.</b> 
+                </div>
+                <div className="picketfenceinfo__inputs__value">
+                  Итоговая цена: <b>{itemData.totalValue} руб.</b> 
+                </div>
+              </div>
+                {/* <div className="productinfo__cartinfo_count">
                   <button 
                     disabled={count === 1}
                     className={count < 2 ? "productinfo__cartinfo_block notActive" : "productinfo__cartinfo_block"}
@@ -330,7 +370,7 @@ const ProductInfoInner: FC = () => {
                   >
                     <img src={plusSvg} alt="plus" />
                   </button>
-                </div>
+                </div> */}
                 <div 
                   onClick={addToCartHandler}
                   className="productinfo__cart">
@@ -338,12 +378,12 @@ const ProductInfoInner: FC = () => {
 
                   <div className="productinfo__cart_btn">В корзину</div>
                 </div>
+                <button
+                  onClick={confirmOrderHandler}
+                  className="productinfo__oneclick">
+                  Оформить заказ
+                </button>
               </div>
-              <button
-                onClick={confirmOrderHandler}
-                className="productinfo__oneclick">
-                Оформить заказ
-              </button>
               <div className="productinfo__consultation">
                 <div className="productinfo__consultation_text">
                   Подробно проконсультируем о наших товарах, способах оплаты и доставки.
