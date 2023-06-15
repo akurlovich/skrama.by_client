@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IProductInfoResponse } from "../../../types/IProductInfoResponse";
 // import { IBook } from "../../../types/IBook";
-import { IProductResponse } from "../../../types/IProductResponse";
+import { IProductResponse, IProductResponseAll } from "../../../types/IProductResponse";
 import { addProduct, addProductInfoType, deleteProductByID, deleteProductInfos, getAllProductsInfo, getAllProductsInfoByTypeID, getProductByID, getProductInfoByProductID, getProducts, getProductsByType, updateProductPriceByID } from "./ProductActionCreators";
 // import { IGenreResponse } from "../../../types/IGenreResponse";
 // import { addBook, getAllGenres, getBookByID, getBooks, updateBookAmountByID } from "./ProductActionCreatores";
@@ -14,6 +14,7 @@ interface IProductState {
   productsAllInfo: IProductInfoResponse[],
   isLoading: boolean,
   error: string,
+  productsMaxRecords: number,
 };
 
 const initialState: IProductState = {
@@ -24,6 +25,7 @@ const initialState: IProductState = {
   productsAllInfo: [],
   isLoading: false,
   error: '',
+  productsMaxRecords: 0,
 };
 
 export const productSlice = createSlice({
@@ -48,9 +50,10 @@ export const productSlice = createSlice({
     [getProducts.pending.type]: (state) => {
       state.isLoading = true;
     },
-    [getProducts.fulfilled.type]: (state, action: PayloadAction<IProductResponse[]>) => {
+    [getProducts.fulfilled.type]: (state, action: PayloadAction<IProductResponseAll>) => {
       state.isLoading = false;
-      state.products = action.payload;
+      state.products = action.payload.products;
+      state.productsMaxRecords = action.payload.maxRecords;
       state.error = '';
     },
     [getProducts.rejected.type]: (state, action: PayloadAction<string>) => {

@@ -175,6 +175,7 @@ const ProductInfoInner: FC = () => {
     };
     const item = itemForOrder();
     dispatch(addItem(item));
+    setItemData({itemCount: '', totalValue: '0'});
     setSuccessModal(true);
     // console.log(productInfo);
   };
@@ -347,7 +348,7 @@ const ProductInfoInner: FC = () => {
                   />
                 </div>
                 <div className="picketfenceinfo__inputs__count">
-                  Итоговое количество: <b>{itemData.itemCount} л.</b> 
+                  Итоговое количество: <b>{itemData.itemCount ? itemData.itemCount : '0'} шт.</b> 
                 </div>
                 <div className="picketfenceinfo__inputs__value">
                   Итоговая цена: <b>{itemData.totalValue} руб.</b> 

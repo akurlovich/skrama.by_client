@@ -6,6 +6,10 @@ import './header.scss';
 import { ICartItem } from "../../types/ICartItem";
 import { addItem } from "../../store/reducers/CartReducer/CartSlice";
 import {isMobile} from 'react-device-detect';
+import serverApi from "../../http";
+import { IProductResponse } from "../../types/IProductResponse";
+import axios from "axios";
+import { DEFAULT_TYPE_ID_SHTAKETNIK } from "../../constants/user";
 
 type PopupClick = MouseEvent & {
   path: Node[];
@@ -29,6 +33,19 @@ export const Header: FC = () => {
     
   // }, [items]);
 
+  const getProductsTYPE = async (typeID = '', page = 1, limit = 1000) => {
+    return await serverApi.get(`/products?typeID=${typeID}&page=${page}&limit=${limit}`);
+    // const resp = await axios.get(`http://localhost:4000/api/products?typeID=${typeID}&page=${page}&limit=${limit}`);
+    // const response = await fetch(`https://api.skrama24.by/api/products?typeID=${typeID}&page=${page}&limit=${limit}`);
+    // const jsonData = await response.json();
+    // console.log(resp.headers['max-records']);
+  };
+
+  const clickShow = async () => {
+    const data = await getProductsTYPE(DEFAULT_TYPE_ID_SHTAKETNIK);
+    console.log(data);
+  }
+
   useEffect(() => {
     const json = localStorage.getItem('cart');
     if (json) {
@@ -36,7 +53,7 @@ export const Header: FC = () => {
       for (const item of data) {
         dispatch(addItem(item));
       }
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -80,6 +97,9 @@ export const Header: FC = () => {
             <span>24</span>
           </h1>
         </Link>
+        <button
+          onClick={clickShow}
+          >click</button>
         <div className="header__toolbar__cart">
           {location.pathname !== '/cart' && (
             <Link to="/cart" className="header__toolbar__cart__button">

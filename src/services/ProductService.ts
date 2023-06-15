@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 import serverApi from "../http";
 import { IProduct, IProductPriceUpdate } from "../types/IProduct";
 import { IProductNew } from "../types/IProductNew";
-import { IProductResponse } from "../types/IProductResponse";
+import { IProductResponse, IProductResponseAll } from "../types/IProductResponse";
 // import { IProduct, IProductUpdate } from "../types/IProduct";
 // import { IProductResponse } from "../types/IProductResponse";
 
@@ -11,8 +11,8 @@ export default class ProductService {
     return serverApi.post<IProductResponse>('/product', product);
   };
 
-  static async getProducts(): Promise<AxiosResponse<IProductResponse[]>> {
-    return serverApi.get<IProductResponse[]>('/products');
+  static async getProducts(typeID = '', page = 1, limit = 1000): Promise<AxiosResponse<IProductResponseAll>> {
+    return serverApi.get<IProductResponseAll>(`/products?typeID=${typeID}&page=${page}&limit=${limit}`);
   };
 
   static async getProductsByType(typeID: string): Promise<AxiosResponse<IProductResponse>> {

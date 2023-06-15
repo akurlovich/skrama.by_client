@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { DEFAULT_POLIKARBONAT_FILTER_TITLE, DEFAULT_SHTAKETNIK_FILTER_TITLE, DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, DEFAULT_TYPE_ID_POLIK_PLANKI, DEFAULT_TYPE_ID_SHTAKETNIK } from '../../constants/user';
+import { DEFAULT_PAGINATION_ITEMS_LIMIT, DEFAULT_POLIKARBONAT_FILTER_TITLE, DEFAULT_SHTAKETNIK_FILTER_TITLE, DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, DEFAULT_TYPE_ID_POLIK_PLANKI, DEFAULT_TYPE_ID_SHTAKETNIK } from '../../constants/user';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getAllProductsInfo, getAllProductsInfoByTypeID, getProducts, getProductsByType } from '../../store/reducers/ProductReducer/ProductActionCreators';
 import { IProductResponse } from '../../types/IProductResponse';
@@ -48,7 +48,7 @@ const PicketFenceBlockInner: FC = () => {
     (async () => {
       // await dispatch(getProducts());
       // await dispatch(getAllProductsInfo());
-      await dispatch(getProductsByType(DEFAULT_TYPE_ID_SHTAKETNIK));
+      await dispatch(getProducts({typeID: DEFAULT_TYPE_ID_SHTAKETNIK, page: 1, limit: DEFAULT_PAGINATION_ITEMS_LIMIT}));
       await dispatch(getAllProductsInfoByTypeID(DEFAULT_TYPE_ID_SHTAKETNIK));
     })();
  

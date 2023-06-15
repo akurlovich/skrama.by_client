@@ -11,6 +11,12 @@ interface IProductAdd {
   productInfo: IProductInfoNew[],
 }
 
+interface IQueryData {
+  typeID: string, 
+  page: number, 
+  limit: number,
+}
+
 export const addProduct = createAsyncThunk(
   'PRODUCT/addProduct',
   async (data: IProductAdd, {rejectWithValue}) => {
@@ -35,9 +41,9 @@ export const addProduct = createAsyncThunk(
 
 export const getProducts = createAsyncThunk(
   'PRODUCT/getProducts',
-  async (_, {rejectWithValue}) => {
+  async (data: IQueryData, {rejectWithValue}) => {
     try {
-      return await (await ProductService.getProducts()).data;
+      return await (await ProductService.getProducts(data.typeID, data.page, data.limit)).data;
       
     } catch (error: any) {
       return rejectWithValue(error.message)

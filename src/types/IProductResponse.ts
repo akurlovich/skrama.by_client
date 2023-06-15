@@ -8,4 +8,9 @@ export interface IProductResponse {
   coverImage: string,
   typeID: string,
   brandID: string,
-}
+};
+
+export interface IProductResponseAll {
+  products: IProductResponse[],
+  maxRecords: number,
+};

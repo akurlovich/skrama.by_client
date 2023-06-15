@@ -45,7 +45,7 @@ const ProductsBlockInner: FC = () => {
 
   useEffect(() => {
     (async () => {
-      await dispatch(getProducts());
+      await dispatch(getProducts({typeID: '', page: 1, limit: 1000}));
       await dispatch(getAllProductsInfo());
     })();
  
