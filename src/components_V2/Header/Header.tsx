@@ -33,18 +33,18 @@ export const Header: FC = () => {
     
   // }, [items]);
 
-  const getProductsTYPE = async (typeID = '', page = 1, limit = 1000) => {
-    return await serverApi.get(`/products?typeID=${typeID}&page=${page}&limit=${limit}`);
-    // const resp = await axios.get(`http://localhost:4000/api/products?typeID=${typeID}&page=${page}&limit=${limit}`);
-    // const response = await fetch(`https://api.skrama24.by/api/products?typeID=${typeID}&page=${page}&limit=${limit}`);
-    // const jsonData = await response.json();
-    // console.log(resp.headers['max-records']);
-  };
+  // const getProductsTYPE = async (typeID = '', page = 1, limit = 1000) => {
+  //   return await serverApi.get(`/products?typeID=${typeID}&page=${page}&limit=${limit}`);
+  //   // const resp = await axios.get(`http://localhost:4000/api/products?typeID=${typeID}&page=${page}&limit=${limit}`);
+  //   // const response = await fetch(`https://api.skrama24.by/api/products?typeID=${typeID}&page=${page}&limit=${limit}`);
+  //   // const jsonData = await response.json();
+  //   // console.log(resp.headers['max-records']);
+  // };
 
-  const clickShow = async () => {
-    const data = await getProductsTYPE(DEFAULT_TYPE_ID_SHTAKETNIK);
-    console.log(data);
-  }
+  // const clickShow = async () => {
+  //   const data = await getProductsTYPE(DEFAULT_TYPE_ID_SHTAKETNIK);
+  //   console.log(data);
+  // }
 
   useEffect(() => {
     const json = localStorage.getItem('cart');
@@ -97,9 +97,6 @@ export const Header: FC = () => {
             <span>24</span>
           </h1>
         </Link>
-        <button
-          onClick={clickShow}
-          >click</button>
         <div className="header__toolbar__cart">
           {location.pathname !== '/cart' && (
             <Link to="/cart" className="header__toolbar__cart__button">

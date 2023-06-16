@@ -12,6 +12,9 @@ export default class ProductService {
   };
 
   static async getProducts(typeID = '', page = 1, limit = 1000): Promise<AxiosResponse<IProductResponseAll>> {
+    if (!typeID) {
+      return serverApi.get<IProductResponseAll>(`/products?page=${page}&limit=${limit}`);
+    }
     return serverApi.get<IProductResponseAll>(`/products?typeID=${typeID}&page=${page}&limit=${limit}`);
   };
 

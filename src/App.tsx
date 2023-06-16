@@ -13,6 +13,7 @@ import { AddProduct } from "./components_V2/AddProduct/AddProduct";
 import { PicketFenceBlock } from "./components_V2/PicketFenceBlock/PicketFenceBlock";
 import { PicketFenceInfo } from "./components_V2/PicketFenceBlock/PicketFenceInfo/PicketFenceInfo";
 import PolikarbonatMain from "./components_V2/PolikarbonatMain/PolikarbonatMain";
+import { PicketFenceBlock_ } from "./components_V2/PicketFenceBlock/PicketFenceBlock_";
 
 const App: FC = () => {
 
@@ -20,7 +21,7 @@ const App: FC = () => {
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />}/>
-        <Route path="cart" element={<ProductsCart/>}/>
+        <Route path="cart" element={<ProductsCart />}/>
         <Route path='admin' element={
           <AdminAuthRouter>
             <AddProduct/>
@@ -30,7 +31,7 @@ const App: FC = () => {
         <Route path="polikarbonat-main" element={<PolikarbonatMain/>}/>
         <Route path="polikarbonat" element={<ProductsBlock/>}/>
         <Route path="polikarbonat/:id" element={<ProductInfo/>}/>
-        <Route path="shtaketnik" element={<PicketFenceBlock/>}/>
+        <Route path="shtaketnik" element={<PicketFenceBlock_/>}/>
         <Route path="shtaketnik/:id" element={<PicketFenceInfo/>}/>
         <Route path="about" element={<About/>}/>
         <Route path="*" element={<PageNotFound/>}/>

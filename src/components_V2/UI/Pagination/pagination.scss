@@ -1,0 +1,27 @@
+.pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  &__block {
+    display: flex;
+    gap: 3px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 22px;
+  }
+
+  &__item {
+    padding: 10px 15px;
+    border: 2px solid var(--primary);
+    cursor: pointer;
+
+    &.active {
+      background-color: var(--secondary);
+      border: none;
+      cursor: default;
+    }
+  }
+}
