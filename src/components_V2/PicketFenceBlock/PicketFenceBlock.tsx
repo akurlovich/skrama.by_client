@@ -6,21 +6,21 @@ import { getAllProductsInfoByTypeID, getProducts } from '../../store/reducers/Pr
 import { IProductResponse } from '../../types/IProductResponse';
 import { ProductItem } from '../ProductsBlock/ProductItem/ProductItem';
 import { Loader_v2 } from '../UI/Loader_v2/Loader_v2';
+import { Pagination } from '../UI/Pagination/Pagination';
 import './picketfenceblock.scss';
 
 const PicketFenceBlockInner: FC = () => {
   const dispatch = useAppDispatch();
-  const { products, productsAllInfo, isLoading, productsMaxRecords } = useAppSelector(state => state.productReducer);
-  const [sortData, setSortData] = useState('');
-  const [sortArrayValue, setSortArrayValue] = useState<string[]>([]);
-  const [readyProductsArray, setReadyProductsArray] = useState<IProductResponse[]>([]);
-  const [pagination, setPagination] = useState({show: true, page: 1, limit: DEFAULT_PAGINATION_ITEMS_LIMIT, pages: 1, pageArray: [] as number[]});
+  const { products, productsAllInfo, isLoading } = useAppSelector(state => state.productReducer);
+  const [pagination, setPagination] = useState({show: true, currentPage: 1});
 
-  let pArr: number[] = [];
+  const indexOfLastPost = pagination.currentPage * DEFAULT_PAGINATION_ITEMS_LIMIT;
+  const indexOfFirstPost = indexOfLastPost - DEFAULT_PAGINATION_ITEMS_LIMIT;
+  const [currentProducts, setCurrentProducts] = useState([] as IProductResponse[]);
+  const [sortData, setSortData] = useState({sortArrayValue: [] as string[], sortValue: ''});
 
-  const readyFilterd = (sort: string) => {
-    // console.log(products)
-    const productsFilter = productsAllInfo.filter(item => item.typeID === DEFAULT_TYPE_ID_SHTAKETNIK).filter(item => item.description === sort);
+  const readyFiltered = (sort: string) => {
+    const productsFilter = productsAllInfo.filter(item => item.description === sort);
     const sortProduct: IProductResponse[] = [];
     for (const item of productsFilter) {
       const found = products.find(element => element._id === item.productID);
@@ -31,77 +31,55 @@ const PicketFenceBlockInner: FC = () => {
     return sortProduct;
   };
 
-  const changeSortData = async (sort: string) => {
-    // setSortData(sort);
-    // dispatch(getProducts({typeID: DEFAULT_TYPE_ID_SHTAKETNIK, page: 1, limit: 1000})).then((res) => {
-    //   const productsFilter = readyFilterd(sort);
-    //   // console.log('first')
-    //   setReadyProductsArray([...productsFilter]);
-    //   setSortData(sort);
-
-    // }
-    // )
-    setPagination(prev => ({...prev, page: 1, show: false}));
-
-    setSortData(sort);
-    // setSortData(sort);
-    const productsFilter = readyFilterd(sort);
-   
-    setReadyProductsArray([...productsFilter]);
-  };
-
-  const paginationHandler = async (item: number) => {
-    if (item === pagination.page) return;
-    setPagination(prev => ({...prev, page: item}));
-    // await dispatch(getProducts({typeID: DEFAULT_TYPE_ID_SHTAKETNIK, page: item, limit: pagination.limit}));
+  const pageHandler = (page: number) => {
+    setPagination(prev => ({...prev, currentPage: page}));
+    const indexOfLastPost = page * DEFAULT_PAGINATION_ITEMS_LIMIT;
+    const indexOfFirstPost = indexOfLastPost - DEFAULT_PAGINATION_ITEMS_LIMIT;
+    setCurrentProducts(products.slice(indexOfFirstPost, indexOfLastPost));
     smoothScroll();
-  };
+ };
 
   useEffect(() => {
     (async () => {
       await dispatch(getProducts({typeID: DEFAULT_TYPE_ID_SHTAKETNIK, page: 1, limit: 1000}));
       await dispatch(getAllProductsInfoByTypeID(DEFAULT_TYPE_ID_SHTAKETNIK));
     })();
- 
+
   }, []);
 
   useEffect(() => {
-    // console.log('change products');
-    if (!sortData) {
-      const productsFilterPolik = products.filter(item => item.typeID === DEFAULT_TYPE_ID_SHTAKETNIK);
-      setReadyProductsArray([...productsFilterPolik]);
-    } else {
-      const productsFilter = readyFilterd(sortData);
-      setReadyProductsArray(productsFilter);
-    }  
-      const titleSortValue = productsAllInfo.filter(item => item.typeID === DEFAULT_TYPE_ID_SHTAKETNIK).filter(item => item.title === DEFAULT_SHTAKETNIK_FILTER_TITLE);
-      const filterData: string[] = [];
-      for  (const item of titleSortValue) {
-        const found = filterData.find(element => element === item.description);
-        if (!found) {
-          filterData.push(item.description);
-        }
-      };
-     
-      const toNumberSort = filterData.map(item => Number(item.slice(0, -2))).sort((a, b,) => a - b);
-      toNumberSort.shift();
-      const toStringSort = toNumberSort.map(item => item.toString() + 'мм')
-      setSortArrayValue([...toStringSort]);
+    setCurrentProducts(products.slice(indexOfFirstPost, indexOfLastPost));
 
-      setPagination(prev => ({...prev, pages: Math.ceil(products.length / DEFAULT_PAGINATION_ITEMS_LIMIT)}));
-      let pArr: number[] = [];
-      for (let i = 1; i < pagination.pages + 1; i++) {
-        pArr.push(i);
-      };
-      setPagination(prev => ({...prev, pageArray: [...pArr]}));
+  }, [products]);
 
-  }, [products, productsAllInfo]);
-
+  useEffect(() => {
+   const titleSortValue = productsAllInfo.filter(item => item.title === DEFAULT_SHTAKETNIK_FILTER_TITLE);
+    const filterData: string[] = [];
+    for  (const item of titleSortValue) {
+      const found = filterData.find(element => element === item.description);
+      if (!found) {
+        filterData.push(item.description);
+      }
+    };
+   
+    const toNumberSort = filterData.map(item => Number(item.slice(0, -2))).sort((a, b,) => a - b);
+    toNumberSort.shift();
+    const toStringSort = toNumberSort.map(item => item.toString() + 'мм');
+    setSortData(prev => ({...prev, sortArrayValue: [...toStringSort]}));
+  }, [productsAllInfo]);
+  
+  useEffect(() => {
+    const filter = readyFiltered(sortData.sortValue);
+    setCurrentProducts(filter);
+    if (sortData.sortValue) {
+      setPagination(prev => ({...prev, show: false}));
+    }
+  }, [sortData.sortValue]);
+  
   return (
     <section className='productsblock'>
       {isLoading && <Loader_v2/>}
       <h2
-        onClick={() => console.log(sortArrayValue)}
         className="productsblock__title">
         Штакетник
       </h2>
@@ -111,11 +89,11 @@ const PicketFenceBlockInner: FC = () => {
             {DEFAULT_SHTAKETNIK_FILTER_TITLE}
           </div>
           <ul>
-            {sortArrayValue && sortArrayValue.map(item => (
+            {sortData.sortArrayValue && sortData.sortArrayValue.map(item => (
               <li
                 key={item}
-                className={`productsblock__sort__item ${sortData === item ? 'active' : null}`}
-                onClick={() => changeSortData(item)}
+                className={`productsblock__sort__item ${sortData.sortValue === item ? 'active' : null}`}
+                onClick={() => setSortData(prev => ({...prev, sortValue: item}))}
               >
                 {item}
               </li>
@@ -125,31 +103,24 @@ const PicketFenceBlockInner: FC = () => {
         </div>
         <div className="productsblock__wrapper">
           <div className="productsblock__container">
-            {!readyProductsArray.length ? 
+            {!currentProducts.length ? 
               <div className="productsblock__notfound">
                 Товары не найдены!
               </div>
               : null
             }
-            {readyProductsArray.map(item => 
+            {currentProducts.map(item => 
               <ProductItem key={item._id} item={item} productsInfo={productsAllInfo}/>
             )}
           </div>
-          <div 
-            className="productsblock__pagination"
-            style={pagination.show ? {display: 'flex'} : {display: 'none'}}
-            >
-            <ul className="productsblock__pagination__block">
-              {pagination.pageArray.map(item => 
-                (<li 
-                  // style={item === pagination.page ? {backgroundColor: 'gray'} : {}}
-                  onClick={() => paginationHandler(item)}
-                  key={item}
-                  className={item === pagination.page ? "productsblock__pagination__item active" : "productsblock__pagination__item"}>{item} 
-                </li>)
-              )}
-            </ul>
-          </div>
+          {pagination.show && 
+            <Pagination
+              totalItems={products.length}
+              limit={DEFAULT_PAGINATION_ITEMS_LIMIT}
+              currentPage={pagination.currentPage}
+              setPage={pageHandler}
+            />
+          }
         </div>
         
       </div>
