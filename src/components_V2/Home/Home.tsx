@@ -27,7 +27,8 @@ const Home: FC = () => {
         </div>
       </div>
       <div className="main__wrapper__main">
-        <TypeBlock title='Поликарбонат' linkTo="polikarbonat-main" imgSrc={polik}/>
+        {/* <TypeBlock title='Поликарбонат' linkTo="polikarbonat-main" imgSrc={polik}/> */}
+        <TypeBlock title='Поликарбонат' linkTo="polikarbonat" imgSrc={polik}/>
         <TypeBlock title='Штакетник' linkTo="shtaketnik" imgSrc={shtak}/>
       </div>
       {/* <MainImage/>
