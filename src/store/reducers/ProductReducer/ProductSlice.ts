@@ -50,10 +50,11 @@ export const productSlice = createSlice({
     [getProducts.pending.type]: (state) => {
       state.isLoading = true;
     },
-    [getProducts.fulfilled.type]: (state, action: PayloadAction<IProductResponseAll>) => {
+    [getProducts.fulfilled.type]: (state, action: PayloadAction<IProductResponse[]>) => {
+      // console.log('first', action.payload)
       state.isLoading = false;
-      state.products = action.payload.products;
-      state.productsMaxRecords = action.payload.maxRecords;
+      state.products = action.payload;
+      // state.productsMaxRecords = action.payload.maxRecords;
       state.error = '';
     },
     [getProducts.rejected.type]: (state, action: PayloadAction<string>) => {
