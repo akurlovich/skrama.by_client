@@ -24,45 +24,50 @@ export const colorsSlice = createSlice({
   reducers: {
 
   },
-  extraReducers: {
-    [addProductColor.pending.type]: (state) => {
+  extraReducers: (builder) => {
+    builder
+      .addCase(addProductColor.pending, (state) => {
       state.isLoading = true;
-    },
-    [addProductColor.fulfilled.type]: (state, action: PayloadAction<IProductColorResponse>) => {
-      state.isLoading = false;
-      state.color = action.payload;
-      state.error = '';
-    },
-    [addProductColor.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [getProductColorsByProductID.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [getProductColorsByProductID.fulfilled.type]: (state, action: PayloadAction<IProductColorResponse[]>) => {
-      state.isLoading = false;
-      state.colorsByProduct = action.payload;
-      state.error = '';
-    },
-    [getProductColorsByProductID.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [getProductColorsByTypeID.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [getProductColorsByTypeID.fulfilled.type]: (state, action: PayloadAction<IProductColorResponse[]>) => {
-      state.isLoading = false;
-      state.colorsByType = action.payload;
-      state.error = '';
-    },
-    [getProductColorsByTypeID.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+      })
+      .addCase(addProductColor.fulfilled, (state, action: PayloadAction<IProductColorResponse>) => {
+        state.isLoading = false;
+        state.color = action.payload;
+        state.error = '';
+      })
+      .addCase(addProductColor.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    builder
+      .addCase(getProductColorsByProductID.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getProductColorsByProductID.fulfilled, (state, action: PayloadAction<IProductColorResponse[]>) => {
+        state.isLoading = false;
+        state.colorsByProduct = action.payload;
+        state.error = '';
+      })
+      .addCase(getProductColorsByProductID.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    builder
+      .addCase(getProductColorsByTypeID.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getProductColorsByTypeID.fulfilled, (state, action: PayloadAction<IProductColorResponse[]>) => {
+        state.isLoading = false;
+        state.colorsByProduct = action.payload;
+        state.error = '';
+      })
+      .addCase(getProductColorsByTypeID.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
     
-  }
+  },
 });
 
 export default colorsSlice.reducer;

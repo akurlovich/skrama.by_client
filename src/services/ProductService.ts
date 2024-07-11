@@ -11,15 +11,15 @@ export default class ProductService {
     return serverApi.post<IProductResponse>('/product', product);
   };
 
-  static async getProducts(typeID = '', page = 1, limit = 1000): Promise<AxiosResponse<IProductResponseAll>> {
+  static async getProducts(typeID = '', page = 1, limit = 1000): Promise<AxiosResponse<IProductResponse[]>> {
     if (!typeID) {
-      return serverApi.get<IProductResponseAll>(`/products?page=${page}&limit=${limit}`);
+      return serverApi.get<IProductResponse[]>(`/products?page=${page}&limit=${limit}`);
     }
-    return serverApi.get<IProductResponseAll>(`/products?typeID=${typeID}&page=${page}&limit=${limit}`);
+    return serverApi.get<IProductResponse[]>(`/products?typeID=${typeID}&page=${page}&limit=${limit}`);
   };
 
-  static async getProductsByType(typeID: string): Promise<AxiosResponse<IProductResponse>> {
-    return serverApi.get<IProductResponse>(`/products/${typeID}`);
+  static async getProductsByType(typeID: string): Promise<AxiosResponse<IProductResponse[]>> {
+    return serverApi.get<IProductResponse[]>(`/products/${typeID}`);
   };
 
   static async getProductByID(id: string): Promise<AxiosResponse<IProductResponse>> {

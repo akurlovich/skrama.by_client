@@ -34,138 +34,165 @@ export const productSlice = createSlice({
   reducers: {
 
   },
-  extraReducers: {
-    [addProduct.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [addProduct.fulfilled.type]: (state, action: PayloadAction<IProductResponse>) => {
-      state.isLoading = false;
-      state.product = action.payload;
-      state.error = '';
-    },
-    [addProduct.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [getProducts.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [getProducts.fulfilled.type]: (state, action: PayloadAction<IProductResponse[]>) => {
-      // console.log('first', action.payload)
-      state.isLoading = false;
-      state.products = action.payload;
-      // state.productsMaxRecords = action.payload.maxRecords;
-      state.error = '';
-    },
-    [getProducts.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [getProductsByType.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [getProductsByType.fulfilled.type]: (state, action: PayloadAction<IProductResponse[]>) => {
-      state.isLoading = false;
-      state.products = action.payload;
-      state.error = '';
-    },
-    [getProductsByType.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [getProductByID.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [getProductByID.fulfilled.type]: (state, action: PayloadAction<IProductResponse>) => {
-      state.isLoading = false;
-      state.product = action.payload;
-      state.error = '';
-    },
-    [getProductByID.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [getProductInfoByProductID.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [getProductInfoByProductID.fulfilled.type]: (state, action: PayloadAction<IProductInfoResponse[]>) => {
-      state.isLoading = false;
-      state.productInfo = action.payload;
-      state.error = '';
-    },
-    [getProductInfoByProductID.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [getAllProductsInfo.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [getAllProductsInfo.fulfilled.type]: (state, action: PayloadAction<IProductInfoResponse[]>) => {
-      state.isLoading = false;
-      state.productsAllInfo = action.payload;
-      state.error = '';
-    },
-    [getAllProductsInfo.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [getAllProductsInfoByTypeID.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [getAllProductsInfoByTypeID.fulfilled.type]: (state, action: PayloadAction<IProductInfoResponse[]>) => {
-      state.isLoading = false;
-      state.productsAllInfo = action.payload;
-      state.error = '';
-    },
-    [getAllProductsInfoByTypeID.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [addProductInfoType.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [addProductInfoType.fulfilled.type]: (state, action: PayloadAction<IProductInfoResponse>) => {
-      state.isLoading = false;
-      state.productInfoNewType = action.payload;
-      state.error = '';
-    },
-    [addProductInfoType.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [deleteProductByID.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [deleteProductByID.fulfilled.type]: (state) => {
-      state.isLoading = false;
-      state.error = '';
-    },
-    [deleteProductByID.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [updateProductPriceByID.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [updateProductPriceByID.fulfilled.type]: (state) => {
-      state.isLoading = false;
-      state.error = '';
-    },
-    [updateProductPriceByID.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [deleteProductInfos.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [deleteProductInfos.fulfilled.type]: (state) => {
-      state.isLoading = false;
-      state.error = '';
-    },
-    [deleteProductInfos.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(addProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addProduct.fulfilled, (state, action: PayloadAction<IProductResponse>) => {
+        state.isLoading = false;
+        state.product = action.payload;
+        state.error = '';
+      })
+      .addCase(addProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    builder
+      .addCase(getProducts.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getProducts.fulfilled, (state, action: PayloadAction<IProductResponse[]>) => {
+        // console.log('first', action.payload)
+        state.isLoading = false;
+        // console.log(action.payload)
+        state.products = action.payload;
+        // state.productsMaxRecords = action.payload.maxRecords;
+        state.error = '';
+      })
+      .addCase(getProducts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    builder
+      .addCase(getProductsByType.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getProductsByType.fulfilled, (state, action: PayloadAction<IProductResponse[]>) => {
+        state.isLoading = false;
+        state.products = action.payload;
+        state.error = '';
+      })
+      .addCase(getProductsByType.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    builder
+      .addCase(getProductByID.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getProductByID.fulfilled, (state, action: PayloadAction<IProductResponse>) => {
+        state.isLoading = false;
+        state.product = action.payload;
+        state.error = '';
+      })
+      .addCase(getProductByID.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    builder
+      .addCase(getProductInfoByProductID.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getProductInfoByProductID.fulfilled, (state, action: PayloadAction<IProductInfoResponse[]>) => {
+        state.isLoading = false;
+        state.productInfo = action.payload;
+        state.error = '';
+      })
+      .addCase(getProductInfoByProductID.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    builder
+      .addCase(getAllProductsInfo.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllProductsInfo.fulfilled, (state, action: PayloadAction<IProductInfoResponse[]>) => {
+        state.isLoading = false;
+        state.productsAllInfo = action.payload;
+        state.error = '';
+      })
+      .addCase(getAllProductsInfo.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+//TODO  возможно вынести ProductInfo в отдельный reducer
+    builder
+      .addCase(getAllProductsInfoByTypeID.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllProductsInfoByTypeID.fulfilled, (state, action: PayloadAction<IProductInfoResponse[]>) => {
+        state.isLoading = false;
+        state.productsAllInfo = action.payload;
+        state.error = '';
+      })
+      .addCase(getAllProductsInfoByTypeID.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    builder
+      .addCase(addProductInfoType.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addProductInfoType.fulfilled, (state, action: PayloadAction<IProductInfoResponse>) => {
+        state.isLoading = false;
+        state.productInfoNewType = action.payload;
+        state.error = '';
+      })
+      .addCase(addProductInfoType.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string
+      });
+
+    builder
+      .addCase(deleteProductByID.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteProductByID.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = '';
+      })
+      .addCase(deleteProductByID.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    builder
+      .addCase(updateProductPriceByID.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateProductPriceByID.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = '';
+      })
+      .addCase(updateProductPriceByID.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    builder
+      .addCase(deleteProductInfos.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteProductInfos.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = '';
+      })
+      .addCase(deleteProductInfos.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      })
+
+
+
+
+
     
     // [updateBookAmountByID.pending.type]: (state) => {
     //   state.isLoading = true;

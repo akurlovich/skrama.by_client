@@ -19,8 +19,8 @@ export default class ProductInfoService {
     return serverApi.get<IProductColorResponse[]>(`/colors`);
   };
 
-  static async getProductColorsByTypeID(typeID: string): Promise<AxiosResponse<IProductColorResponse>> {
-    return serverApi.get<IProductColorResponse>(`/colors/${typeID}`);
+  static async getProductColorsByTypeID(typeID: string): Promise<AxiosResponse<IProductColorResponse[]>> {
+    return serverApi.get<IProductColorResponse[]>(`/colors/${typeID}`);
   };
 
 

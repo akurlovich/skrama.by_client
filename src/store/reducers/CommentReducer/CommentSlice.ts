@@ -24,51 +24,58 @@ export const commentSlice = createSlice({
   reducers: {
 
   },
-  extraReducers: {
-    [addComment.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [addComment.fulfilled.type]: (state, action: PayloadAction<ICommentResponse>) => {
-      state.isLoading = false;
-      state.comment = action.payload;
-    },
-    [addComment.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [getComments.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [getComments.fulfilled.type]: (state, action: PayloadAction<ICommentResponse[]>) => {
-      state.isLoading = false;
-      state.comments = action.payload;
-    },
-    [getComments.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [getAllCommentByBookID.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [getAllCommentByBookID.fulfilled.type]: (state, action: PayloadAction<ICommentResponse[]>) => {
-      state.isLoading = false;
-      state.commentsByBookID = action.payload;
-    },
-    [getAllCommentByBookID.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [updateCommentByModerator.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [updateCommentByModerator.fulfilled.type]: (state, action: PayloadAction<ICommentResponse>) => {
-      state.isLoading = false;
-      state.comment = action.payload;
-    },
-    [updateCommentByModerator.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(addComment.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addComment.fulfilled, (state, action: PayloadAction<ICommentResponse>) => {
+        state.isLoading = false;
+        state.comment = action.payload;
+      })
+      .addCase(addComment.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    builder
+      .addCase(getComments.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getComments.fulfilled, (state, action: PayloadAction<ICommentResponse[]>) => {
+        state.isLoading = false;
+        state.comments = action.payload;
+      })
+      .addCase(getComments.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    builder
+      .addCase(getAllCommentByBookID.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllCommentByBookID.fulfilled, (state, action: PayloadAction<ICommentResponse[]>) => {
+        state.isLoading = false;
+        state.commentsByBookID = action.payload;
+      })
+      .addCase(getAllCommentByBookID.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    builder
+      .addCase(updateCommentByModerator.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateCommentByModerator.fulfilled, (state, action: PayloadAction<ICommentResponse>) => {
+        state.isLoading = false;
+        state.comment = action.payload;
+      })
+      .addCase(updateCommentByModerator.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
   },
 });
 

@@ -24,43 +24,50 @@ export const typeSlice = createSlice({
   reducers: {
 
   },
-  extraReducers: {
-    [addType.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [addType.fulfilled.type]: (state, action: PayloadAction<ITypeResponse>) => {
-      state.isLoading = false;
-      state.type = action.payload;
-      state.error = '';
-    },
-    [addType.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [getTypes.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [getTypes.fulfilled.type]: (state, action: PayloadAction<ITypeResponse[]>) => {
-      state.isLoading = false;
-      state.types = action.payload;
-      state.error = '';
-    },
-    [getTypes.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [getTypeByID.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [getTypeByID.fulfilled.type]: (state, action: PayloadAction<ITypeResponse>) => {
-      state.isLoading = false;
-      state.type = action.payload;
-      state.error = '';
-    },
-    [getTypeByID.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(addType.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addType.fulfilled, (state, action: PayloadAction<ITypeResponse>) => {
+        state.isLoading = false;
+        state.type = action.payload;
+        state.error = '';
+      })
+      .addCase(addType.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+      
+    builder
+      .addCase(getTypes.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getTypes.fulfilled, (state, action: PayloadAction<ITypeResponse[]>) => {
+        state.isLoading = false;
+        state.types = action.payload;
+        state.error = '';
+      })
+      .addCase(getTypes.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    builder
+      .addCase(getTypeByID.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getTypeByID.fulfilled, (state, action: PayloadAction<ITypeResponse>) => {
+        state.isLoading = false;
+        state.type = action.payload;
+        state.error = '';
+      })
+      .addCase(getTypeByID.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+
     // [updateBookAmountByID.pending.type]: (state) => {
     //   state.isLoading = true;
     // },

@@ -40,6 +40,7 @@ const PicketFenceBlockInner: FC = () => {
  };
 
   useEffect(() => {
+    console.log('from this 1');
     (async () => {
       await dispatch(getProducts({typeID: DEFAULT_TYPE_ID_SHTAKETNIK, page: 1, limit: 1000}));
       await dispatch(getAllProductsInfoByTypeID(DEFAULT_TYPE_ID_SHTAKETNIK));
@@ -48,7 +49,11 @@ const PicketFenceBlockInner: FC = () => {
   }, []);
 
   useEffect(() => {
-    setCurrentProducts(products.slice(indexOfFirstPost, indexOfLastPost));
+    console.log('from this 2');
+    if (products?.length) {
+      console.log('from this 3')
+      setCurrentProducts(products.slice(indexOfFirstPost, indexOfLastPost));
+    }
 
   }, [products]);
 
@@ -113,14 +118,14 @@ const PicketFenceBlockInner: FC = () => {
               <ProductItem key={item._id} item={item} productsInfo={productsAllInfo}/>
             )}
           </div>
-          {pagination.show && 
+          {/* {pagination.show && products.length &&
             <Pagination
               totalItems={products.length}
               limit={DEFAULT_PAGINATION_ITEMS_LIMIT}
               currentPage={pagination.currentPage}
               setPage={pageHandler}
             />
-          }
+          } */}
         </div>
         
       </div>

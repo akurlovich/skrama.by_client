@@ -22,43 +22,49 @@ export const brandSlice = createSlice({
   reducers: {
 
   },
-  extraReducers: {
-    [addBrand.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [addBrand.fulfilled.type]: (state, action: PayloadAction<IBrandResponse>) => {
-      state.isLoading = false;
-      state.brand = action.payload;
-      state.error = '';
-    },
-    [addBrand.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [getBrands.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [getBrands.fulfilled.type]: (state, action: PayloadAction<IBrandResponse[]>) => {
-      state.isLoading = false;
-      state.brands = action.payload;
-      state.error = '';
-    },
-    [getBrands.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [getBrandByID.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [getBrandByID.fulfilled.type]: (state, action: PayloadAction<IBrandResponse>) => {
-      state.isLoading = false;
-      state.brand = action.payload;
-      state.error = '';
-    },
-    [getBrandByID.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(addBrand.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addBrand.fulfilled, (state, action: PayloadAction<IBrandResponse>) => {
+        state.isLoading = false;
+        state.brand = action.payload;
+        state.error = '';
+      })
+      .addCase(addBrand.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    builder
+      .addCase(getBrands.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getBrands.fulfilled, (state, action: PayloadAction<IBrandResponse[]>) => {
+        state.isLoading = false;
+        state.brands = action.payload;
+        state.error = '';
+      })
+      .addCase(getBrands.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+    
+    builder
+      .addCase(getBrandByID.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getBrandByID.fulfilled, (state, action: PayloadAction<IBrandResponse>) => {
+        state.isLoading = false;
+        state.brand = action.payload;
+        state.error = '';
+      })
+      .addCase(getBrandByID.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
     // [updateBookAmountByID.pending.type]: (state) => {
     //   state.isLoading = true;
     // },
@@ -83,7 +89,7 @@ export const brandSlice = createSlice({
     //   state.isLoading = false;
     //   state.error = action.payload;
     // },
-  }
+  },
 });
 
 export default brandSlice.reducer;
