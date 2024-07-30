@@ -168,6 +168,12 @@ export const Header: FC = () => {
                 Поликарбонат
               </NavLink>
               <NavLink 
+                to='/shifer'
+                onClick={() => setShowItems(false)}
+                className={({ isActive }) => isActive ? 'header__navbar__item active' : 'header__navbar__item show'}>
+                Шифер
+              </NavLink>
+              <NavLink 
                 to='/shtaketnik'
                 onClick={() => setShowItems(false)}
                 className={({ isActive }) => isActive ? 'header__navbar__item active' : 'header__navbar__item show'}>

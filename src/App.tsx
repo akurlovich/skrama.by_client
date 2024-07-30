@@ -13,6 +13,8 @@ import { AddProduct } from "./components_V2/AddProduct/AddProduct";
 import { PicketFenceBlock } from "./components_V2/PicketFenceBlock/PicketFenceBlock";
 import { PicketFenceInfo } from "./components_V2/PicketFenceBlock/PicketFenceInfo/PicketFenceInfo";
 import PolikarbonatMain from "./components_V2/PolikarbonatMain/PolikarbonatMain";
+import { ShiferBlock } from "./components_V2/ShiferBlock/ShiferBlock";
+import { ShiferInfo } from "./components_V2/ShiferBlock/ShiferInfo/ShiferInfo";
 
 const App: FC = () => {
 
@@ -32,6 +34,8 @@ const App: FC = () => {
         <Route path="polikarbonat/:id" element={<ProductInfo/>}/>
         <Route path="shtaketnik" element={<PicketFenceBlock/>}/>
         <Route path="shtaketnik/:id" element={<PicketFenceInfo/>}/>
+        <Route path="shifer" element={<ShiferBlock/>}/>
+        <Route path="shifer/:id" element={<ShiferInfo/>}/>
         <Route path="about" element={<About/>}/>
         <Route path="*" element={<PageNotFound/>}/>
       </Route>

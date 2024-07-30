@@ -33,9 +33,9 @@ const Home: FC = () => {
         {/* <TypeBlock title='Поликарбонат' linkTo="polikarbonat-main" imgSrc={polik}/> */}
         {/* <TypeBlock title='Поликарбонат' linkTo="polikarbonat" imgSrc={polik}/> */}
         {/* <TypeBlock title='Штакетник' linkTo="shtaketnik" imgSrc={shtak}/> */}
-        <TypeCard title="Поликарбонат" text="сотовый" imgSrc={polik}/>
-        <TypeCard title="Штакетник" imgSrc={shtak}/>
-        <TypeCard title="Шифер" imgSrc={shifer}/>
+        <TypeCard title="Поликарбонат" text="сотовый" linkTo="polikarbonat" imgSrc={polik}/>
+        <TypeCard title="Штакетник" linkTo="shtaketnik" imgSrc={shtak}/>
+        <TypeCard title="Шифер" linkTo="shifer" imgSrc={shifer}/>
       </div>
       {/* <MainImage/>
       <MainAbout/>
