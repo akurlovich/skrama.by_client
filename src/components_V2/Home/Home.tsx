@@ -11,6 +11,9 @@ import { TypeBlock } from "../TypeBlock/TypeBlock";
 import polik from '../../assets/img/main_img4.jpg';
 // @ts-ignore
 import shtak from '../../assets/img/main_img.jpg';
+// @ts-ignore
+import shifer from '../../assets/img/main_img5.jpg';
+import { TypeCard } from "../TypeCard/TypeCard";
 
 
 const Home: FC = () => {
@@ -28,8 +31,11 @@ const Home: FC = () => {
       </div>
       <div className="main__wrapper__main">
         {/* <TypeBlock title='Поликарбонат' linkTo="polikarbonat-main" imgSrc={polik}/> */}
-        <TypeBlock title='Поликарбонат' linkTo="polikarbonat" imgSrc={polik}/>
-        <TypeBlock title='Штакетник' linkTo="shtaketnik" imgSrc={shtak}/>
+        {/* <TypeBlock title='Поликарбонат' linkTo="polikarbonat" imgSrc={polik}/> */}
+        {/* <TypeBlock title='Штакетник' linkTo="shtaketnik" imgSrc={shtak}/> */}
+        <TypeCard title="Поликарбонат" text="сотовый" imgSrc={polik}/>
+        <TypeCard title="Штакетник" imgSrc={shtak}/>
+        <TypeCard title="Шифер" imgSrc={shifer}/>
       </div>
       {/* <MainImage/>
       <MainAbout/>
