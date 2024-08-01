@@ -6,6 +6,7 @@ import { getAllProductsInfo, getProducts } from '../../store/reducers/ProductRed
 import { DEFAULT_POLIKARBONAT_FILTER_TITLE, DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, DEFAULT_TYPE_ID_POLIK_PLANKI } from '../../constants/user';
 import { IProductResponse } from '../../types/IProductResponse';
 import { Loader_v2 } from '../UI/Loader_v2/Loader_v2';
+import { getTypes } from '../../store/reducers/TypeReducer/TypeActionCreators';
 
 const ProductsBlockInner: FC = () => {
   const dispatch = useAppDispatch();
@@ -47,6 +48,7 @@ const ProductsBlockInner: FC = () => {
     (async () => {
       await dispatch(getProducts({typeID: '', page: 1, limit: 1000}));
       await dispatch(getAllProductsInfo());
+      await dispatch(getTypes())
     })();
  
   }, []);

@@ -6,7 +6,7 @@ import { IProductResponse } from '../../../types/IProductResponse';
 import { IProductInfoResponse } from '../../../types/IProductInfoResponse';
 import { useNavigate } from 'react-router-dom';
 import { SERVER_URL } from '../../../constants/http';
-import { DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, DEFAULT_TYPE_ID_SHTAKETNIK } from '../../../constants/user';
+import { DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, DEFAULT_TYPE_ID_SHIFER, DEFAULT_TYPE_ID_SHTAKETNIK } from '../../../constants/user';
 import ProductService from '../../../services/ProductService';
 import { addItem } from '../../../store/reducers/CartReducer/CartSlice';
 import { useAppDispatch } from '../../../hooks/redux';
@@ -33,6 +33,9 @@ const ProductItemInner: FC <IProps> = ({item, productsInfo}) => {
     }
     if (item.typeID === DEFAULT_TYPE_ID_SHTAKETNIK) {
       navigate(`/shtaketnik/${item._id}`);
+    }
+    if (item.typeID === DEFAULT_TYPE_ID_SHIFER) {
+      navigate(`/shifer/${item._id}`);
     }
     
     await ProductService.updateProductPriceByID({id: item._id, views: item.views + 1});
@@ -121,7 +124,8 @@ const ProductItemInner: FC <IProps> = ({item, productsInfo}) => {
 
 
             {(item.typeID === DEFAULT_TYPE_ID_POLIK_KREPEZH || 
-              item.typeID === DEFAULT_TYPE_ID_SHTAKETNIK) ? null :
+              item.typeID === DEFAULT_TYPE_ID_SHTAKETNIK || 
+              item.typeID === DEFAULT_TYPE_ID_SHIFER ) ? null :
               <div className="productitem__item__text">
                 Цвет: прозрачный
               </div>
