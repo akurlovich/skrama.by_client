@@ -7,12 +7,12 @@ import { MainServices } from "./MainServices/MainServices";
 import { MainChooseUs } from "./MainChooseUs/MainChooseUs";
 import { Loader_v2 } from "../UI/Loader_v2/Loader_v2";
 import { TypeBlock } from "../TypeBlock/TypeBlock";
-// @ts-ignore
-import polik from '../../assets/img/main_img4.jpg';
-// @ts-ignore
-import shtak from '../../assets/img/main_img.jpg';
-// @ts-ignore
-import shifer from '../../assets/img/main_img5.jpg';
+// // @ts-ignore
+// import polik from '../../assets/img/main_img4.jpg';
+// // @ts-ignore
+// import shtak from '../../assets/img/main_img.jpg';
+// // @ts-ignore
+// import shifer from '../../assets/img/main_img5.jpg';
 import { TypeCard } from "../TypeCard/TypeCard";
 
 
@@ -33,9 +33,9 @@ const Home: FC = () => {
         {/* <TypeBlock title='Поликарбонат' linkTo="polikarbonat-main" imgSrc={polik}/> */}
         {/* <TypeBlock title='Поликарбонат' linkTo="polikarbonat" imgSrc={polik}/> */}
         {/* <TypeBlock title='Штакетник' linkTo="shtaketnik" imgSrc={shtak}/> */}
-        <TypeCard title="Поликарбонат" text="сотовый" linkTo="polikarbonat" imgSrc={polik}/>
-        <TypeCard title="Штакетник" linkTo="shtaketnik" imgSrc={shtak}/>
-        <TypeCard title="Шифер" linkTo="shifer" imgSrc={shifer}/>
+        <TypeCard title="Поликарбонат" text="сотовый" linkTo="polikarbonat" imgSrc='images/main_img4.jpg'/>
+        <TypeCard title="Штакетник" linkTo="shtaketnik" imgSrc='images/main_img.jpg'/>
+        <TypeCard title="Шифер" linkTo="shifer" imgSrc='images/main_img5.jpg'/>
       </div>
       {/* <MainImage/>
       <MainAbout/>

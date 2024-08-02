@@ -146,6 +146,7 @@
   }
 
   &__instock {
+    margin-bottom: 10px;
     display: flex;
     gap: 10px;
     align-items: center;
@@ -161,12 +162,12 @@
   }
 
   &__addinfo {
-    padding-top: 15px;
+    // padding-top: 5px;
     max-width: 290px;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    gap: 40px;
+    // gap: 40px;
     font-family: "Open Sans", sans-serif;
     font-weight: 400;
     line-height: 1.5;

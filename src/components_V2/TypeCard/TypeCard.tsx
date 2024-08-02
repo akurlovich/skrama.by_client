@@ -16,7 +16,8 @@ const TypeCardInner: FC<IProps> = ({title, text, linkTo, imgSrc}) => {
 		<div className='typecard'>
 			<div className="typecard__card">
 				<div className="typecard__card__image">
-					<img src={imgSrc}/>
+					<img src={imgSrc} loading="lazy"/>
+					{/* <img src='images/main_img5.jpg' loading="lazy"/> */}
 				</div>
 				<div className="typecard__card__title">
 					<h2>{title}</h2>

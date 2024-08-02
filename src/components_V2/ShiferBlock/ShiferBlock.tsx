@@ -84,7 +84,7 @@ const ShiferBlockInner: FC = () => {
         Шифер
       </h2>
       <div className="productsblock__main">
-        <div className="productsblock__sort">
+        {/* <div className="productsblock__sort">
           <div className="productsblock__sort__title">
             Тип
           </div>
@@ -100,20 +100,7 @@ const ShiferBlockInner: FC = () => {
             ))}
             
           </ul>
-          {/* <div className="productsblock__sort__title dop-el">
-            Доборные элементы
-          </div>
-          <div 
-            className={`productsblock__sort__item ${sortData === item ? 'active' : null}`}
-            onClick={() => changeSortData(DEFAULT_TYPE_ID_POLIK_KREPEZH)}>
-            Крепеж
-          </div>
-          <div 
-            className={`productsblock__sort__item ${sortData === item ? 'active' : null}`}
-            onClick={() => changeSortData(DEFAULT_TYPE_ID_POLIK_PLANKI)}>
-            Планки
-          </div> */}
-        </div>
+        </div> */}
         <div className="productsblock__container">
           {!readyProductsArray.length ? 
             <div className="productsblock__notfound">

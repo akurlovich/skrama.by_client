@@ -202,22 +202,22 @@ const ShiferInfoInner: FC = () => {
       {confirmOrder && <ConfirmOrder setModal={setConfirmOrder} onClickClear={onClickClear} items={items} long={true}/>}
       {consultation && <ConfirmOrder setModal={setConsultation} items={[]} short={true}/>}
       <div className="productinfo">
-        <ProductNavigation itemThickness={itemThickness} productTitle='Поликарбонат' productPageLink='/polikarbonat'/>
+        {/* <ProductNavigation itemThickness={itemThickness} productTitle='Поликарбонат' productPageLink='/polikarbonat'/> */}
         <div className="productinfo__wrapper">
           {isAdminAuth && (
-                  <div className="productinfo__title_btns">
-                  <CommandBarButton
-                    iconProps={editIcon}
-                    text="Изменить цену"
-                    onClick={updateProductHandler}
-                  />
-                  <CommandBarButton
-                    iconProps={deleteIcon}
-                    text="Удалить"
-                    onClick={deleteProductHandler}
-                  />
-                </div>)
-              }
+            <div className="productinfo__title_btns">
+            <CommandBarButton
+              iconProps={editIcon}
+              text="Изменить цену"
+              onClick={updateProductHandler}
+            />
+            <CommandBarButton
+              iconProps={deleteIcon}
+              text="Удалить"
+              onClick={deleteProductHandler}
+            />
+            </div>)
+          }
           <div className="productinfo__container">
             <div className="productinfo__imageblock">
               {/* <img className="productinfo__image" src={SERVER_URL + product?.coverImage} alt="product cover"/> */}
