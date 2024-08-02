@@ -235,19 +235,22 @@ const ProductInfoInner: FC = () => {
         <ProductNavigation itemThickness={itemThickness} productTitle='Поликарбонат' productPageLink='/polikarbonat'/>
         <div className="productinfo__wrapper">
           {isAdminAuth && (
-                  <div className="productinfo__title_btns">
-                  <CommandBarButton
-                    iconProps={editIcon}
-                    text="Изменить цену"
-                    onClick={updateProductHandler}
-                  />
-                  <CommandBarButton
-                    iconProps={deleteIcon}
-                    text="Удалить"
-                    onClick={deleteProductHandler}
-                  />
-                </div>)
-              }
+            <div className="productinfo__title_btns">
+            <CommandBarButton
+              iconProps={editIcon}
+              text="Изменить цену"
+              onClick={updateProductHandler}
+            />
+            <CommandBarButton
+              iconProps={deleteIcon}
+              text="Удалить"
+              onClick={deleteProductHandler}
+            />
+          </div>)
+          }
+          <div className="productinfo__titleblock">
+            <h2 className="productinfo__title">{product.name} {itemThickness}</h2>
+          </div>
           <div className="productinfo__container">
             <div className="productinfo__imageblock">
               {/* <img className="productinfo__image" src={SERVER_URL + product?.coverImage} alt="product cover"/> */}
@@ -298,10 +301,10 @@ const ProductInfoInner: FC = () => {
               }
             </div>
             <div className="productinfo__info">
-              <div className="productinfo__titleblock">
+              {/* <div className="productinfo__titleblock">
                 <h2 className="productinfo__title">{product.name} {itemThickness}</h2>
                 
-              </div>
+              </div> */}
               <div className="productinfo__rating">
                 <img src={starRatingSvg} alt='star'/>
                 <img src={starRatingSvg} alt='star'/>

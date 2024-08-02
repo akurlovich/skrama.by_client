@@ -262,6 +262,9 @@ const PicketFenceInfoInner: FC = () => {
               updateProductHandler={updateProductHandler}
               deleteProductHandler={deleteProductHandler}
             />}
+          <div className="picketfenceinfo__titleblock">
+            <h2 className="picketfenceinfo__title">{product.name}</h2>      
+          </div>
           <div className="picketfenceinfo__container">
             <div className="picketfenceinfo__imageblock">
               <img className="picketfenceinfo__image" src={colorImage.imageData} alt="штакетник"/>
@@ -282,10 +285,6 @@ const PicketFenceInfoInner: FC = () => {
               }
             </div>
             <div className="picketfenceinfo__info">
-              <div className="picketfenceinfo__titleblock">
-                <h2 className="picketfenceinfo__title">{product.name}</h2>
-                
-              </div>
               <div className="picketfenceinfo__rating">
                 <img src={starRatingSvg} alt='star'/>
                 <img src={starRatingSvg} alt='star'/>
@@ -307,7 +306,7 @@ const PicketFenceInfoInner: FC = () => {
               
                 {productInfo.map(item => (
                   <div key={item._id} className="picketfenceinfo__addinfo">
-                    <div className="">{`${item.title}:`}</div>
+                    <div className="picketfenceinfo__addinfo__first">{`${item.title}:`}</div>
                     <div className="picketfenceinfo__addinfo__secondary">{item.description}</div>
                   </div>
                 ))}
