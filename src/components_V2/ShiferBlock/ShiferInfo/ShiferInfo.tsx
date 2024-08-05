@@ -207,7 +207,7 @@ const ShiferInfoInner: FC = () => {
           <div className="productinfo__titleblock">
             <h2 className="productinfo__title">{product.name}</h2>
           </div>
-          {/* {isAdminAuth && (
+          {isAdminAuth && (
             <div className="productinfo__title_btns">
             <CommandBarButton
               iconProps={editIcon}
@@ -220,7 +220,7 @@ const ShiferInfoInner: FC = () => {
               onClick={deleteProductHandler}
             />
             </div>)
-          } */}
+          }
           <div className="productinfo__container">
             {/* <div className="productinfo__titleblock">
               <h2 className="productinfo__title">{product.name} {itemThickness}</h2>
