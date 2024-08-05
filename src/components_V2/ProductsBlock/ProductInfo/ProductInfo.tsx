@@ -249,7 +249,7 @@ const ProductInfoInner: FC = () => {
           </div>)
           }
           <div className="productinfo__titleblock">
-            <h2 className="productinfo__title">{product.name} {itemThickness}</h2>
+            <h2 className="productinfo__title">{product.name}</h2>
           </div>
           <div className="productinfo__container">
             <div className="productinfo__imageblock">
