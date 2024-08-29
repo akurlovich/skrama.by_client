@@ -1,6 +1,7 @@
 .productitem {
 
   &__item {
+    align-self: stretch;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -9,7 +10,7 @@
     margin-top: 10px;
     flex: 0 0 auto;
     width: 320px;
-    min-height: 475px;
+    // min-height: 475px;
     // height: 359px; 
     // border: 3px solid #F6F7F8;
     border: 3px solid #dff1e0;

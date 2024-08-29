@@ -88,13 +88,7 @@ const ShiferInfoInner: FC = () => {
     return item;
   };
 
-  const confirmOrderHandler = () => {
-    smoothScroll();
-    const item = itemForOrder();
-    dispatch(addItem(item));
-    setConfirmOrder(true);
-  };
-
+  
   const deleteProductHandler = async () => {
     if (params.id) {
       await dispatch(deleteProductByID(params.id));
@@ -136,6 +130,17 @@ const ShiferInfoInner: FC = () => {
     if (e.currentTarget.value) {
       setWarnings(prev => ({...prev, count: false}));
     };
+  };
+
+  const confirmOrderHandler = () => {
+    if (!itemData.itemCount) {
+      setWarnings(prev => ({...prev, count: true}));
+      return;
+    };
+    smoothScroll();
+    const item = itemForOrder();
+    dispatch(addItem(item));
+    setConfirmOrder(true);
   };
 
   const addToCartHandler = () => {
@@ -227,16 +232,22 @@ const ShiferInfoInner: FC = () => {
             </div> */}
             <div className="productinfo__imageblock">
               {/* <img className="productinfo__image" src={SERVER_URL + product?.coverImage} alt="product cover"/> */}
-              <img className="productinfo__image" src={colorImage.imageData} alt="поликарбонат"/>
-              {product.typeID === DEFAULT_TYPE_ID_POLIKARBONAT ? 
-                <div className="productinfo__image__colors">
+              <img className="productinfo__image_large" src={colorImage.imageData} alt="шифер"/>
+              
+              <div className="productinfo__image__colors">
+                <img
+                  onClick={() => setColorImage({imageData: SERVER_URL + product?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
+                  className="productinfo__image__item" src={SERVER_URL + product?.coverImage} alt="шифер" />
+
+                {product._id === '66ac76102faf536a7c7037e7' ? 
                   <img
-                    onClick={() => setColorImage({imageData: SERVER_URL + product?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
-                    className="productinfo__image__item" src={SERVER_URL + product?.coverImage} alt="поликарбонат" />
-                 
-                </div>
-                : null
-              }
+                    onClick={() => setColorImage({imageData: '../images/shifer_rim.jpg', isColor: false, choosenColor: 'Прозрачный'})}
+                    className="productinfo__image__item" src='../images/shifer_rim.jpg'  alt="шифер" />
+                : null}
+
+                
+              </div>
+                
             </div>
             <div className="productinfo__info">
               {/* <div className="productinfo__titleblock">
@@ -304,13 +315,13 @@ const ShiferInfoInner: FC = () => {
                     <img src={plusSvg} alt="plus" />
                   </button>
                 </div> */}
-                <div 
+                <button 
                   onClick={addToCartHandler}
                   className="productinfo__cart">
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 512 512"><title/><g data-name="1" id="_1"><path fill="#fff" d="M397.78,316H192.65A15,15,0,0,1,178,304.33L143.46,153.85a15,15,0,0,1,14.62-18.36H432.35A15,15,0,0,1,447,153.85L412.4,304.33A15,15,0,0,1,397.78,316ZM204.59,286H385.84l27.67-120.48H176.91Z"/><path fill="#fff" d="M222,450a57.48,57.48,0,1,1,57.48-57.48A57.54,57.54,0,0,1,222,450Zm0-84.95a27.48,27.48,0,1,0,27.48,27.47A27.5,27.5,0,0,0,222,365.05Z"/><path fill="#fff" d="M368.42,450a57.48,57.48,0,1,1,57.48-57.48A57.54,57.54,0,0,1,368.42,450Zm0-84.95a27.48,27.48,0,1,0,27.48,27.47A27.5,27.5,0,0,0,368.42,365.05Z"/><path fill="#fff" d="M158.08,165.49a15,15,0,0,1-14.23-10.26L118.14,78H70.7a15,15,0,1,1,0-30H129a15,15,0,0,1,14.23,10.26l29.13,87.49a15,15,0,0,1-14.23,19.74Z"/></g></svg>
 
                   <div className="productinfo__cart_btn">В корзину</div>
-                </div>
+                </button>
                 <button
                   onClick={confirmOrderHandler}
                   className="productinfo__oneclick">
