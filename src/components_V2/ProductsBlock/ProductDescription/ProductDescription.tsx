@@ -1,12 +1,13 @@
 import React, { FC, useState } from 'react';
-import { DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_SHIFER, DEFAULT_TYPE_ID_SHTAKETNIK } from '../../../constants/user';
+import { DEFAULT_RIM_PROFILE, DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_SHIFER, DEFAULT_TYPE_ID_SHTAKETNIK } from '../../../constants/user';
 import './productdescription.scss';
 
 interface IProps {
   type: string;
+  productID?: string;
 }
 
-const ProductDescriptionInner: FC<IProps> = ({type}) => {
+const ProductDescriptionInner: FC<IProps> = ({type, productID}) => {
   const [sortData, setSortData] = useState('Описание');
   // const ulData = ['Описание', 'Доставка', 'Применение', 'Оплата'];
   const ulData = ['Описание', 'Доставка', 'Оплата'];
@@ -66,6 +67,15 @@ const ProductDescriptionInner: FC<IProps> = ({type}) => {
     }
     if (type === DEFAULT_TYPE_ID_SHIFER) {
       return (<div className="productinfo__description_description">
+        {productID === DEFAULT_RIM_PROFILE ? 
+          <>
+            <p><strong>Лист "Римская волна" (шифер) толщиной 5.8мм х/цементный.</strong></p>
+            <p><strong>Размер листа 1,75*0,98 метра,</strong> прекрасно подходит для кровли,заборов, ограждений.</p>
+            <p>Цена за лист площадью 1,715м2.</p>
+            <p>Посмотреть вы можете у нас <strong>на складе</strong>  с 8.00 до 19.00 по адресу: ул. П.Глебки 11, Минск ( район метро Спортивная, Каменная горка).</p>
+          </>
+        
+        : null}
         <p>
         <strong>Хризотилцементные волнистые листы</strong>  – это традиционный строительный материал с более чем вековой историей применения, за которым в народе прочно закрепилось название «шифер». Хризотилцемент является композиционным материалом. В его состав входят всего три компонента: вода, цемент и природный волокнистый минерал хризотил, армирующий цементную матрицу. Достоинствами хризотилцементных изделий неоспоримо являются:
         </p>

@@ -19,6 +19,7 @@ import starRatingSvg from '../../../assets/img/star_rating.png';
 import { AiFillDownCircle } from 'react-icons/ai';
 import { PocketFenceInfoInput } from '../../PicketFenceBlock/PicketFenceInfo/PicketFenceInfoUI/PocketFenceInfoInput';
 import { ProductDescription } from '../../ProductsBlock/ProductDescription/ProductDescription';
+import './shiferinfo.scss';
 
 initializeIcons();
 
@@ -259,17 +260,27 @@ const ShiferInfoInner: FC = () => {
                 itemProp="image"
                 itemScope
                 itemType="http://schema.org/ImageObject"
-                className="productinfo__image__colors">
+                className="productinfo__image__colors shifer_img_block">
                 <img
                   onClick={() => setColorImage({imageData: SERVER_URL + product?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
                   itemProp="contentUrl"
-                  className="productinfo__image__item" src={SERVER_URL + product?.coverImage} alt="шифер" />
+                  className="productinfo__image__item shifer_img" src={SERVER_URL + product?.coverImage} alt="шифер" />
 
                 {product._id === DEFAULT_RIM_PROFILE ? 
-                  <img
-                    onClick={() => setColorImage({imageData: '../images/shifer_rim.jpg', isColor: false, choosenColor: 'Прозрачный'})}
-                    itemProp="contentUrl"
-                    className="productinfo__image__item" src='../images/shifer_rim.jpg'  alt="шифер" />
+                  <>
+                    <img
+                      onClick={() => setColorImage({imageData: '../images/shifer_rim.jpg', isColor: false, choosenColor: 'Прозрачный'})}
+                      itemProp="contentUrl"
+                      className="productinfo__image__item shifer_img" src='../images/shifer_rim.jpg'  alt="шифер" />
+                    <img
+                      onClick={() => setColorImage({imageData: '../images/shifer_rim2.jpg', isColor: false, choosenColor: 'Прозрачный'})}
+                      itemProp="contentUrl"
+                      className="productinfo__image__item shifer_img" src='../images/shifer_rim2.jpg'  alt="шифер" />
+                    <img
+                      onClick={() => setColorImage({imageData: '../images/shifer_rim3.jpg', isColor: false, choosenColor: 'Прозрачный'})}
+                      itemProp="contentUrl"
+                      className="productinfo__image__item shifer_img" src='../images/shifer_rim3.jpg'  alt="шифер" />
+                  </>
                 : null}
                 <meta itemProp="name" content='Шифер "Римская волна" фото'/>
                 
@@ -372,7 +383,7 @@ const ShiferInfoInner: FC = () => {
               </div>
             </div>
           </div>
-          <ProductDescription type={product.typeID}/>
+          <ProductDescription type={product.typeID} productID={product._id}/>
         </article>
       </main>
     
