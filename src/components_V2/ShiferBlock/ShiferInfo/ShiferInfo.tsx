@@ -2,7 +2,7 @@ import { CommandBarButton, IIconProps, initializeIcons } from '@fluentui/react';
 import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { SERVER_URL } from '../../../constants/http';
-import { DEFAULT_POLIKARBONAT_FILTER_TITLE, DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, NO_IMAGE } from '../../../constants/user';
+import { DEFAULT_POLIKARBONAT_FILTER_TITLE, DEFAULT_RIM_PROFILE, DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, NO_IMAGE } from '../../../constants/user';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { smoothScroll } from '../../../services/ClientServices/SmothScroll';
 import { setAuthAdmin } from '../../../store/reducers/AuthReducer/AuthSlice';
@@ -170,6 +170,7 @@ const ShiferInfoInner: FC = () => {
       dispatch(setAuthAdmin());
     };
     smoothScroll();
+    
   }, []);
 
   useEffect(() => {
@@ -185,6 +186,15 @@ const ShiferInfoInner: FC = () => {
       setPrice((colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price).toFixed(2));
 
     }
+
+    if (product._id === DEFAULT_RIM_PROFILE) {
+      document.title = 'Римский профиль | Купить по Доступным Ценам + Доставка';
+    }
+
+    return () => {
+      document.title = 'Поликарбонат | Купить по Доступным Ценам + Доставка';
+    }
+
   }, [product])
   
   
@@ -239,7 +249,7 @@ const ShiferInfoInner: FC = () => {
                   onClick={() => setColorImage({imageData: SERVER_URL + product?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
                   className="productinfo__image__item" src={SERVER_URL + product?.coverImage} alt="шифер" />
 
-                {product._id === '66ac76102faf536a7c7037e7' ? 
+                {product._id === DEFAULT_RIM_PROFILE ? 
                   <img
                     onClick={() => setColorImage({imageData: '../images/shifer_rim.jpg', isColor: false, choosenColor: 'Прозрачный'})}
                     className="productinfo__image__item" src='../images/shifer_rim.jpg'  alt="шифер" />
