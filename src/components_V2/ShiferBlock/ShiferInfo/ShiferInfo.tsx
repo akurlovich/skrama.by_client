@@ -216,12 +216,17 @@ const ShiferInfoInner: FC = () => {
       }
       {confirmOrder && <ConfirmOrder setModal={setConfirmOrder} onClickClear={onClickClear} items={items} long={true}/>}
       {consultation && <ConfirmOrder setModal={setConsultation} items={[]} short={true}/>}
-      <div className="productinfo">
+      <main className="productinfo">
         {/* <ProductNavigation itemThickness={itemThickness} productTitle='Поликарбонат' productPageLink='/polikarbonat'/> */}
-        <div className="productinfo__wrapper">
-          <div className="productinfo__titleblock">
-            <h2 className="productinfo__title">{product.name}</h2>
-          </div>
+        <article 
+          itemScope
+          itemType="https://schema.org/Product"
+          className="productinfo__wrapper">
+          <header className="productinfo__titleblock">
+            <h2
+              itemProp="name" 
+              className="productinfo__title">{product.name}</h2>
+          </header>
           {isAdminAuth && (
             <div className="productinfo__title_btns">
             <CommandBarButton
@@ -240,26 +245,43 @@ const ShiferInfoInner: FC = () => {
             {/* <div className="productinfo__titleblock">
               <h2 className="productinfo__title">{product.name} {itemThickness}</h2>
             </div> */}
-            <div className="productinfo__imageblock">
+            <div 
+              itemProp="image"
+              itemScope
+              itemType="http://schema.org/ImageObject"
+              className="productinfo__imageblock">
               {/* <img className="productinfo__image" src={SERVER_URL + product?.coverImage} alt="product cover"/> */}
-              <img className="productinfo__image_large" src={colorImage.imageData} alt="шифер"/>
+              <img 
+                itemProp="contentUrl"
+                className="productinfo__image_large" src={colorImage.imageData} alt="шифер"/>
               
-              <div className="productinfo__image__colors">
+              <div 
+                itemProp="image"
+                itemScope
+                itemType="http://schema.org/ImageObject"
+                className="productinfo__image__colors">
                 <img
                   onClick={() => setColorImage({imageData: SERVER_URL + product?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
+                  itemProp="contentUrl"
                   className="productinfo__image__item" src={SERVER_URL + product?.coverImage} alt="шифер" />
 
                 {product._id === DEFAULT_RIM_PROFILE ? 
                   <img
                     onClick={() => setColorImage({imageData: '../images/shifer_rim.jpg', isColor: false, choosenColor: 'Прозрачный'})}
+                    itemProp="contentUrl"
                     className="productinfo__image__item" src='../images/shifer_rim.jpg'  alt="шифер" />
                 : null}
-
+                <meta itemProp="name" content='Шифер "Римская волна" фото'/>
                 
               </div>
-                
+              <meta itemProp="name" content='Шифер "Римская волна" фото'/>
             </div>
             <div className="productinfo__info">
+              <meta 
+                itemProp="brand" 
+                itemScope
+                itemType="https://schema.org/Brand" 
+                itemRef="site-url logo site-name sameAsFB sameAsInstagram sameAsYouTube" content='Шифер "Римский профиль"'/>
               {/* <div className="productinfo__titleblock">
                 <h2 className="productinfo__title">{product.name} {itemThickness}</h2>
                 
@@ -351,8 +373,8 @@ const ShiferInfoInner: FC = () => {
             </div>
           </div>
           <ProductDescription type={product.typeID}/>
-        </div>
-      </div>
+        </article>
+      </main>
     
     </>
   )
