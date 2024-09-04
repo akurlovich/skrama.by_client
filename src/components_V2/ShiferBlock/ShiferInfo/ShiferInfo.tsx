@@ -280,6 +280,10 @@ const ShiferInfoInner: FC = () => {
                       onClick={() => setColorImage({imageData: '../images/shifer_rim3.jpg', isColor: false, choosenColor: 'Прозрачный'})}
                       itemProp="contentUrl"
                       className="productinfo__image__item shifer_img" src='../images/shifer_rim3.jpg'  alt="шифер" />
+                    <img
+                      onClick={() => setColorImage({imageData: '../images/shifer_rim6.jpg', isColor: false, choosenColor: 'Прозрачный'})}
+                      itemProp="contentUrl"
+                      className="productinfo__image__item shifer_img" src='../images/shifer_rim6.jpg'  alt="шифер" />
                   </>
                 : null}
                 <meta itemProp="name" content='Шифер "Римская волна" фото'/>
