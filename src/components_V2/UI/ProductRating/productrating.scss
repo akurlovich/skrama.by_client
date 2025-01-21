@@ -1,0 +1,44 @@
+.productrating {
+	&__wrapper {
+    padding-top: 10px;
+    font-size: 20px;
+    display: flex;
+    gap: 5px;
+
+    @media (max-width: 575px) { 
+			display: none;
+      padding-top: 5px;
+    }
+
+    & img {
+      width: 20px;
+    }
+
+		&_phone {
+			// padding-top: 10px;
+			margin-bottom: 5px;
+			font-size: 20px;
+			display: flex;
+			gap: 5px;
+			width: 100%;
+			align-items: center;
+			justify-content: center;
+
+			@media (min-width: 576px) { 
+				display: none;
+				padding-top: 5px;
+			}
+		}
+
+  }
+
+	&__block {
+		padding-left: 10px;
+		font-family: 'Proxima Nova';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 19px;
+		color: #C1C8CE;
+	}
+}

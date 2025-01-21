@@ -20,6 +20,7 @@ import { AiFillDownCircle } from 'react-icons/ai';
 import { PocketFenceInfoInput } from '../../PicketFenceBlock/PicketFenceInfo/PicketFenceInfoUI/PocketFenceInfoInput';
 import { ProductDescription } from '../../ProductsBlock/ProductDescription/ProductDescription';
 import './shiferinfo.scss';
+import { ProductRating } from '../../UI/ProductRating/ProductRating';
 
 initializeIcons();
 
@@ -37,11 +38,11 @@ const ShiferInfoInner: FC = () => {
   const [count, setCount] = useState(1);
   const [successModal, setSuccessModal] = useState(false);
   const [updateProductModal, setUpdateProductModal] = useState(false);
-  const [colorImage, setColorImage] = useState({imageData: NO_IMAGE, isColor: false, choosenColor: 'Прозрачный'});
+  const [colorImage, setColorImage] = useState({ imageData: NO_IMAGE, isColor: false });
 
   const [confirmOrder, setConfirmOrder] = useState(false);
   const [consultation, setConsultation] = useState(false);
-  const [itemThickness, setItemThickness] = useState('');
+  // const [itemThickness, setItemThickness] = useState('');
 
   const [price, setPrice] = useState('0');
 
@@ -80,7 +81,7 @@ const ShiferInfoInner: FC = () => {
       title: product.name,
       price: product.price,
       imageUrl: SERVER_URL + product.coverImage,
-      color: colorImage.choosenColor,
+      color: 'нет',
       thickness,
       density,
       size,
@@ -163,6 +164,11 @@ const ShiferInfoInner: FC = () => {
   useEffect(() => {
     (async () => {
       if (params.id) {
+        if (params.id === 'rim') {
+          await dispatch(getProductInfoByProductID(DEFAULT_RIM_PROFILE));
+          await dispatch(getProductByID(DEFAULT_RIM_PROFILE));
+          return
+        }
         await dispatch(getProductInfoByProductID(params.id));
         await dispatch(getProductByID(params.id));
       }
@@ -176,13 +182,13 @@ const ShiferInfoInner: FC = () => {
 
   useEffect(() => {
     setColorImage(prev => ({...prev, imageData: SERVER_URL + product?.coverImage}));
-    for (const element of productInfo) {
-      switch (element.title) {
-        case DEFAULT_POLIKARBONAT_FILTER_TITLE:
-          setItemThickness(element.description);
-          break;
-      }
-    };
+    // for (const element of productInfo) {
+    //   switch (element.title) {
+    //     case DEFAULT_POLIKARBONAT_FILTER_TITLE:
+    //       setItemThickness(element.description);
+    //       break;
+    //   }
+    // };
     if (product.price) {
       setPrice((colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price).toFixed(2));
 
@@ -226,9 +232,12 @@ const ShiferInfoInner: FC = () => {
           <header className="productinfo__titleblock">
             <h2
               itemProp="name" 
-              className="productinfo__title">{product.name}</h2>
+              className="productinfo__title">
+              {product.name}
+            </h2>
+            <ProductRating views={product.views} phone={true}/>
           </header>
-          {isAdminAuth && (
+          {/* {isAdminAuth && (
             <div className="productinfo__title_btns">
             <CommandBarButton
               iconProps={editIcon}
@@ -241,7 +250,7 @@ const ShiferInfoInner: FC = () => {
               onClick={deleteProductHandler}
             />
             </div>)
-          }
+          } */}
           <div className="productinfo__container">
             {/* <div className="productinfo__titleblock">
               <h2 className="productinfo__title">{product.name} {itemThickness}</h2>
@@ -262,34 +271,38 @@ const ShiferInfoInner: FC = () => {
                 itemType="http://schema.org/ImageObject"
                 className="productinfo__image__colors shifer_img_block">
                 <img
-                  onClick={() => setColorImage({imageData: SERVER_URL + product?.coverImage, isColor: false, choosenColor: 'Прозрачный'})}
+                  onClick={() => setColorImage({ imageData: SERVER_URL + product?.coverImage, isColor: false })}
                   itemProp="contentUrl"
                   className="productinfo__image__item shifer_img" src={SERVER_URL + product?.coverImage} alt="шифер" />
 
                 {product._id === DEFAULT_RIM_PROFILE ? 
                   <>
                     <img
-                      onClick={() => setColorImage({imageData: '../images/shifer_rim.jpg', isColor: false, choosenColor: 'Прозрачный'})}
+                      onClick={() => setColorImage({ imageData: '../images/shifer_rim.jpg', isColor: false })}
                       itemProp="contentUrl"
                       className="productinfo__image__item shifer_img" src='../images/shifer_rim.jpg'  alt="шифер" />
                     <img
-                      onClick={() => setColorImage({imageData: '../images/shifer_rim2.jpg', isColor: false, choosenColor: 'Прозрачный'})}
+                      onClick={() => setColorImage({ imageData: '../images/shifer_rim2.jpg', isColor: false })}
                       itemProp="contentUrl"
                       className="productinfo__image__item shifer_img" src='../images/shifer_rim2.jpg'  alt="шифер" />
                     <img
-                      onClick={() => setColorImage({imageData: '../images/shifer_rim3.jpg', isColor: false, choosenColor: 'Прозрачный'})}
+                      onClick={() => setColorImage({ imageData: '../images/shifer_rim4.jpg', isColor: false })}
+                      itemProp="contentUrl"
+                      className="productinfo__image__item shifer_img" src='../images/shifer_rim4.jpg'  alt="шифер" />
+                    <img
+                      onClick={() => setColorImage({ imageData: '../images/shifer_rim3.jpg', isColor: false })}
                       itemProp="contentUrl"
                       className="productinfo__image__item shifer_img" src='../images/shifer_rim3.jpg'  alt="шифер" />
                     <img
-                      onClick={() => setColorImage({imageData: '../images/shifer_rim6.jpg', isColor: false, choosenColor: 'Прозрачный'})}
+                      onClick={() => setColorImage({ imageData: '../images/shifer_rim6.jpg', isColor: false })}
                       itemProp="contentUrl"
                       className="productinfo__image__item shifer_img" src='../images/shifer_rim6.jpg'  alt="шифер" />
                   </>
                 : null}
-                <meta itemProp="name" content='Шифер "Римская волна" фото'/>
+                <meta itemProp="name" content='Шифер "Римский профиль" фото'/>
                 
               </div>
-              <meta itemProp="name" content='Шифер "Римская волна" фото'/>
+              <meta itemProp="name" content='Шифер "Римский профиль" фото'/>
             </div>
             <div className="productinfo__info">
               <meta 
@@ -297,20 +310,7 @@ const ShiferInfoInner: FC = () => {
                 itemScope
                 itemType="https://schema.org/Brand" 
                 itemRef="site-url logo site-name sameAsFB sameAsInstagram sameAsYouTube" content='Шифер "Римский профиль"'/>
-              {/* <div className="productinfo__titleblock">
-                <h2 className="productinfo__title">{product.name} {itemThickness}</h2>
-                
-              </div> */}
-              <div className="productinfo__rating">
-                <img src={starRatingSvg} alt='star'/>
-                <img src={starRatingSvg} alt='star'/>
-                <img src={starRatingSvg} alt='star'/>
-                <img src={starRatingSvg} alt='star'/>
-                <img src={starRatingSvg} alt='star'/>
-                <div className="productinfo__rating_review">
-                  Просмотров: {product.views} 
-                </div>
-              </div>
+              <ProductRating views={product.views}/>
               <div className="productinfo__price">{`${price} руб. за 1 лист`}</div>
               <div className="productinfo__instock">
                 <AiFillDownCircle size={24}/>
@@ -330,7 +330,7 @@ const ShiferInfoInner: FC = () => {
               <div className="picketfenceinfo__inputs">
                 <div className="picketfenceinfo__inputs__block">
                   <PocketFenceInfoInput 
-                    label='Количество шт.:'
+                    label='Введите количество шт.:'
                     value={itemData.itemCount}
                     onChangeHandler={totalValueHandler}
                     warning={warnings.count}
@@ -344,24 +344,7 @@ const ShiferInfoInner: FC = () => {
                   Итоговая цена: <b>{itemData.totalValue} руб.</b> 
                 </div>
               </div>
-                {/* <div className="productinfo__cartinfo_count">
-                  <button 
-                    disabled={count === 1}
-                    className={count < 2 ? "productinfo__cartinfo_block notActive" : "productinfo__cartinfo_block"}
-                    onClick={handlerMinusCount}
-                  >
-                    <img src={minusSvg} alt="minus" />
-                  </button>
-                  <div className="productinfo__cartinfo_block nothover">
-                    <div>{count}</div>
-                  </div>
-                  <button 
-                    className="productinfo__cartinfo_block"
-                    onClick={handlerPlusCount}
-                  >
-                    <img src={plusSvg} alt="plus" />
-                  </button>
-                </div> */}
+         
                 <button 
                   onClick={addToCartHandler}
                   className="productinfo__cart">

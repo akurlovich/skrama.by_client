@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import MainLayout from "./components_V2/RoutersComponents/MainLayout/MainLayout";
 import Home from "./components_V2/Home/Home";
 import "./scss/app.scss";
@@ -29,6 +29,7 @@ const App: FC = () => {
           </AdminAuthRouter>
         }/>
         {/* <Route path="products" element={<ProductListItems/>}/> */}
+        {/* <Route path="shifer/66ac76102faf536a7c7037e7" element={<Navigate to="/shifer/rim"/>}/> */}
         <Route path="polikarbonat-main" element={<PolikarbonatMain/>}/>
         <Route path="polikarbonat" element={<ProductsBlock/>}/>
         <Route path="polikarbonat/:id" element={<ProductInfo/>}/>

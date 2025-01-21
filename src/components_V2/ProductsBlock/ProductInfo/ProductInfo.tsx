@@ -49,6 +49,7 @@ import { ProductDescription } from '../ProductDescription/ProductDescription';
 import { ProductNavigation } from '../ProductNavigation/ProductNavigation';
 import { smoothScroll } from '../../../services/ClientServices/SmothScroll';
 import { PocketFenceInfoInput } from '../../PicketFenceBlock/PicketFenceInfo/PicketFenceInfoUI/PocketFenceInfoInput';
+import { ProductRating } from '../../UI/ProductRating/ProductRating';
 
 initializeIcons();
 
@@ -248,9 +249,12 @@ const ProductInfoInner: FC = () => {
             />
           </div>)
           }
-          <div className="productinfo__titleblock">
-            <h2 className="productinfo__title">{product.name}</h2>
-          </div>
+          <header className="productinfo__titleblock">
+            <h2 
+              itemProp="name" 
+              className="productinfo__title">{product.name}</h2>
+            <ProductRating views={product.views} phone={true}/>
+          </header>
           <div className="productinfo__container">
             <div className="productinfo__imageblock">
               {/* <img className="productinfo__image" src={SERVER_URL + product?.coverImage} alt="product cover"/> */}
@@ -305,7 +309,7 @@ const ProductInfoInner: FC = () => {
                 <h2 className="productinfo__title">{product.name} {itemThickness}</h2>
                 
               </div> */}
-              <div className="productinfo__rating">
+              {/* <div className="productinfo__rating">
                 <img src={starRatingSvg} alt='star'/>
                 <img src={starRatingSvg} alt='star'/>
                 <img src={starRatingSvg} alt='star'/>
@@ -314,7 +318,8 @@ const ProductInfoInner: FC = () => {
                 <div className="productinfo__rating_review">
                   Просмотров: {product.views} 
                 </div>
-              </div>
+              </div> */}
+              <ProductRating views={product.views}/>
               <div className="productinfo__price">{`${price} руб. за 1 лист`}</div>
               <div className="productinfo__instock">
                 <AiFillDownCircle size={24}/>

@@ -6,7 +6,7 @@ import { IProductResponse } from '../../../types/IProductResponse';
 import { IProductInfoResponse } from '../../../types/IProductInfoResponse';
 import { useNavigate } from 'react-router-dom';
 import { SERVER_URL } from '../../../constants/http';
-import { DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, DEFAULT_TYPE_ID_SHIFER, DEFAULT_TYPE_ID_SHTAKETNIK } from '../../../constants/user';
+import { DEFAULT_RIM_PROFILE, DEFAULT_TYPE_ID_POLIKARBONAT, DEFAULT_TYPE_ID_POLIK_KREPEZH, DEFAULT_TYPE_ID_SHIFER, DEFAULT_TYPE_ID_SHTAKETNIK } from '../../../constants/user';
 import ProductService from '../../../services/ProductService';
 import { addItem } from '../../../store/reducers/CartReducer/CartSlice';
 import { useAppDispatch } from '../../../hooks/redux';
@@ -35,6 +35,11 @@ const ProductItemInner: FC <IProps> = ({item, productsInfo}) => {
       navigate(`/shtaketnik/${item._id}`);
     }
     if (item.typeID === DEFAULT_TYPE_ID_SHIFER) {
+      // console.log(item._id)
+      // if (item._id === DEFAULT_RIM_PROFILE) {
+      //   navigate(`/shifer/rim`)
+      //   return
+      // }
       navigate(`/shifer/${item._id}`);
     }
     
