@@ -237,7 +237,7 @@ const ShiferInfoInner: FC = () => {
             </h2>
             <ProductRating views={product.views} phone={true}/>
           </header>
-          {/* {isAdminAuth && (
+          {isAdminAuth && (
             <div className="productinfo__title_btns">
             <CommandBarButton
               iconProps={editIcon}
@@ -250,7 +250,7 @@ const ShiferInfoInner: FC = () => {
               onClick={deleteProductHandler}
             />
             </div>)
-          } */}
+          }
           <div className="productinfo__container">
             {/* <div className="productinfo__titleblock">
               <h2 className="productinfo__title">{product.name} {itemThickness}</h2>
@@ -315,7 +315,7 @@ const ShiferInfoInner: FC = () => {
               <div className="productinfo__instock">
                 <AiFillDownCircle size={24}/>
                 <div className="productinfo__instock_text">
-                  В наличии
+                  {(product._id === DEFAULT_RIM_PROFILE) ? 'Временно отсутствует' : "В наличии"}
                 </div>
               </div>
               
