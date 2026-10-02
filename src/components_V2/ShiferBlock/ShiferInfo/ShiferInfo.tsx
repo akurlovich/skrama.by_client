@@ -80,7 +80,8 @@ const ShiferInfoInner: FC = () => {
       typeID: product.typeID,
       title: product.name,
       price: product.price,
-      imageUrl: SERVER_URL + product.coverImage,
+      // imageUrl: SERVER_URL + product.coverImage,
+      imageUrl: '../images/rim1.jpg',
       color: 'нет',
       thickness,
       density,
@@ -181,7 +182,8 @@ const ShiferInfoInner: FC = () => {
   }, []);
 
   useEffect(() => {
-    setColorImage(prev => ({...prev, imageData: SERVER_URL + product?.coverImage}));
+    // setColorImage(prev => ({...prev, imageData: SERVER_URL + product?.coverImage}));
+    setColorImage(prev => ({...prev, imageData: '../images/rim1.jpg'}));
     // for (const element of productInfo) {
     //   switch (element.title) {
     //     case DEFAULT_POLIKARBONAT_FILTER_TITLE:
@@ -271,32 +273,35 @@ const ShiferInfoInner: FC = () => {
                 itemType="http://schema.org/ImageObject"
                 className="productinfo__image__colors shifer_img_block">
                 <img
-                  onClick={() => setColorImage({ imageData: SERVER_URL + product?.coverImage, isColor: false })}
+                  // onClick={() => setColorImage({ imageData: SERVER_URL + product?.coverImage, isColor: false })}
+                  onClick={() => setColorImage({ imageData: '../images/rim1.jpg' , isColor: false })}
                   itemProp="contentUrl"
-                  className="productinfo__image__item shifer_img" src={SERVER_URL + product?.coverImage} alt="шифер" />
+                  // className="productinfo__image__item shifer_img" src={SERVER_URL + product?.coverImage} alt="шифер" 
+                  className="productinfo__image__item shifer_img" src='../images/rim1.jpg' alt="шифер" 
+                  />
 
                 {product._id === DEFAULT_RIM_PROFILE ? 
                   <>
                     <img
-                      onClick={() => setColorImage({ imageData: '../images/shifer_rim.jpg', isColor: false })}
+                      onClick={() => setColorImage({ imageData: '../images/rim2.jpg', isColor: false })}
                       itemProp="contentUrl"
-                      className="productinfo__image__item shifer_img" src='../images/shifer_rim.jpg'  alt="шифер" />
+                      className="productinfo__image__item shifer_img" src='../images/rim2.jpg'  alt="шифер" />
                     <img
-                      onClick={() => setColorImage({ imageData: '../images/shifer_rim2.jpg', isColor: false })}
+                      onClick={() => setColorImage({ imageData: '../images/rim3.jpg', isColor: false })}
                       itemProp="contentUrl"
-                      className="productinfo__image__item shifer_img" src='../images/shifer_rim2.jpg'  alt="шифер" />
+                      className="productinfo__image__item shifer_img" src='../images/rim3.jpg'  alt="шифер" />
                     <img
-                      onClick={() => setColorImage({ imageData: '../images/shifer_rim4.jpg', isColor: false })}
+                      onClick={() => setColorImage({ imageData: '../images/rim4.png', isColor: false })}
                       itemProp="contentUrl"
-                      className="productinfo__image__item shifer_img" src='../images/shifer_rim4.jpg'  alt="шифер" />
-                    <img
+                      className="productinfo__image__item shifer_img" src='../images/rim4.png'  alt="шифер" />
+                    {/* <img
                       onClick={() => setColorImage({ imageData: '../images/shifer_rim3.jpg', isColor: false })}
                       itemProp="contentUrl"
                       className="productinfo__image__item shifer_img" src='../images/shifer_rim3.jpg'  alt="шифер" />
                     <img
                       onClick={() => setColorImage({ imageData: '../images/shifer_rim6.jpg', isColor: false })}
                       itemProp="contentUrl"
-                      className="productinfo__image__item shifer_img" src='../images/shifer_rim6.jpg'  alt="шифер" />
+                      className="productinfo__image__item shifer_img" src='../images/shifer_rim6.jpg'  alt="шифер" /> */}
                   </>
                 : null}
                 <meta itemProp="name" content='Шифер "Римский профиль" фото'/>
